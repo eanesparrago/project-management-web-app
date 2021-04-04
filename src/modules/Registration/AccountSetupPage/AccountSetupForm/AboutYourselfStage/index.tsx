@@ -1,14 +1,30 @@
 import { Typography, Space, Form, Button, Select } from "antd";
 
+import { useAppSelector, useAppDispatch } from "app/hooks";
+import {
+  selectFullName,
+  setWorkType,
+  setStage,
+  WorkType,
+} from "../../../registrationSlice";
+
 const { Title } = Typography;
 const { Option } = Select;
 
 function AboutYourselfStage() {
+  const dispatch = useAppDispatch();
+  const fullName = useAppSelector(selectFullName);
+
+  function onFinish({ workType }: { workType: WorkType }) {
+    dispatch(setWorkType(workType));
+    dispatch(setStage("mainObjective"));
+  }
+
   return (
     <Space direction="vertical" size="large">
-      <Title>Tell us about yourself, [name]</Title>
+      <Title>Tell us about yourself, {fullName}</Title>
 
-      <Form layout="vertical">
+      <Form layout="vertical" onFinish={onFinish}>
         <Form.Item label="What kind of work do you do?" name="workType">
           <Select>
             <Option value="marketing">Marketing</Option>
@@ -27,7 +43,7 @@ function AboutYourselfStage() {
         </Form.Item>
 
         <Form.Item>
-          <Button size="large" type="primary">
+          <Button size="large" type="primary" htmlType="submit">
             Continue
           </Button>
         </Form.Item>

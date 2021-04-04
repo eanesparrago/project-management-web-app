@@ -23,6 +23,8 @@ function AccountSetupPage() {
 const S = {} as any;
 
 S.AccountSetupPage = styled.div`
+  padding-bottom: 6rem;
+
   .AccountSetupPage__header-block {
     margin-bottom: 4rem;
     padding: 1.5rem 2rem;
