@@ -7,7 +7,7 @@ import {
   selectProjectTasks,
   setStage,
   setProjectTasks,
-} from "../../../registrationSlice";
+} from "../../accountSetupPageSlice";
 
 const { Title } = Typography;
 

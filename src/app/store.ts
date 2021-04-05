@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import registrationSlice from "modules/Registration/registrationSlice";
+import registrationReducer from "modules/Registration/registrationReducer";
 
 export const store = configureStore({
   reducer: {
-    registration: registrationSlice,
+    registration: registrationReducer,
   },
 });
 

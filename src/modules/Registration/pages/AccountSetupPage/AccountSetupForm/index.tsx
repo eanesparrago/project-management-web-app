@@ -6,13 +6,13 @@ import ProjectTasksStage from "./ProjectTasksStage";
 import TaskGroupingsStage from "./TaskGroupingsStage";
 
 import { useAppSelector } from "app/hooks";
-import { selectRegistrationStage } from "../../registrationSlice";
+import { selectAccountSetupStage } from "../accountSetupPageSlice";
 
 function AccountSetupForm() {
-  const registartionStage = useAppSelector(selectRegistrationStage);
+  const accountSetupStage = useAppSelector(selectAccountSetupStage);
 
   function getCurrentForm() {
-    switch (registartionStage) {
+    switch (accountSetupStage) {
       case "accountInfo":
         return <AccountInfoStage />;
 

@@ -3,19 +3,20 @@ import styled from "styled-components";
 import Logo from "components/Logo";
 import AccountSetupSteps from "./AccountSetupSteps";
 import AccountSetupForm from "./AccountSetupForm";
+import MainLayout from "../../layouts/MainLayout";
 
 function AccountSetupPage() {
   return (
     <S.AccountSetupPage>
-      <div className="AccountSetupPage__header-block">
+      <header className="AccountSetupPage__header-block">
         <Logo className="AccountSetupPage__Logo" />
 
         <AccountSetupSteps className="AccountSetupPage__AccountSetupSteps" />
-      </div>
+      </header>
 
-      <div className="AccountSetupPage__main-block">
+      <MainLayout as="main">
         <AccountSetupForm />
-      </div>
+      </MainLayout>
     </S.AccountSetupPage>
   );
 }

@@ -2,7 +2,7 @@ import { Typography, Space, Form, Button, Input } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
 import { useAppDispatch } from "app/hooks";
-import { setStage, setTaskGroupings } from "../../../registrationSlice";
+import { setStage, setTaskGroupings } from "../../accountSetupPageSlice";
 
 const { Title } = Typography;
 

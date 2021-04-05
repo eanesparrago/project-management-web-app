@@ -1,7 +1,11 @@
 import { Typography, Space, Input, Form, Button } from "antd";
 
 import { useAppDispatch } from "app/hooks";
-import { setStage, setFullName, setPassword } from "../../../registrationSlice";
+import {
+  setStage,
+  setFullName,
+  setPassword,
+} from "../../accountSetupPageSlice";
 
 const { Title, Text } = Typography;
 
@@ -26,12 +30,7 @@ function AccountInfoStage() {
 
       <Text type="secondary">You're signing up as email@example.com</Text>
 
-      <Form
-        layout="vertical"
-        name="accountInfoStage"
-        onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
-      >
+      <Form layout="vertical" name="accountInfoStage" onFinish={onFinish}>
         <Form.Item
           label="What's your full name?"
           name="fullName"

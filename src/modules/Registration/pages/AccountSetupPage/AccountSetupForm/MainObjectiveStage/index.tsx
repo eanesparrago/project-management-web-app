@@ -14,7 +14,7 @@ import {
   setStage,
   setMainObjective as setRegistrationMainObjective,
   MainObjective,
-} from "../../../registrationSlice";
+} from "../../accountSetupPageSlice";
 
 const { Title, Text } = Typography;
 

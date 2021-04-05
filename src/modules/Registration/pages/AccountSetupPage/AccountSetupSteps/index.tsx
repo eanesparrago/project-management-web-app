@@ -2,9 +2,9 @@ import { Steps } from "antd";
 
 import { useAppSelector } from "app/hooks";
 import {
-  selectRegistrationStage,
-  RegistrationStage,
-} from "../../registrationSlice";
+  selectAccountSetupStage,
+  AccountSetupStage,
+} from "../accountSetupPageSlice";
 
 const { Step } = Steps;
 
@@ -12,8 +12,8 @@ interface AccountSetupStepsProps {
   className?: string;
 }
 
-function getCurrentStep(registrationStage: RegistrationStage): number {
-  switch (registrationStage) {
+function getCurrentStep(accountSetupStage: AccountSetupStage): number {
+  switch (accountSetupStage) {
     case "accountInfo":
       return 0;
 
@@ -32,9 +32,9 @@ function getCurrentStep(registrationStage: RegistrationStage): number {
 }
 
 function AccountSetupSteps({ className }: AccountSetupStepsProps) {
-  const registrationStage = useAppSelector(selectRegistrationStage);
+  const accountSetupStage = useAppSelector(selectAccountSetupStage);
 
-  const currentStep = getCurrentStep(registrationStage);
+  const currentStep = getCurrentStep(accountSetupStage);
 
   return (
     <Steps size="small" className={className} current={currentStep}>

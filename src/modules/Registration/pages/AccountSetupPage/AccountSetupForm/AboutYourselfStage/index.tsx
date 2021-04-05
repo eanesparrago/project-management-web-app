@@ -6,7 +6,7 @@ import {
   setWorkType,
   setStage,
   WorkType,
-} from "../../../registrationSlice";
+} from "../../accountSetupPageSlice";
 
 const { Title } = Typography;
 const { Option } = Select;

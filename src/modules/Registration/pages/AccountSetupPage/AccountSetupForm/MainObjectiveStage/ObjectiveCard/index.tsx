@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 import { Space, Typography, Card } from "antd";
 
-import { MainObjective } from "../../../../registrationSlice";
+import { MainObjective } from "../../../accountSetupPageSlice";
 
 const { Text } = Typography;
 
