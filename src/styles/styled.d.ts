@@ -15,7 +15,14 @@ declare module "styled-components" {
         base: string;
       };
       white: string;
-      grey: string;
+      grey: {
+        light: string;
+        medium: string;
+      };
+    };
+    boxShadow: {
+      1: string;
+      2: string;
     };
   }
 }

@@ -17,7 +17,7 @@ const S = {} as any;
 S.ProjectHeader = styled.div`
   width: 100%;
   padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid ${(p) => p.theme.color.grey};
+  border-bottom: 1px solid ${(p) => p.theme.color.grey.medium};
 `;
 
 export default ProjectHeader;
