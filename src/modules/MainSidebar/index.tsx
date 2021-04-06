@@ -6,15 +6,16 @@ import Logo from "components/Logo";
 
 const { SubMenu } = Menu;
 
-function Sidebar() {
+function MainSidebar({ ...rest }) {
   return (
     <S.Menu
       defaultOpenKeys={["projects"]}
       mode="inline"
-      theme="light"
+      theme="dark"
       inlineCollapsed={false}
+      {...rest}
     >
-      <div className="Sidebar__header-block">
+      <div className="MainSidebar__header-block">
         <Logo />
       </div>
 
@@ -31,7 +32,7 @@ S.Menu = styled(Menu)`
   width: 16rem;
   height: 100vh;
 
-  .Sidebar__header-block {
+  .MainSidebar__header-block {
     padding-top: 1.5rem;
     padding-left: 1.5rem;
     margin-bottom: 1.5rem;
@@ -42,4 +43,4 @@ S.Menu = styled(Menu)`
   }
 `;
 
-export default Sidebar;
+export default MainSidebar;

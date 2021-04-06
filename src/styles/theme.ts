@@ -1,5 +1,7 @@
 import { DefaultTheme } from "styled-components";
-import { blue } from "@ant-design/colors";
+import { blue, grey } from "@ant-design/colors";
+
+console.log("grey", grey);
 
 const theme: DefaultTheme = {
   breakpoint: {
@@ -15,6 +17,7 @@ const theme: DefaultTheme = {
       base: blue.primary as string,
     },
     white: "#FFFFFF",
+    grey: grey[0] as string,
   },
 };
 

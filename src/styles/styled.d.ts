@@ -15,6 +15,7 @@ declare module "styled-components" {
         base: string;
       };
       white: string;
+      grey: string;
     };
   }
 }
