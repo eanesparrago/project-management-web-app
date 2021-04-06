@@ -9,14 +9,15 @@ import GlobalStyle from "styles/GlobalStyle";
 import { store } from "app/store";
 
 const CreateAccountPage = lazy(
-  () => import("modules/Registration/pages/CreateAccountPage")
+  () => import("modules/registration/pages/CreateAccountPage")
 );
 const AccountSetupPage = lazy(
-  () => import("modules/Registration/pages/AccountSetupPage")
+  () => import("modules/registration/pages/AccountSetupPage")
 );
 const VerifyEmailPage = lazy(
-  () => import("modules/Registration/pages/VerifyEmailPage")
+  () => import("modules/registration/pages/VerifyEmailPage")
 );
+const MainApp = lazy(() => import("modules/MainApp"))
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
 
               <Route path="/verify-email">
                 <VerifyEmailPage />
+              </Route>
+
+              <Route exact path="/">
+                <MainApp />
               </Route>
             </Suspense>
           </Switch>
