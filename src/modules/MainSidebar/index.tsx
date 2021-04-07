@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useRouteMatch, NavLink } from "react-router-dom";
 import { firestore } from "backend/firebase";
+import collectIdsAndDocs from "utils/collectIdsAndDocs";
 
 import styled from "styled-components";
 import { Menu } from "antd";
@@ -25,18 +26,18 @@ function MainSidebar({ ...rest }) {
   const { url } = useRouteMatch();
 
   useEffect(() => {
-    async function getProjects() {
-      const snapshot = await firestore.collection("projects").get();
-
-      const projects = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Project[];
-
-      setProjects(projects);
+    function subscribeToProjects() {
+      return firestore.collection("projects").onSnapshot((snapshot) => {
+        const projects = snapshot.docs.map(collectIdsAndDocs);
+        setProjects(projects);
+      });
     }
 
-    getProjects();
+    const unsubscribe = subscribeToProjects();
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   function onGoToCreateProject() {

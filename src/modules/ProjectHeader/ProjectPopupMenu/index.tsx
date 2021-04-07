@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { firestore } from "backend/firebase";
 
 import { Button, Popover, Modal } from "antd";
@@ -6,10 +6,12 @@ import { CaretDownOutlined } from "@ant-design/icons";
 
 function ProjectPopupMenu() {
   const { projectId } = useParams<{ projectId: string | undefined }>();
+  const history = useHistory();
 
   async function deleteProject() {
     if (projectId) {
       await firestore.doc(`projects/${projectId}`).delete();
+      history.push(`/app`);
     }
   }
 

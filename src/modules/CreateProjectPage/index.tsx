@@ -30,9 +30,9 @@ function CreateProjectPage() {
   }
 
   async function onFinish(values: CreateProjectForm) {
-    await createProject(values);
+    const project = await createProject(values);
 
-    history.push("/");
+    history.push(`/app/${project.id}`);
   }
 
   return (
