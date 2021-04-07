@@ -27,8 +27,8 @@ function App() {
         <GlobalStyle></GlobalStyle>
 
         <Router>
-          <Switch>
-            <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
               <Route path="/account-setup">
                 <AccountSetupPage />
               </Route>
@@ -41,15 +41,15 @@ function App() {
                 <VerifyEmailPage />
               </Route>
 
-              <Route exact path="/">
-                <MainApp />
-              </Route>
-
               <Route path="/create-project">
                 <CreateProjectPage />
               </Route>
-            </Suspense>
-          </Switch>
+
+              <Route path="/app">
+                <MainApp />
+              </Route>
+            </Switch>
+          </Suspense>
         </Router>
       </ThemeProvider>
     </Provider>

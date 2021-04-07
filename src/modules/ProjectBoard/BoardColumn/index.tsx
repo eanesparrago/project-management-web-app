@@ -21,11 +21,11 @@ function BoardColumn() {
 
         <div className="BoardColumn__headerButtons-block">
           <Tooltip title="Add task">
-            <Button type="link" icon={<PlusOutlined />} />
+            <Button type="text" icon={<PlusOutlined />} />
           </Tooltip>
 
           <Tooltip title="More actions">
-            <Button type="link" icon={<EllipsisOutlined />} />
+            <Button type="text" icon={<EllipsisOutlined />} />
           </Tooltip>
         </div>
       </div>

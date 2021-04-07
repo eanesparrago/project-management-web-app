@@ -1,18 +1,27 @@
 import styled from "styled-components";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 import MainSidebar from "modules/MainSidebar";
 import ProjectHeader from "modules/ProjectHeader";
 import ProjectBoard from "modules/ProjectBoard";
 
 function MainApp() {
+  const { path } = useRouteMatch();
+
   return (
     <S.MainApp>
       <MainSidebar />
 
       <main className="MainApp__main-block">
-        <ProjectHeader />
+        <Route path={`${path}/:projectId?`}>
+          <ProjectHeader />
+        </Route>
 
-        <S.ProjectBoard />
+        <Switch>
+          <Route path={`${path}/:projectId`}>
+            <S.ProjectBoard />
+          </Route>
+        </Switch>
       </main>
     </S.MainApp>
   );

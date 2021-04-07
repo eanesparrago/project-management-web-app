@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch, NavLink } from "react-router-dom";
 import { firestore } from "backend/firebase";
 
 import styled from "styled-components";
@@ -22,6 +22,7 @@ type Project = {
 function MainSidebar({ ...rest }) {
   const [projects, setProjects] = useState<Project[]>([]);
   const history = useHistory();
+  const { url } = useRouteMatch();
 
   useEffect(() => {
     async function getProjects() {
@@ -60,7 +61,9 @@ function MainSidebar({ ...rest }) {
 
       <SubMenu key="projects" icon={<UnorderedListOutlined />} title="Projects">
         {projects.map((project) => (
-          <Menu.Item key={project.id}>{project.title}</Menu.Item>
+          <Menu.Item key={project.id}>
+            <NavLink to={`${url}/${project.id}`}>{project.title}</NavLink>
+          </Menu.Item>
         ))}
       </SubMenu>
     </S.Menu>
