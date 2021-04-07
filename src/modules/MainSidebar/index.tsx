@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { firestore } from "backend/firebase";
 
 import styled from "styled-components";
 import { Menu } from "antd";
-import { UnorderedListOutlined } from "@ant-design/icons";
+import { UnorderedListOutlined, PlusOutlined } from "@ant-design/icons";
 import Logo from "components/Logo";
 
 const { SubMenu } = Menu;
@@ -20,6 +21,7 @@ type Project = {
 
 function MainSidebar({ ...rest }) {
   const [projects, setProjects] = useState<Project[]>([]);
+  const history = useHistory();
 
   useEffect(() => {
     async function getProjects() {
@@ -36,6 +38,10 @@ function MainSidebar({ ...rest }) {
     getProjects();
   }, []);
 
+  function onGoToCreateProject() {
+    history.push("/create-project");
+  }
+
   return (
     <S.Menu
       defaultOpenKeys={["projects"]}
@@ -47,6 +53,10 @@ function MainSidebar({ ...rest }) {
       <div className="MainSidebar__header-block">
         <Logo />
       </div>
+
+      <Menu.Item icon={<PlusOutlined />} onClick={onGoToCreateProject}>
+        Create Project
+      </Menu.Item>
 
       <SubMenu key="projects" icon={<UnorderedListOutlined />} title="Projects">
         {projects.map((project) => (

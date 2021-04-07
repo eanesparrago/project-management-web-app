@@ -19,5 +19,6 @@ firebase.initializeApp(firebaseConfig);
 
 // Initialize Firestore database
 export const firestore = firebase.firestore();
+firestore.settings({ ignoreUndefinedProperties: true });
 
 export default firebase;

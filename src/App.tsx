@@ -17,7 +17,8 @@ const AccountSetupPage = lazy(
 const VerifyEmailPage = lazy(
   () => import("modules/registration/pages/VerifyEmailPage")
 );
-const MainApp = lazy(() => import("modules/MainApp"))
+const MainApp = lazy(() => import("modules/MainApp"));
+const CreateProjectPage = lazy(() => import("modules/CreateProjectPage"));
 
 function App() {
   return (
@@ -42,6 +43,10 @@ function App() {
 
               <Route exact path="/">
                 <MainApp />
+              </Route>
+
+              <Route path="/create-project">
+                <CreateProjectPage />
               </Route>
             </Suspense>
           </Switch>

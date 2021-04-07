@@ -10,6 +10,4 @@ function ColumnTitle({ ...rest }) {
   );
 }
 
-const S = {} as any;
-
 export default ColumnTitle;
