@@ -15,6 +15,7 @@
     "@types/react-dom": "^17.0.3",
     "antd": "^4.15.0",
     "destyle.css": "^2.0.2",
+    "firebase": "^8.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",

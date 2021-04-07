@@ -8,7 +8,7 @@ const { Text } = Typography;
 
 function ColumnCard({ ...rest }) {
   return (
-    <S.ColumnCard {...rest}>
+    <S.ColumnCard role="button" {...rest}>
       <CompleteButton />
 
       <Text>Task 1</Text>
@@ -18,7 +18,7 @@ function ColumnCard({ ...rest }) {
 
 const S = {} as any;
 
-S.ColumnCard = styled.button`
+S.ColumnCard = styled.div`
   display: block;
   width: 100%;
   border-radius: 8px;
