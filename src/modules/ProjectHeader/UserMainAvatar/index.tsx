@@ -1,10 +1,10 @@
-import { auth } from "backend/firebase";
+import { signOut } from "backend/firebase";
 
 import { Avatar, Popover, Button } from "antd";
 
 function UserMainAvatar({ ...rest }) {
   function onLogOut() {
-    auth.signOut();
+    signOut();
   }
 
   const content = (
