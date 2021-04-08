@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { Typography } from "antd";
 import ProjectPopupMenu from "./ProjectPopupMenu";
+import EditProjectDetailsModal from "./EditProjectDetailsModal";
 
 const { Title } = Typography;
 
@@ -13,6 +14,8 @@ function ProjectHeader() {
       </Title>
 
       <ProjectPopupMenu />
+
+      <EditProjectDetailsModal />
     </S.ProjectHeader>
   );
 }

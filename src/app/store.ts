@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import registrationReducer from "modules/registration/registrationReducer";
+import projectHeaderSlice from "modules/ProjectHeader/projectHeaderSlice";
 
 export const store = configureStore({
   reducer: {
     registration: registrationReducer,
+    projectHeader: projectHeaderSlice,
   },
 });
 

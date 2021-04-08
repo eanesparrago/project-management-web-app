@@ -1,5 +1,8 @@
+import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import { firestore } from "backend/firebase";
+import { useAppDispatch } from "app/hooks";
+import { setIsEditProjectDetailsModalOpen } from "../projectHeaderSlice";
 
 import { Button, Popover, Modal } from "antd";
 import { CaretDownOutlined } from "@ant-design/icons";
@@ -7,6 +10,7 @@ import { CaretDownOutlined } from "@ant-design/icons";
 function ProjectPopupMenu() {
   const { projectId } = useParams<{ projectId: string | undefined }>();
   const history = useHistory();
+  const dispatch = useAppDispatch();
 
   async function deleteProject() {
     if (projectId) {
@@ -26,12 +30,20 @@ function ProjectPopupMenu() {
     });
   }
 
+  function onOpenEditProjectDetails() {
+    dispatch(setIsEditProjectDetailsModalOpen(true));
+  }
+
   const content = (
-    <>
-      <Button type="text" danger onClick={onDeleteProjectWarn}>
+    <S.Content>
+      <Button type="text" onClick={onOpenEditProjectDetails} block>
+        Edit project details
+      </Button>
+
+      <Button type="text" danger onClick={onDeleteProjectWarn} block>
         Delete project
       </Button>
-    </>
+    </S.Content>
   );
 
   return (
@@ -40,5 +52,11 @@ function ProjectPopupMenu() {
     </Popover>
   );
 }
+
+const S = {} as any;
+
+S.Content = styled.div`
+  /* width: ; */
+`;
 
 export default ProjectPopupMenu;
