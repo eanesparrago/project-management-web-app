@@ -33,10 +33,10 @@ function MainSidebar({ ...rest }) {
       });
     }
 
-    const unsubscribe = subscribeToProjects();
+    const unsubscribeFromFirestore = subscribeToProjects();
 
     return () => {
-      unsubscribe();
+      unsubscribeFromFirestore();
     };
   }, []);
 

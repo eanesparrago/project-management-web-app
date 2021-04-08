@@ -38,8 +38,8 @@ function CreateProjectPage() {
   return (
     <S.CreateProjectPage>
       <div className="CreateProjectPage__header-block">
-        <Button icon={<ArrowLeftOutlined />} onClick={onBack} />
-        <Button icon={<CloseOutlined />} onClick={onBack} />
+        <Button type="text" icon={<ArrowLeftOutlined />} onClick={onBack} />
+        <Button type="text" icon={<CloseOutlined />} onClick={onBack} />
       </div>
 
       <div className="CreateProjectPage__main-block">
