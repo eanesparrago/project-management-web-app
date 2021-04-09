@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { useHistory } from "react-router";
 import useAuth from "utils/useAuth";
+import useResendEmail from "./utils/useResendEmail";
 
-import { Typography, message, Button, Spin } from "antd";
+import { Typography, Button, Spin } from "antd";
+import { CheckCircleFilled } from "@ant-design/icons";
 import Logo from "components/Logo";
 import MainLayout from "../../layouts/MainLayout";
 
@@ -10,20 +12,34 @@ const { Title, Text, Link } = Typography;
 
 function VerifyEmailPage() {
   const history = useHistory();
-  const { auth, user, isLoading } = useAuth();
-
-  function onResendEmail() {
-    // TODO
-
-    message.info("Confirmation email sent");
-  }
+  const { auth, user, isAuthLoading } = useAuth();
+  const {
+    resendEmail,
+    isResendEmailLoading,
+    isResendEmailSuccess,
+  } = useResendEmail();
 
   function onLogOut() {
     auth.signOut();
     history.push("/login");
   }
 
-  const email = isLoading ? <Spin /> : user?.email;
+  function renderEmail() {
+    return isAuthLoading ? <Spin /> : user?.email;
+  }
+
+  function renderResendEmail() {
+    if (isResendEmailLoading) return <Spin />;
+
+    if (isResendEmailSuccess)
+      return (
+        <Typography.Text type="success">
+          Email sent <CheckCircleFilled />
+        </Typography.Text>
+      );
+
+    return <Link onClick={resendEmail}>Resend email</Link>;
+  }
 
   return (
     <S.VerifyEmailPage>
@@ -37,13 +53,12 @@ function VerifyEmailPage() {
 
       <MainLayout as="main">
         <Title className="VerifyEmailPage__Title">
-          Please verify your email address, {email}
+          Please verify your email address, {renderEmail()}
         </Title>
 
         <Text>
           Complete your signup through the email we sent to your email address.
-          Didn't receive an email?{" "}
-          <Link onClick={onResendEmail}>Resend email</Link>.
+          Didn't receive an email? {renderResendEmail()}
         </Text>
       </MainLayout>
     </S.VerifyEmailPage>

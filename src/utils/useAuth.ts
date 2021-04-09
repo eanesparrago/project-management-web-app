@@ -6,20 +6,20 @@ import { auth } from "backend/firebase";
 
 type AuthState = {
   isSignedIn: boolean;
-  isLoading: boolean;
+  isAuthLoading: boolean;
   user: firebase.User | null;
 };
 
 function useAuth() {
   const [authState, setAuthState] = useState<AuthState>({
     isSignedIn: false,
-    isLoading: true,
+    isAuthLoading: true,
     user: null,
   });
 
   useEffect(() => {
     const unregisterAuthObserver = auth.onAuthStateChanged((user) =>
-      setAuthState({ user, isLoading: false, isSignedIn: !!user })
+      setAuthState({ user, isAuthLoading: false, isSignedIn: !!user })
     );
     return () => unregisterAuthObserver();
   }, []);
