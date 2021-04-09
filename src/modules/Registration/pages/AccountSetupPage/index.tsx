@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { auth } from "backend/firebase";
 
 import Logo from "components/Logo";
 import AccountSetupSteps from "./AccountSetupSteps";
@@ -7,10 +6,6 @@ import AccountSetupForm from "./AccountSetupForm";
 import MainLayout from "../../layouts/MainLayout";
 
 function AccountSetupPage() {
-  // if (auth.isSignInWithEmailLink(window.location.href)) {
-  //   const email = 
-  // }
-
   return (
     <S.AccountSetupPage>
       <header className="AccountSetupPage__header-block">

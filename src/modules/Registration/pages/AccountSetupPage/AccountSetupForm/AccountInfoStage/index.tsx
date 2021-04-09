@@ -11,10 +11,10 @@ import { useMemo } from "react";
 
 const { Title, Text } = Typography;
 
-interface AccountInfoForm {
+type AccountInfoForm = {
   fullName: string;
   password: string;
-}
+};
 
 function AccountInfoStage() {
   const dispatch = useAppDispatch();
@@ -43,17 +43,6 @@ function AccountInfoStage() {
           rules={[{ required: true, message: "Please input your full name!" }]}
         >
           <Input size="large"></Input>
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            { required: true, message: "Please input your password!" },
-            { min: 8, message: "Password must be 8 characters or longer!" },
-          ]}
-        >
-          <Input.Password size="large"></Input.Password>
         </Form.Item>
 
         <Form.Item>

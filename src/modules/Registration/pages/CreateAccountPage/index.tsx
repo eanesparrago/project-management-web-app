@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useAppDispatch } from "app/hooks";
-import localStorage from "utils/localStorage";
 import { setEmailAddress } from "../../registrationSlice";
-import useSendSignInLinkToEmail from "./utils/useSendSignInLinkToEmail";
-import checkIfEmailExists from "./utils/checkIfEmailExists";
+import useCreateUserWithEmailAndPassword from "./utils/useCreateUserWithEmailAndPassword";
 
 import { Typography, Input, Form, Button, message } from "antd";
 import Logo from "components/Logo";
@@ -12,29 +10,30 @@ import MainLayout from "../../layouts/MainLayout";
 
 const { Title } = Typography;
 
+type CreateAccountForm = {
+  emailAddress: string;
+  password: string;
+};
+
 function CreateAccountPage() {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const { sendSignInLinkToEmail, isLoading } = useSendSignInLinkToEmail();
 
-  async function onFinish({ emailAddress }: { emailAddress: string }) {
+  const {
+    createUserWithEmailAndPassword,
+    isLoading,
+  } = useCreateUserWithEmailAndPassword();
+
+  async function onFinish({ emailAddress, password }: CreateAccountForm) {
+    dispatch(setEmailAddress(emailAddress));
+
     try {
-      if (await checkIfEmailExists(emailAddress)) {
-        history.push("/login");
-        message.info("Email is already registered");
-        return;
-      }
-
-      dispatch(setEmailAddress(emailAddress));
-      
-      await sendSignInLinkToEmail(emailAddress);
-
-      // Put in localStorage for use in Account Setup after user clicks sign in link
-      localStorage.set("emailAddress", emailAddress);
+      await createUserWithEmailAndPassword(emailAddress, password);
 
       history.push("/verify-email");
     } catch (error) {
       console.error(error);
+      message.error(error.message);
     }
   }
 
@@ -53,15 +52,28 @@ function CreateAccountPage() {
           className="CreateAccountPage__Form"
           size="large"
           onFinish={onFinish}
+          layout="vertical"
         >
           <Form.Item
+            label="Email address"
             name="emailAddress"
             rules={[
               { required: true, message: "Please input your email address!" },
               { type: "email", message: "Email is not a valid email" },
             ]}
           >
-            <Input placeholder="name@company.com" />
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              { required: true, message: "Please input your password!" },
+              { min: 8, message: "Password must be 8 characters or longer!" },
+            ]}
+          >
+            <Input.Password />
           </Form.Item>
 
           <Form.Item>
