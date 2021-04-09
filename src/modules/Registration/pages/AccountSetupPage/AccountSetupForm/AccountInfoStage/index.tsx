@@ -1,11 +1,13 @@
-import { Typography, Space, Input, Form, Button } from "antd";
-
 import { useAppDispatch } from "app/hooks";
 import {
   setStage,
   setFullName,
   setPassword,
 } from "../../accountSetupPageSlice";
+import localStorage from "utils/localStorage";
+
+import { Typography, Space, Input, Form, Button } from "antd";
+import { useMemo } from "react";
 
 const { Title, Text } = Typography;
 
@@ -24,11 +26,15 @@ function AccountInfoStage() {
     dispatch(setStage("aboutYourself"));
   }
 
+  const emailAddress = useMemo(() => localStorage.get("emailAddress"), []);
+
   return (
     <Space direction="vertical" size="large">
       <Title>Welcome to Asana Clone!</Title>
 
-      <Text type="secondary">You're signing up as email@example.com</Text>
+      {emailAddress && (
+        <Text type="secondary">You're signing up as {emailAddress}</Text>
+      )}
 
       <Form layout="vertical" name="accountInfoStage" onFinish={onFinish}>
         <Form.Item

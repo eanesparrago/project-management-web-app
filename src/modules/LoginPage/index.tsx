@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { signInWithGoogle } from "backend/firebase";
+import { Link } from "react-router-dom";
 
-import { Card, Button } from "antd";
+import { Card, Button, Divider, Typography } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
 import Logo from "components/Logo";
+import LoginForm from "./LoginForm";
 
 function LoginPage() {
   function onLoginWithGoogle() {
@@ -23,6 +25,24 @@ function LoginPage() {
         >
           Login with Google
         </Button>
+
+        <Divider />
+
+        <S.LoginForm />
+
+        <Button className="LoginPage__forgotPassword-Button" type="text" block>
+          Forgot your password?
+        </Button>
+
+        <div className="LoginPage__signUp-block">
+          <Typography.Text>
+            Don't have an account?{" "}
+            <Link to="/create-account" component={Typography.Link}>
+              Sign up
+            </Link>
+            <Typography.Link></Typography.Link>
+          </Typography.Text>
+        </div>
       </Card>
     </S.LoginPage>
   );
@@ -34,7 +54,6 @@ S.LoginPage = styled.div`
   background-color: ${(p) => p.theme.color.grey.medium};
   min-height: 100vh;
   padding-top: 6rem;
-  text-align: center;
 
   .LoginPage__login-Card {
     width: 24rem;
@@ -43,7 +62,20 @@ S.LoginPage = styled.div`
 
   .LoginPage__Logo {
     margin-bottom: 1.5rem;
+    text-align: center;
   }
+
+  .LoginPage__forgotPassword-Button {
+    margin-bottom: 1.5rem;
+  }
+
+  .LoginPage__signUp-block {
+    text-align: center;
+  }
+`;
+
+S.LoginForm = styled(LoginForm)`
+  margin-bottom: 0.5rem;
 `;
 
 export default LoginPage;

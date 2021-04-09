@@ -25,20 +25,20 @@ const LoginPage = lazy(() => import("modules/LoginPage"));
 function App() {
   const history = useHistory();
 
-  useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      if (user) {
-        history.push("/app");
-        return;
-      }
+  // useEffect(() => {
+  //   const unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       history.push("/app");
+  //       return;
+  //     }
 
-      history.push("/login");
-    });
+  //     history.push("/login");
+  //   });
 
-    return () => {
-      unsubscribeFromAuth();
-    };
-  }, [history]);
+  //   return () => {
+  //     unsubscribeFromAuth();
+  //   };
+  // }, [history]);
 
   return (
     <Provider store={store}>

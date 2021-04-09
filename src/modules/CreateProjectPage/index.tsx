@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { firestore } from "backend/firebase";
+import { auth, firestore } from "backend/firebase";
 import collectIdsAndDocs from "utils/collectIdsAndDocs";
 
 import { Button, Form, Typography, Input } from "antd";
@@ -29,8 +29,16 @@ function CreateProjectPage() {
     history.goBack();
   }
 
-  async function onFinish(values: CreateProjectForm) {
-    const project = await createProject(values);
+  async function onFinish({ title, description }: CreateProjectForm) {
+    const projectData = {
+      title,
+      description,
+      user: {
+        uid: auth.currentUser?.uid,
+      },
+    };
+
+    const project = await createProject(projectData);
 
     history.push(`/app/${project.id}`);
   }
@@ -51,13 +59,7 @@ function CreateProjectPage() {
           layout="vertical"
           onFinish={onFinish}
         >
-          <Form.Item
-            label="Project name"
-            name="title"
-            rules={[
-              { required: true, message: "Please input the project name!" },
-            ]}
-          >
+          <Form.Item label="Project name" name="title">
             <Input />
           </Form.Item>
 

@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useAppDispatch } from "app/hooks";
+import localStorage from "utils/localStorage";
 import { setEmailAddress } from "../../registrationSlice";
+import useSendSignInLinkToEmail from "./useSendSignInLinkToEmail";
 
 import { Typography, Input, Form, Button } from "antd";
 import Logo from "components/Logo";
@@ -12,11 +14,21 @@ const { Title } = Typography;
 function CreateAccountPage() {
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const { sendSignInLinkToEmail, isLoading } = useSendSignInLinkToEmail();
 
-  function onFinish({ emailAddress }: { emailAddress: string }) {
+  async function onFinish({ emailAddress }: { emailAddress: string }) {
     dispatch(setEmailAddress(emailAddress));
 
-    history.push("/verify-email");
+    try {
+      await sendSignInLinkToEmail(emailAddress);
+
+      // Put in localStorage for use in Account Setup after user clicks sign in link
+      localStorage.set("emailAddress", emailAddress);
+
+      history.push("/verify-email");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -46,7 +58,7 @@ function CreateAccountPage() {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button type="primary" htmlType="submit" block loading={isLoading}>
               Create your account
             </Button>
           </Form.Item>
