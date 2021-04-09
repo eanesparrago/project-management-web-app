@@ -1,10 +1,7 @@
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import { useAppDispatch } from "app/hooks";
-import { setEmailAddress } from "../../registrationSlice";
-import useCreateUserWithEmailAndPassword from "./utils/useCreateUserWithEmailAndPassword";
+import useCreateUser from "./utils/useCreateUser";
 
-import { Typography, Input, Form, Button, message } from "antd";
+import { Typography, Input, Form, Button } from "antd";
 import Logo from "components/Logo";
 import MainLayout from "../../layouts/MainLayout";
 
@@ -16,25 +13,10 @@ type CreateAccountForm = {
 };
 
 function CreateAccountPage() {
-  const dispatch = useAppDispatch();
-  const history = useHistory();
-
-  const {
-    createUserWithEmailAndPassword,
-    isLoading,
-  } = useCreateUserWithEmailAndPassword();
+  const { createUser, isLoading } = useCreateUser();
 
   async function onFinish({ emailAddress, password }: CreateAccountForm) {
-    dispatch(setEmailAddress(emailAddress));
-
-    try {
-      await createUserWithEmailAndPassword(emailAddress, password);
-
-      history.push("/verify-email");
-    } catch (error) {
-      console.error(error);
-      message.error(error.message);
-    }
+    await createUser(emailAddress, password);
   }
 
   return (

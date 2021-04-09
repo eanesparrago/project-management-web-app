@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { auth } from "backend/firebase";
+import { message } from "antd";
 
-function useCreateUserWithEmailAndPassword() {
+function useCreateUser() {
   const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
-  async function createUserWithEmailAndPassword(
-    emailAddress: string,
-    password: string
-  ) {
+  async function createUser(emailAddress: string, password: string) {
     try {
       setIsLoading(true);
 
@@ -22,15 +22,14 @@ function useCreateUserWithEmailAndPassword() {
       });
 
       setIsLoading(false);
-
-      return userCredential;
+      history.push("/verify-email");
     } catch (error) {
       setIsLoading(false);
-      throw new Error(error);
+      message.error(error.message);
     }
   }
 
-  return { createUserWithEmailAndPassword, isLoading };
+  return { createUser, isLoading };
 }
 
-export default useCreateUserWithEmailAndPassword;
+export default useCreateUser;

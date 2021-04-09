@@ -1,18 +1,16 @@
 import styled from "styled-components";
 import { useHistory } from "react-router";
-import { useAppSelector } from "app/hooks";
-import { auth } from "backend/firebase";
-import { selectEmailAddress } from "../../registrationSlice";
+import useAuth from "utils/useAuth";
 
-import { Typography, message, Button } from "antd";
+import { Typography, message, Button, Spin } from "antd";
 import Logo from "components/Logo";
 import MainLayout from "../../layouts/MainLayout";
 
 const { Title, Text, Link } = Typography;
 
 function VerifyEmailPage() {
-  const emailAddress = auth.currentUser?.email;
   const history = useHistory();
+  const { auth, user, isLoading } = useAuth();
 
   function onResendEmail() {
     // TODO
@@ -24,6 +22,8 @@ function VerifyEmailPage() {
     auth.signOut();
     history.push("/login");
   }
+
+  const email = isLoading ? <Spin /> : user?.email;
 
   return (
     <S.VerifyEmailPage>
@@ -37,7 +37,7 @@ function VerifyEmailPage() {
 
       <MainLayout as="main">
         <Title className="VerifyEmailPage__Title">
-          Please verify your email address, {emailAddress}.
+          Please verify your email address, {email}
         </Title>
 
         <Text>
