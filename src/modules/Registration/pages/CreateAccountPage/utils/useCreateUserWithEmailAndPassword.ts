@@ -17,11 +17,9 @@ function useCreateUserWithEmailAndPassword() {
       );
 
       await userCredential.user?.sendEmailVerification({
-        url: "http://localhost:3000/account-setup",
+        url: "http://localhost:3000/login",
         handleCodeInApp: true,
       });
-
-      await auth.signOut();
 
       setIsLoading(false);
 

@@ -1,8 +1,21 @@
+import useSignIn from "./utils/useSignIn";
+
 import { Form, Input, Button } from "antd";
 
+type LoginFormData = {
+  emailAddress: string;
+  password: string;
+};
+
 function LoginForm({ ...rest }) {
+  const { signIn, isLoading } = useSignIn();
+
+  async function onFinish({ emailAddress, password }: LoginFormData) {
+    await signIn(emailAddress, password);
+  }
+
   return (
-    <Form layout="vertical" {...rest}>
+    <Form layout="vertical" {...rest} onFinish={onFinish}>
       <Form.Item
         label="Email address"
         name="emailAddress"
@@ -21,7 +34,7 @@ function LoginForm({ ...rest }) {
         <Input.Password />
       </Form.Item>
 
-      <Button type="primary" block htmlType="submit">
+      <Button type="primary" block htmlType="submit" loading={isLoading}>
         Log in
       </Button>
     </Form>
