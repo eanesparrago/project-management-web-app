@@ -3,9 +3,10 @@ import { useHistory } from "react-router-dom";
 import { useAppDispatch } from "app/hooks";
 import localStorage from "utils/localStorage";
 import { setEmailAddress } from "../../registrationSlice";
-import useSendSignInLinkToEmail from "./useSendSignInLinkToEmail";
+import useSendSignInLinkToEmail from "./utils/useSendSignInLinkToEmail";
+import checkIfEmailExists from "./utils/checkIfEmailExists";
 
-import { Typography, Input, Form, Button } from "antd";
+import { Typography, Input, Form, Button, message } from "antd";
 import Logo from "components/Logo";
 import MainLayout from "../../layouts/MainLayout";
 
@@ -17,9 +18,15 @@ function CreateAccountPage() {
   const { sendSignInLinkToEmail, isLoading } = useSendSignInLinkToEmail();
 
   async function onFinish({ emailAddress }: { emailAddress: string }) {
-    dispatch(setEmailAddress(emailAddress));
-
     try {
+      if (await checkIfEmailExists(emailAddress)) {
+        history.push("/login");
+        message.info("Email is already registered");
+        return;
+      }
+
+      dispatch(setEmailAddress(emailAddress));
+      
       await sendSignInLinkToEmail(emailAddress);
 
       // Put in localStorage for use in Account Setup after user clicks sign in link
