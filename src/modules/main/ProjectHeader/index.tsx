@@ -9,35 +9,31 @@ const { Title } = Typography;
 
 function ProjectHeader() {
   return (
-    <S.ProjectHeader>
-      <Title className="ProjectHeader__Title" level={3}>
-        [Project title]
-      </Title>
+    <ScProjectHeader>
+      <ScTitle level={3}>[Project title]</ScTitle>
 
       <ProjectPopupMenu />
 
       <EditProjectDetailsModal />
 
-      <S.UserMainAvatar />
-    </S.ProjectHeader>
+      <ScUserMainAvatar />
+    </ScProjectHeader>
   );
 }
 
-const S = {} as any;
-
-S.ProjectHeader = styled.div`
+const ScProjectHeader = styled.div`
   width: 100%;
   padding: 0.75rem 1.5rem;
   border-bottom: 1px solid ${(p) => p.theme.color.grey.medium};
   display: flex;
   align-items: flex-start;
-
-  .ProjectHeader__Title {
-    margin-right: 0.5rem;
-  }
 `;
 
-S.UserMainAvatar = styled(UserMainAvatar)`
+const ScTitle = styled(Title)`
+  margin-right: 0.5rem;
+`;
+
+const ScUserMainAvatar = styled(UserMainAvatar)`
   margin-left: auto;
 `;
 

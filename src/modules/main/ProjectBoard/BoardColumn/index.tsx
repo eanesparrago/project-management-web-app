@@ -11,15 +11,11 @@ function BoardColumn() {
   const { isHovered, onHover, onHoverEnd } = useHover();
 
   return (
-    <S.BoardColumn $isHovered={isHovered}>
-      <div
-        className="BoardColumn__header-block"
-        onMouseLeave={onHoverEnd}
-        onMouseEnter={onHover}
-      >
-        <S.ColumnTitle />
+    <ScBoardColumn $isHovered={isHovered}>
+      <HeaderBlock onMouseLeave={onHoverEnd} onMouseEnter={onHover}>
+        <ScColumnTitle />
 
-        <div className="BoardColumn__headerButtons-block">
+        <HeaderButtonsBlock>
           <Tooltip title="Add task">
             <Button type="text" icon={<PlusOutlined />} />
           </Tooltip>
@@ -27,17 +23,15 @@ function BoardColumn() {
           <Tooltip title="More actions">
             <Button type="text" icon={<EllipsisOutlined />} />
           </Tooltip>
-        </div>
-      </div>
+        </HeaderButtonsBlock>
+      </HeaderBlock>
 
       <ColumnCard />
-    </S.BoardColumn>
+    </ScBoardColumn>
   );
 }
 
-const S = {} as any;
-
-S.BoardColumn = styled.div<{ $isHovered: boolean }>`
+const ScBoardColumn = styled.div<{ $isHovered: boolean }>`
   width: 20rem;
   padding: 0.75rem 1rem;
   border-radius: 8px;
@@ -45,27 +39,27 @@ S.BoardColumn = styled.div<{ $isHovered: boolean }>`
   transition-duration: 100ms;
 
   ${(p) => p.$isHovered && p.theme.boxShadow["1"]}
+`;
 
-  .BoardColumn__header-block {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.75rem;
+const HeaderBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
 
-    > *:not(:last-child) {
-      margin-right: 0.5rem;
-    }
-  }
-
-  .BoardColumn__headerButtons-block {
-    display: flex;
-
-    > *:not(:last-child) {
-      margin-right: 0.5rem;
-    }
+  > *:not(:last-child) {
+    margin-right: 0.5rem;
   }
 `;
 
-S.ColumnTitle = styled(ColumnTitle)`
+const HeaderButtonsBlock = styled.div`
+  display: flex;
+
+  > *:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+`;
+
+const ScColumnTitle = styled(ColumnTitle)`
   flex-grow: 1;
 `;
 

@@ -18,12 +18,13 @@ const AccountSetupPage = lazy(
 const VerifyEmailPage = lazy(
   () => import("modules/exterior/registration/pages/VerifyEmailPage")
 );
-const MainApp = lazy(() => import("modules/MainApp"));
 const CreateProjectPage = lazy(() => import("modules/CreateProjectPage"));
 const LoginPage = lazy(() => import("modules/exterior/LoginPage"));
 const ForgotPasswordPage = lazy(
   () => import("modules/exterior/forgotPassword/pages/ForgotPasswordPage")
 );
+
+const MainApp = lazy(() => import("modules/main/MainApp"));
 
 function App() {
   const history = useHistory();

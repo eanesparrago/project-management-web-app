@@ -4,7 +4,7 @@ import { firestore } from "backend/firebase";
 import collectIdsAndDocs from "utils/collectIdsAndDocs";
 
 import styled from "styled-components";
-import { Menu } from "antd";
+import { Menu, MenuProps } from "antd";
 import { UnorderedListOutlined, PlusOutlined } from "@ant-design/icons";
 import Logo from "components/Logo";
 
@@ -45,16 +45,16 @@ function MainSidebar({ ...rest }) {
   }
 
   return (
-    <S.Menu
+    <ScMenu
       defaultOpenKeys={["projects"]}
       mode="inline"
       theme="dark"
       inlineCollapsed={false}
       {...rest}
     >
-      <div className="MainSidebar__header-block">
+      <HeaderBlock className="MainSidebar__header-block">
         <Logo />
-      </div>
+      </HeaderBlock>
 
       <Menu.Item icon={<PlusOutlined />} onClick={onGoToCreateProject}>
         Create Project
@@ -67,24 +67,22 @@ function MainSidebar({ ...rest }) {
           </Menu.Item>
         ))}
       </SubMenu>
-    </S.Menu>
+    </ScMenu>
   );
 }
 
-const S = {} as any;
-
-S.Menu = styled(Menu)`
+const ScMenu: typeof Menu = styled(Menu)<MenuProps>`
   width: 16rem;
   height: 100vh;
+` as any;
 
-  .MainSidebar__header-block {
-    padding-top: 1.5rem;
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
+const HeaderBlock = styled.div`
+  padding-top: 1.5rem;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
 
-    > * {
-      line-height: normal;
-    }
+  > * {
+    line-height: normal;
   }
 `;
 

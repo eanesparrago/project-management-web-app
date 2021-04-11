@@ -1,24 +1,21 @@
 import styled from "styled-components";
 
 import { Typography } from "antd";
-
 import CompleteButton from "./CompleteButton";
 
 const { Text } = Typography;
 
 function ColumnCard({ ...rest }) {
   return (
-    <S.ColumnCard role="button" {...rest}>
+    <ScColumnCard role="button" {...rest}>
       <CompleteButton />
 
       <Text>Task 1</Text>
-    </S.ColumnCard>
+    </ScColumnCard>
   );
 }
 
-const S = {} as any;
-
-S.ColumnCard = styled.div`
+const ScColumnCard = styled.div`
   display: block;
   width: 100%;
   border-radius: 8px;

@@ -4,15 +4,13 @@ import BoardColumn from "./BoardColumn";
 
 function ProjectBoard({ ...rest }) {
   return (
-    <S.ProjectBoard {...rest}>
+    <ScProjectBoard {...rest}>
       <BoardColumn />
-    </S.ProjectBoard>
+    </ScProjectBoard>
   );
 }
 
-const S = {} as any;
-
-S.ProjectBoard = styled.div`
+const ScProjectBoard = styled.div`
   padding: 0.5rem 1rem;
   background-color: ${(p) => p.theme.color.grey.light};
 `;

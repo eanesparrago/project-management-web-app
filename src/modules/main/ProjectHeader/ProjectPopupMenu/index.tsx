@@ -35,7 +35,7 @@ function ProjectPopupMenu() {
   }
 
   const content = (
-    <S.Content>
+    <ScContent>
       <Button type="text" onClick={onOpenEditProjectDetails} block>
         Edit project details
       </Button>
@@ -43,7 +43,7 @@ function ProjectPopupMenu() {
       <Button type="text" danger onClick={onDeleteProjectWarn} block>
         Delete project
       </Button>
-    </S.Content>
+    </ScContent>
   );
 
   return (
@@ -53,10 +53,6 @@ function ProjectPopupMenu() {
   );
 }
 
-const S = {} as any;
-
-S.Content = styled.div`
-  /* width: ; */
-`;
+const ScContent = styled.div``;
 
 export default ProjectPopupMenu;

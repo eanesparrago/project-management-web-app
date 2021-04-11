@@ -1,46 +1,44 @@
 import styled from "styled-components";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-import MainSidebar from "modules/MainSidebar";
-import ProjectHeader from "modules/ProjectHeader";
-import ProjectBoard from "modules/ProjectBoard";
+import MainSidebar from "../MainSidebar";
+import ProjectHeader from "../ProjectHeader";
+import ProjectBoard from "../ProjectBoard";
 
 function MainApp() {
   const { path } = useRouteMatch();
 
   return (
-    <S.MainApp>
+    <PageBlock>
       <MainSidebar />
 
-      <main className="MainApp__main-block">
+      <MainBlock>
         <Route path={`${path}/:projectId?`}>
           <ProjectHeader />
         </Route>
 
         <Switch>
           <Route path={`${path}/:projectId`}>
-            <S.ProjectBoard />
+            <ScProjectBoard />
           </Route>
         </Switch>
-      </main>
-    </S.MainApp>
+      </MainBlock>
+    </PageBlock>
   );
 }
 
-const S = {} as any;
-
-S.MainApp = styled.div`
+const PageBlock = styled.div`
   display: flex;
-
-  .MainApp__main-block {
-    height: 100vh;
-    flex-grow: 1;
-    display: flex;
-    flex-flow: column;
-  }
 `;
 
-S.ProjectBoard = styled(ProjectBoard)`
+const MainBlock = styled.div`
+  height: 100vh;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
+`;
+
+const ScProjectBoard = styled(ProjectBoard)`
   flex-grow: 1;
 `;
 
