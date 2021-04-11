@@ -3,8 +3,9 @@ import { useHistory } from "react-router-dom";
 import { auth, firestore } from "backend/firebase";
 import collectIdsAndDocs from "utils/collectIdsAndDocs";
 
-import { Button, Form, Typography, Input } from "antd";
+import { Button, Form, Typography, Input, FormProps } from "antd";
 import { ArrowLeftOutlined, CloseOutlined } from "@ant-design/icons";
+import { FunctionComponent } from "react";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -44,16 +45,16 @@ function CreateProjectPage() {
   }
 
   return (
-    <S.CreateProjectPage>
-      <div className="CreateProjectPage__header-block">
+    <>
+      <HeaderBlock>
         <Button type="text" icon={<ArrowLeftOutlined />} onClick={onBack} />
         <Button type="text" icon={<CloseOutlined />} onClick={onBack} />
-      </div>
+      </HeaderBlock>
 
-      <div className="CreateProjectPage__main-block">
+      <MainBlock>
         <Title level={2}>New Project</Title>
 
-        <Form
+        <ScForm
           className="CreateProjectPage__Form"
           size="large"
           layout="vertical"
@@ -72,29 +73,25 @@ function CreateProjectPage() {
               Create project
             </Button>
           </Form.Item>
-        </Form>
-      </div>
-    </S.CreateProjectPage>
+        </ScForm>
+      </MainBlock>
+    </>
   );
 }
 
-const S = {} as any;
+const HeaderBlock = styled.div`
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+`;
 
-S.CreateProjectPage = styled.div`
-  .CreateProjectPage__header-block {
-    padding: 1rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 4rem;
-  }
+const MainBlock = styled.div`
+  padding-left: 4rem;
+`;
 
-  .CreateProjectPage__main-block {
-    padding-left: 4rem;
-  }
-
-  .CreateProjectPage__Form {
-    width: 24rem;
-  }
+const ScForm: FunctionComponent<FormProps> = styled(Form)`
+  width: 24rem;
 `;
 
 export default CreateProjectPage;
