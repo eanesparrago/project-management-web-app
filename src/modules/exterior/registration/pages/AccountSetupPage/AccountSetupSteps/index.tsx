@@ -8,9 +8,9 @@ import {
 
 const { Step } = Steps;
 
-interface AccountSetupStepsProps {
+type AccountSetupStepsProps = {
   className?: string;
-}
+};
 
 function getCurrentStep(accountSetupStage: AccountSetupStage): number {
   switch (accountSetupStage) {

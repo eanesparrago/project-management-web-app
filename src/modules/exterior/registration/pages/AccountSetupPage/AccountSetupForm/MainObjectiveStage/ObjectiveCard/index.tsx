@@ -30,8 +30,8 @@ function ObjectiveCard({
   }
 
   return (
-    <S.Button onClick={onClick} aria-selected={isActive}>
-      <S.Card hoverable $isActive={isActive} {...rest}>
+    <ScButton onClick={onClick} aria-selected={isActive}>
+      <ScCard hoverable $isActive={isActive} {...rest}>
         <Space size="middle" align="start">
           {icon}
 
@@ -41,18 +41,18 @@ function ObjectiveCard({
             <Text>{body}</Text>
           </Space>
         </Space>
-      </S.Card>
-    </S.Button>
+      </ScCard>
+    </ScButton>
   );
 }
 
-const S = {} as any;
+ 
 
-S.Button = styled.button`
+const ScButton = styled.button`
   width: 100%;
 `;
 
-S.Card = styled(Card)<{ $isActive: boolean }>`
+const ScCard = styled(Card)<{ $isActive: boolean }>`
   ${(p) =>
     p.$isActive &&
     css`

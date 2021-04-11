@@ -1,28 +1,23 @@
 import styled from "styled-components";
-import { useHistory } from "react-router";
 import useAuth from "utils/useAuth";
 import useResendEmail from "./utils/useResendEmail";
 
-import { Typography, Button, Spin } from "antd";
+import { Typography, Spin } from "antd";
 import { CheckCircleFilled } from "@ant-design/icons";
 import Logo from "components/Logo";
 import MainLayout from "components/layouts/MainLayout";
+import LogoutButton from "components/LogoutButton";
+import { PageBlock, HeaderBlock, ScTitle } from "../../../styles";
 
-const { Title, Text, Link } = Typography;
+const { Text, Link } = Typography;
 
 function VerifyEmailPage() {
-  const history = useHistory();
-  const { auth, user, isAuthLoading } = useAuth();
+  const { user, isAuthLoading } = useAuth();
   const {
     resendEmail,
     isResendEmailLoading,
     isResendEmailSuccess,
   } = useResendEmail();
-
-  function onLogOut() {
-    auth.signOut();
-    history.push("/login");
-  }
 
   function renderEmail() {
     return isAuthLoading ? <Spin /> : user?.email;
@@ -42,50 +37,27 @@ function VerifyEmailPage() {
   }
 
   return (
-    <S.VerifyEmailPage>
-      <header className="VerifyEmailPage__header-block">
+    <PageBlock>
+      <HeaderBlock>
         <Logo />
 
-        <Button type="text" onClick={onLogOut}>
-          Log out
-        </Button>
-      </header>
+        <ScLogoutButton />
+      </HeaderBlock>
 
       <MainLayout as="main">
-        <Title className="VerifyEmailPage__Title">
-          Please verify your email address, {renderEmail()}
-        </Title>
+        <ScTitle>Please verify your email address, {renderEmail()}</ScTitle>
 
         <Text>
           Complete your signup through the email we sent to your email address.
           Didn't receive an email? {renderResendEmail()}
         </Text>
       </MainLayout>
-    </S.VerifyEmailPage>
+    </PageBlock>
   );
 }
 
-const S = {} as any;
-
-S.VerifyEmailPage = styled.div`
-  .VerifyEmailPage__header-block {
-    padding: 1.5rem 2rem;
-    margin-bottom: 4rem;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .VerifyEmailPage__Title {
-    margin-bottom: 3rem;
-  }
-
-  .VerifyEmailPage__Form {
-    width: 32rem;
-
-    @media (max-width: ${(p) => p.theme.breakpoint.tabletPortrait}) {
-      width: 100%;
-    }
-  }
+const ScLogoutButton = styled(LogoutButton)`
+  margin-left: auto;
 `;
 
 export default VerifyEmailPage;

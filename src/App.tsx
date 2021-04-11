@@ -10,19 +10,19 @@ import { store } from "app/store";
 import { auth } from "backend/firebase";
 
 const CreateAccountPage = lazy(
-  () => import("modules/registration/pages/CreateAccountPage")
+  () => import("modules/exterior/registration/pages/CreateAccountPage")
 );
 const AccountSetupPage = lazy(
-  () => import("modules/registration/pages/AccountSetupPage")
+  () => import("modules/exterior/registration/pages/AccountSetupPage")
 );
 const VerifyEmailPage = lazy(
-  () => import("modules/registration/pages/VerifyEmailPage")
+  () => import("modules/exterior/registration/pages/VerifyEmailPage")
 );
 const MainApp = lazy(() => import("modules/MainApp"));
 const CreateProjectPage = lazy(() => import("modules/CreateProjectPage"));
-const LoginPage = lazy(() => import("modules/LoginPage"));
+const LoginPage = lazy(() => import("modules/exterior/LoginPage"));
 const ForgotPasswordPage = lazy(
-  () => import("modules/forgotPassword/pages/ForgotPasswordPage")
+  () => import("modules/exterior/forgotPassword/pages/ForgotPasswordPage")
 );
 
 function App() {

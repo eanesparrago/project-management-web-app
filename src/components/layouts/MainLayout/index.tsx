@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { FunctionComponent, PropsWithChildren } from "react";
 import styled from "styled-components";
 
 type MainLayoutProps = PropsWithChildren<{
@@ -7,12 +7,10 @@ type MainLayoutProps = PropsWithChildren<{
 }>;
 
 function MainLayout({ children, ...rest }: MainLayoutProps) {
-  return <S.MainLayout {...rest}>{children}</S.MainLayout>;
+  return <ScMainLayout {...rest}>{children}</ScMainLayout>;
 }
 
-const S = {} as any;
-
-S.MainLayout = styled.div`
+const ScMainLayout: FunctionComponent = styled.div`
   padding-left: 6rem;
 
   @media (max-width: ${(p) => p.theme.breakpoint.tabletPortrait}) {

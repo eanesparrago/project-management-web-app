@@ -1,11 +1,16 @@
-import styled from "styled-components";
 import useSendPasswordResetEmail from "./utils/useSendPasswordResetEmail";
 
 import { Typography, Input, Form, Button } from "antd";
 import Logo from "components/Logo";
-import MainLayout from "components/layouts/MainLayout";
+import {
+  PageBlock,
+  HeaderBlock,
+  MainBlock,
+  ScForm,
+  ScTitle,
+} from "../../../styles";
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 type ForgotPasswordFormData = {
   emailAddress: string;
@@ -27,9 +32,7 @@ function ForgotPasswordPage() {
     if (isSendPasswordResetEmailSuccess) {
       return (
         <>
-          <Title className="ForgotPasswordPage__Title">
-            Instructions sent!
-          </Title>
+          <ScTitle>Instructions sent!</ScTitle>
 
           <Text>
             Instructions for resetting your password have been sent to{" "}
@@ -41,13 +44,9 @@ function ForgotPasswordPage() {
 
     return (
       <>
-        <Title className="ForgotPasswordPage__Title">Forgot password?</Title>
-        <Form
-          className="ForgotPasswordPage__Form"
-          size="large"
-          onFinish={onFinish}
-          layout="vertical"
-        >
+        <ScTitle>Forgot password?</ScTitle>
+
+        <ScForm size="large" onFinish={onFinish} layout="vertical">
           <Form.Item
             label="Email address"
             name="emailAddress"
@@ -69,50 +68,20 @@ function ForgotPasswordPage() {
               Send me instructions
             </Button>
           </Form.Item>
-        </Form>
+        </ScForm>
       </>
     );
   }
 
   return (
-    <S.ForgotPasswordPage>
-      <header className="ForgotPasswordPage__header-block">
+    <PageBlock>
+      <HeaderBlock>
         <Logo />
-      </header>
+      </HeaderBlock>
 
-      <MainLayout as="main">{renderForm()}</MainLayout>
-    </S.ForgotPasswordPage>
+      <MainBlock>{renderForm()}</MainBlock>
+    </PageBlock>
   );
 }
-
-const S = {} as any;
-
-S.ForgotPasswordPage = styled.div`
-  .ForgotPasswordPage__header-block {
-    padding: 1.5rem 2rem;
-    margin-bottom: 4rem;
-  }
-
-  .ForgotPasswordPage__main-block {
-    padding-left: 6rem;
-
-    @media (max-width: ${(p) => p.theme.breakpoint.tabletPortrait}) {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  .ForgotPasswordPage__Title {
-    margin-bottom: 3rem;
-  }
-
-  .ForgotPasswordPage__Form {
-    width: 32rem;
-
-    @media (max-width: ${(p) => p.theme.breakpoint.tabletPortrait}) {
-      width: 100%;
-    }
-  }
-`;
 
 export default ForgotPasswordPage;

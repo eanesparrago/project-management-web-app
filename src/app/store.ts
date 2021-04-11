@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import registrationReducer from "modules/registration/registrationReducer";
+import registrationReducer from "modules/exterior/registration/registrationReducer";
 import projectHeaderSlice from "modules/ProjectHeader/projectHeaderSlice";
 
 export const store = configureStore({

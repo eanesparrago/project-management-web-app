@@ -1,17 +1,16 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-interface LogoProps {
+type LogoProps = {
   className?: string;
-}
+};
 
 function Logo({ ...rest }: LogoProps) {
-  return <S.Logo {...rest}>Asana Clone</S.Logo>;
+  return <ScLogo {...rest}>Asana Clone</ScLogo>;
 }
 
-const S = {} as any;
-
-S.Logo = styled.div`
+ 
+const ScLogo = styled.div`
   white-space: nowrap;
-`
+`;
 
 export default Logo;

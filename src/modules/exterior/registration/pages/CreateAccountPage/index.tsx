@@ -1,11 +1,9 @@
-import styled from "styled-components";
 import useCreateUser from "./utils/useCreateUser";
 
-import { Typography, Input, Form, Button } from "antd";
+import { Input, Form, Button } from "antd";
 import Logo from "components/Logo";
 import MainLayout from "components/layouts/MainLayout";
-
-const { Title } = Typography;
+import { ScTitle, ScForm, HeaderBlock, PageBlock } from "../../../styles";
 
 type CreateAccountForm = {
   emailAddress: string;
@@ -20,22 +18,15 @@ function CreateAccountPage() {
   }
 
   return (
-    <S.CreateAccountPage>
-      <header className="CreateAccountPage__header-block">
+    <PageBlock>
+      <HeaderBlock>
         <Logo />
-      </header>
+      </HeaderBlock>
 
       <MainLayout as="main">
-        <Title className="CreateAccountPage__Title">
-          Create your Asana Clone account
-        </Title>
+        <ScTitle>Create your Asana Clone account</ScTitle>
 
-        <Form
-          className="CreateAccountPage__Form"
-          size="large"
-          onFinish={onFinish}
-          layout="vertical"
-        >
+        <ScForm size="large" onFinish={onFinish} layout="vertical">
           <Form.Item
             label="Email address"
             name="emailAddress"
@@ -63,40 +54,10 @@ function CreateAccountPage() {
               Create your account
             </Button>
           </Form.Item>
-        </Form>
+        </ScForm>
       </MainLayout>
-    </S.CreateAccountPage>
+    </PageBlock>
   );
 }
-
-const S = {} as any;
-
-S.CreateAccountPage = styled.div`
-  .CreateAccountPage__header-block {
-    padding: 1.5rem 2rem;
-    margin-bottom: 4rem;
-  }
-
-  .CreateAccountPage__main-block {
-    padding-left: 6rem;
-
-    @media (max-width: ${(p) => p.theme.breakpoint.tabletPortrait}) {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  .CreateAccountPage__Title {
-    margin-bottom: 3rem;
-  }
-
-  .CreateAccountPage__Form {
-    width: 32rem;
-
-    @media (max-width: ${(p) => p.theme.breakpoint.tabletPortrait}) {
-      width: 100%;
-    }
-  }
-`;
 
 export default CreateAccountPage;
