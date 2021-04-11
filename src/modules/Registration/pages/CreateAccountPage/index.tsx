@@ -3,7 +3,7 @@ import useCreateUser from "./utils/useCreateUser";
 
 import { Typography, Input, Form, Button } from "antd";
 import Logo from "components/Logo";
-import MainLayout from "../../layouts/MainLayout";
+import MainLayout from "components/layouts/MainLayout";
 
 const { Title } = Typography;
 

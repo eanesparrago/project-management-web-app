@@ -21,6 +21,9 @@ const VerifyEmailPage = lazy(
 const MainApp = lazy(() => import("modules/MainApp"));
 const CreateProjectPage = lazy(() => import("modules/CreateProjectPage"));
 const LoginPage = lazy(() => import("modules/LoginPage"));
+const ForgotPasswordPage = lazy(
+  () => import("modules/forgotPassword/pages/ForgotPasswordPage")
+);
 
 function App() {
   const history = useHistory();
@@ -65,6 +68,10 @@ function App() {
 
             <Route path="/create-project">
               <CreateProjectPage />
+            </Route>
+
+            <Route path="/forgot-password">
+              <ForgotPasswordPage />
             </Route>
 
             <Route path="/app">

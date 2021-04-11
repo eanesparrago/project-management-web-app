@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Logo from "components/Logo";
 import AccountSetupSteps from "./AccountSetupSteps";
 import AccountSetupForm from "./AccountSetupForm";
-import MainLayout from "../../layouts/MainLayout";
+import MainLayout from "components/layouts/MainLayout";
 
 function AccountSetupPage() {
   return (

@@ -6,7 +6,7 @@ import useResendEmail from "./utils/useResendEmail";
 import { Typography, Button, Spin } from "antd";
 import { CheckCircleFilled } from "@ant-design/icons";
 import Logo from "components/Logo";
-import MainLayout from "../../layouts/MainLayout";
+import MainLayout from "components/layouts/MainLayout";
 
 const { Title, Text, Link } = Typography;
 

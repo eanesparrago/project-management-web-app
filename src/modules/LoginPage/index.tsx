@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { signInWithGoogle } from "backend/firebase";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { Card, Button, Divider, Typography } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
@@ -8,8 +8,14 @@ import Logo from "components/Logo";
 import LoginForm from "./LoginForm";
 
 function LoginPage() {
+  const history = useHistory();
+
   function onLoginWithGoogle() {
     signInWithGoogle();
+  }
+
+  function onGoToForgotPassword() {
+    history.push("/forgot-password");
   }
 
   return (
@@ -30,7 +36,12 @@ function LoginPage() {
 
         <S.LoginForm />
 
-        <Button className="LoginPage__forgotPassword-Button" type="text" block>
+        <Button
+          className="LoginPage__forgotPassword-Button"
+          type="text"
+          block
+          onClick={onGoToForgotPassword}
+        >
           Forgot your password?
         </Button>
 
