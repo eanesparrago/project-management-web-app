@@ -7,7 +7,7 @@ import { CheckCircleFilled } from "@ant-design/icons";
 import Logo from "components/Logo";
 import MainLayout from "components/layouts/MainLayout";
 import LogoutButton from "components/LogoutButton";
-import { PageBlock, HeaderBlock, ScTitle } from "../../../styles";
+import { PageBlock, HeaderBlock, ScTitle, MainBlock } from "../../../styles";
 
 const { Text, Link } = Typography;
 
@@ -44,14 +44,14 @@ function VerifyEmailPage() {
         <ScLogoutButton />
       </HeaderBlock>
 
-      <MainLayout as="main">
+      <MainBlock>
         <ScTitle>Please verify your email address, {renderEmail()}</ScTitle>
 
         <Text>
           Complete your signup through the email we sent to your email address.
           Didn't receive an email? {renderResendEmail()}
         </Text>
-      </MainLayout>
+      </MainBlock>
     </PageBlock>
   );
 }

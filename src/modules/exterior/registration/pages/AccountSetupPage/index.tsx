@@ -3,9 +3,8 @@ import styled from "styled-components";
 import Logo from "components/Logo";
 import AccountSetupSteps from "./AccountSetupSteps";
 import AccountSetupForm from "./AccountSetupForm";
-import MainLayout from "components/layouts/MainLayout";
 import LogoutButton from "components/LogoutButton";
-import { HeaderBlock, PageBlock } from "../../../styles";
+import { HeaderBlock, PageBlock, MainBlock } from "../../../styles";
 
 function AccountSetupPage() {
   return (
@@ -18,9 +17,9 @@ function AccountSetupPage() {
         <ScLogoutButton />
       </HeaderBlock>
 
-      <MainLayout as="main">
+      <MainBlock>
         <AccountSetupForm />
-      </MainLayout>
+      </MainBlock>
     </PageBlock>
   );
 }

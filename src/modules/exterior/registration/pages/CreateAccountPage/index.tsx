@@ -2,8 +2,13 @@ import useCreateUser from "./utils/useCreateUser";
 
 import { Input, Form, Button } from "antd";
 import Logo from "components/Logo";
-import MainLayout from "components/layouts/MainLayout";
-import { ScTitle, ScForm, HeaderBlock, PageBlock } from "../../../styles";
+import {
+  ScTitle,
+  ScForm,
+  HeaderBlock,
+  PageBlock,
+  MainBlock,
+} from "../../../styles";
 
 type CreateAccountForm = {
   emailAddress: string;
@@ -23,7 +28,7 @@ function CreateAccountPage() {
         <Logo />
       </HeaderBlock>
 
-      <MainLayout as="main">
+      <MainBlock>
         <ScTitle>Create your Asana Clone account</ScTitle>
 
         <ScForm size="large" onFinish={onFinish} layout="vertical">
@@ -55,7 +60,7 @@ function CreateAccountPage() {
             </Button>
           </Form.Item>
         </ScForm>
-      </MainLayout>
+      </MainBlock>
     </PageBlock>
   );
 }
