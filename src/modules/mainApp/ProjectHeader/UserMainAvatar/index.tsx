@@ -1,17 +1,10 @@
-import { signOut } from "backend/firebase";
-
-import { Avatar, Popover, Button } from "antd";
+import { Avatar, Popover } from "antd";
+import LogoutButton from "components/LogoutButton";
 
 function UserMainAvatar({ ...rest }) {
-  function onLogOut() {
-    signOut();
-  }
-
   const content = (
     <>
-      <Button type="text" block onClick={onLogOut}>
-        Log Out
-      </Button>
+      <LogoutButton />
     </>
   );
 
