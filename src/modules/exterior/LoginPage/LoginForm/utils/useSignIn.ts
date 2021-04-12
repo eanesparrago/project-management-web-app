@@ -1,6 +1,6 @@
 import { useHistory } from "react-router";
 import { useState } from "react";
-import { auth } from "backend/firebase";
+import { auth, firestore, createUserProfileDocument } from "backend/firebase";
 import { message } from "antd";
 
 function useSignIn() {
@@ -11,19 +11,35 @@ function useSignIn() {
     setIsLoading(true);
 
     try {
-      const userCredential = await auth.signInWithEmailAndPassword(
+      const { user } = await auth.signInWithEmailAndPassword(
         emailAddress,
         password
       );
 
-      setIsLoading(false);
+      if (!user) throw new Error("User not found");
 
-      if (userCredential.user?.emailVerified) {
-        // TODO: go to /account-setup if not yet set up, go to /app if already set up
-        history.push("/account-setup");
-      } else {
+      if (!user.emailVerified) {
+        setIsLoading(false);
         history.push("/verify-email");
+        return;
       }
+
+      const userDoc = await firestore.doc(`users/${user.uid}`).get();
+
+      if (!userDoc.exists) {
+        await createUserProfileDocument(user);
+        setIsLoading(false);
+        history.push("/account-setup");
+        return;
+      }
+
+      const userProfile = userDoc.data();
+
+      if (userProfile?.isActivated) {
+        history.push("/app");
+      }
+
+      setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       message.error("The username or password is not correct.");

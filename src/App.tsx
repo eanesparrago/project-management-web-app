@@ -1,13 +1,12 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { ThemeProvider } from "styled-components";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import "destyle.css";
 import "antd/dist/antd.css";
 import theme from "styles/theme";
 import GlobalStyle from "styles/GlobalStyle";
 import { store } from "app/store";
-import { auth, createUserProfileDocument } from "backend/firebase";
 
 const CreateAccountPage = lazy(
   () => import("modules/exterior/registration/pages/CreateAccountPage")
@@ -29,20 +28,6 @@ const CreateProjectPage = lazy(
 );
 
 function App() {
-  const history = useHistory();
-
-  useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (!userAuth) return;
-
-      await createUserProfileDocument(userAuth);
-    });
-
-    return () => {
-      unsubscribeFromAuth();
-    };
-  }, [history]);
-
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
