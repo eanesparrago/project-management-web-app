@@ -36,10 +36,9 @@ function useSignIn() {
       const userProfile = userDoc.data();
 
       if (userProfile?.isActivated) {
+        setIsLoading(false);
         history.push("/app");
       }
-
-      setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       message.error("The username or password is not correct.");
