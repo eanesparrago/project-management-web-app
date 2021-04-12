@@ -32,18 +32,16 @@ export type MainObjective =
 interface AccountSetupPageState {
   stage: AccountSetupStage;
   fullName: string;
-  password: string;
   workType: WorkType;
   mainObjective: MainObjective;
   projectName: string;
-  projectTasks: [string, string, string] | null;
+  projectTasks: string[] | null;
   taskGroupings: [string, string, string] | null;
 }
 
 const initialState: AccountSetupPageState = {
   stage: "accountInfo",
   fullName: "",
-  password: "",
   workType: null,
   mainObjective: null,
   projectName: "",
@@ -61,9 +59,6 @@ const accountSetupPageSlice = createSlice({
     setFullName(state, action: PayloadAction<string>) {
       state.fullName = action.payload;
     },
-    setPassword(state, action: PayloadAction<string>) {
-      state.password = action.payload;
-    },
     setWorkType(state, action: PayloadAction<WorkType>) {
       state.workType = action.payload;
     },
@@ -74,10 +69,18 @@ const accountSetupPageSlice = createSlice({
       state.projectName = action.payload;
     },
     setProjectTasks(state, action: PayloadAction<[string, string, string]>) {
-      state.projectTasks = action.payload;
+      action.payload.forEach((task) => {
+        if (task) {
+          state.projectTasks = [];
+          state.projectTasks.push(task);
+        }
+      });
     },
     setTaskGroupings(state, action: PayloadAction<[string, string, string]>) {
       state.taskGroupings = action.payload;
+    },
+    resetAccountSetupPage() {
+      return initialState;
     },
   },
 });
@@ -85,25 +88,42 @@ const accountSetupPageSlice = createSlice({
 export const {
   setStage,
   setFullName,
-  setPassword,
   setWorkType,
   setMainObjective,
   setProjectName,
   setProjectTasks,
   setTaskGroupings,
+  resetAccountSetupPage,
 } = accountSetupPageSlice.actions;
 
 export const selectAccountSetupStage = (state: RootState) =>
   state.registration.accountSetupPage.stage;
 
-export const selectFullName = (state: RootState) => state.registration.accountSetupPage.fullName;
-
-export const selectPassword = (state: RootState) => state.registration.accountSetupPage.password;
+export const selectFullName = (state: RootState) =>
+  state.registration.accountSetupPage.fullName;
 
 export const selectProjectName = (state: RootState) =>
   state.registration.accountSetupPage.projectName;
 
 export const selectProjectTasks = (state: RootState) =>
   state.registration.accountSetupPage.projectTasks;
+
+export const selectAccountSetupInfo = (state: RootState) => {
+  const {
+    fullName,
+    workType,
+    mainObjective,
+    projectName,
+    projectTasks,
+    taskGroupings,
+  } = state.registration.accountSetupPage;
+
+  const accountSetupInfo = {
+    profileInfo: { fullName, workType, mainObjective },
+    projectInfo: { projectName, projectTasks, taskGroupings },
+  };
+
+  return accountSetupInfo;
+};
 
 export default accountSetupPageSlice.reducer;

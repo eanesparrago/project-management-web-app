@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import { useAppDispatch } from "app/hooks";
+import { resetAccountSetupPage } from "./accountSetupPageSlice";
 
 import Logo from "components/Logo";
 import AccountSetupSteps from "./AccountSetupSteps";
@@ -7,6 +10,12 @@ import LogoutButton from "components/LogoutButton";
 import { HeaderBlock, PageBlock, MainBlock } from "../../../styles";
 
 function AccountSetupPage() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(resetAccountSetupPage());
+  }, [dispatch]);
+
   return (
     <PageBlock>
       <HeaderBlock>

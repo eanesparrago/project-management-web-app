@@ -1,13 +1,15 @@
-import { Typography, Space, Form, Button, Input } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-
 import { useAppDispatch } from "app/hooks";
 import { setStage, setTaskGroupings } from "../../accountSetupPageSlice";
+import useSetupAccount from "../utils/useSetupAccount";
+
+import { Typography, Space, Form, Button, Input } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
 function TaskGroupingsStage() {
   const dispatch = useAppDispatch();
+  const { setupAccount, isSetupAccountLoading } = useSetupAccount();
 
   function onBack() {
     dispatch(setStage("projectTasks"));
@@ -23,6 +25,8 @@ function TaskGroupingsStage() {
     grouping3: string;
   }) {
     dispatch(setTaskGroupings([grouping1, grouping2, grouping3]));
+
+    setupAccount();
   }
 
   return (
@@ -61,7 +65,12 @@ function TaskGroupingsStage() {
         </Form.Item>
 
         <Form.Item>
-          <Button size="large" type="primary" htmlType="submit">
+          <Button
+            size="large"
+            type="primary"
+            htmlType="submit"
+            loading={isSetupAccountLoading}
+          >
             Continue
           </Button>
         </Form.Item>

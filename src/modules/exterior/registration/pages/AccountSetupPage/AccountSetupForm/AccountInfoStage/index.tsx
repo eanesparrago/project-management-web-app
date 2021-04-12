@@ -1,10 +1,6 @@
 import { useAppDispatch } from "app/hooks";
-import {
-  setStage,
-  setFullName,
-  setPassword,
-} from "../../accountSetupPageSlice";
 import localStorage from "utils/localStorage";
+import { setStage, setFullName } from "../../accountSetupPageSlice";
 
 import { Typography, Space, Input, Form, Button } from "antd";
 import { useMemo } from "react";
@@ -13,7 +9,6 @@ const { Title, Text } = Typography;
 
 type AccountInfoForm = {
   fullName: string;
-  password: string;
 };
 
 function AccountInfoStage() {
@@ -21,7 +16,6 @@ function AccountInfoStage() {
 
   function onFinish(values: AccountInfoForm) {
     dispatch(setFullName(values.fullName));
-    dispatch(setPassword(values.password));
 
     dispatch(setStage("aboutYourself"));
   }
@@ -33,7 +27,7 @@ function AccountInfoStage() {
       <Title>Welcome to Asana Clone!</Title>
 
       {emailAddress && (
-        <Text type="secondary">You're signing up as {emailAddress}</Text>
+        <Text type="secondary">You're setting up as {emailAddress}</Text>
       )}
 
       <Form layout="vertical" name="accountInfoStage" onFinish={onFinish}>
@@ -51,10 +45,6 @@ function AccountInfoStage() {
           </Button>
         </Form.Item>
       </Form>
-
-      <Text>
-        Wrong account? <Typography.Link>Log in</Typography.Link> instead.
-      </Text>
     </Space>
   );
 }

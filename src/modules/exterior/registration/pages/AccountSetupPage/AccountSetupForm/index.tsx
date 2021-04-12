@@ -1,12 +1,12 @@
+import { useAppSelector } from "app/hooks";
+import { selectAccountSetupStage } from "../accountSetupPageSlice";
+
 import AccountInfoStage from "./AccountInfoStage";
 import AboutYourselfStage from "./AboutYourselfStage";
 import MainObjectiveStage from "./MainObjectiveStage";
 import FirstProjectStage from "./FirstProjectStage";
 import ProjectTasksStage from "./ProjectTasksStage";
 import TaskGroupingsStage from "./TaskGroupingsStage";
-
-import { useAppSelector } from "app/hooks";
-import { selectAccountSetupStage } from "../accountSetupPageSlice";
 
 function AccountSetupForm() {
   const accountSetupStage = useAppSelector(selectAccountSetupStage);
