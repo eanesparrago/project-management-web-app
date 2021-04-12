@@ -11,12 +11,14 @@ function useCreateUser() {
     try {
       setIsLoading(true);
 
-      const userCredential = await auth.createUserWithEmailAndPassword(
+      const { user } = await auth.createUserWithEmailAndPassword(
         emailAddress,
         password
       );
 
-      await userCredential.user?.sendEmailVerification({
+      if (!user) return;
+
+      await user.sendEmailVerification({
         url: "http://localhost:3000/login",
         handleCodeInApp: true,
       });
@@ -24,6 +26,7 @@ function useCreateUser() {
       setIsLoading(false);
       history.push("/verify-email");
     } catch (error) {
+      console.error(error);
       setIsLoading(false);
       message.error(error.message);
     }

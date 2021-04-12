@@ -5,7 +5,7 @@ import useUpdatePassword from "./utils/useUpdatePassword";
 
 import { Input, Form, Button } from "antd";
 import Logo from "components/Logo";
-import MainLayout from "components/layouts/MainLayout";
+import { MainBlock } from "../../../styles";
 
 type ResetPasswordFormData = {
   password: string;
@@ -25,7 +25,7 @@ function ResetPasswordPage() {
         <Logo />
       </header>
 
-      <MainLayout as="main">
+      <MainBlock>
         <Form
           className="ResetPasswordPage__Form"
           size="large"
@@ -83,7 +83,7 @@ function ResetPasswordPage() {
             </Button>
           </Form.Item>
         </Form>
-      </MainLayout>
+      </MainBlock>
     </S.ResetPasswordPage>
   );
 }

@@ -5,7 +5,6 @@ import useResendEmail from "./utils/useResendEmail";
 import { Typography, Spin } from "antd";
 import { CheckCircleFilled } from "@ant-design/icons";
 import Logo from "components/Logo";
-import MainLayout from "components/layouts/MainLayout";
 import LogoutButton from "components/LogoutButton";
 import { PageBlock, HeaderBlock, ScTitle, MainBlock } from "../../../styles";
 

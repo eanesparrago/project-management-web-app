@@ -7,7 +7,7 @@ import "antd/dist/antd.css";
 import theme from "styles/theme";
 import GlobalStyle from "styles/GlobalStyle";
 import { store } from "app/store";
-import { auth } from "backend/firebase";
+import { auth, createUserProfileDocument } from "backend/firebase";
 
 const CreateAccountPage = lazy(
   () => import("modules/exterior/registration/pages/CreateAccountPage")
@@ -24,25 +24,24 @@ const ForgotPasswordPage = lazy(
 );
 
 const MainApp = lazy(() => import("modules/mainApp/MainApp"));
-const CreateProjectPage = lazy(() => import("modules/mainApp/CreateProjectPage"));
+const CreateProjectPage = lazy(
+  () => import("modules/mainApp/CreateProjectPage")
+);
 
 function App() {
   const history = useHistory();
 
-  // useEffect(() => {
-  //   const unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       history.push("/app");
-  //       return;
-  //     }
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (!userAuth) return;
 
-  //     history.push("/login");
-  //   });
+      await createUserProfileDocument(userAuth);
+    });
 
-  //   return () => {
-  //     unsubscribeFromAuth();
-  //   };
-  // }, [history]);
+    return () => {
+      unsubscribeFromAuth();
+    };
+  }, [history]);
 
   return (
     <Provider store={store}>
