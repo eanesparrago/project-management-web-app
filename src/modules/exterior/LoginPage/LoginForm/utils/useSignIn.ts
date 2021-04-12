@@ -35,10 +35,16 @@ function useSignIn() {
 
       const userProfile = userDoc.data();
 
-      if (userProfile?.isActivated) {
+      if (!userProfile) throw new Error("Error getting user profile");
+
+      if (userProfile.isActivated) {
         setIsLoading(false);
         history.push("/app");
+        return;
       }
+
+      setIsLoading(false);
+      history.push("/account-setup");
     } catch (error) {
       setIsLoading(false);
       message.error("The username or password is not correct.");
