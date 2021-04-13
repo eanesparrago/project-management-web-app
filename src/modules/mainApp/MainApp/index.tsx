@@ -4,6 +4,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import MainSidebar from "../MainSidebar";
 import ProjectHeader from "../ProjectHeader";
 import ProjectBoard from "../ProjectBoard";
+import ProfileSettingsModal from "../ProfileSettingsModal";
 
 function MainApp() {
   const { path } = useRouteMatch();
@@ -23,6 +24,8 @@ function MainApp() {
           </Route>
         </Switch>
       </MainBlock>
+
+      <ProfileSettingsModal />
     </PageBlock>
   );
 }
