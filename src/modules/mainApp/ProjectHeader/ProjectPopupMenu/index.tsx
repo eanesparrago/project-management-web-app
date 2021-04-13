@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
-import { firestore } from "backend/firebase";
+import { firestore } from "api/firebase";
 import { useAppDispatch } from "app/hooks";
 import { setIsEditProjectDetailsModalOpen } from "../projectHeaderSlice";
 

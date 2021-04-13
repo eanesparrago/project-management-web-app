@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { auth, firestore } from "backend/firebase";
+import { auth, firestore } from "api/firebase";
 import collectIdsAndDocs from "utils/collectIdsAndDocs";
 
 import { Button, Form, Typography, Input, FormProps } from "antd";

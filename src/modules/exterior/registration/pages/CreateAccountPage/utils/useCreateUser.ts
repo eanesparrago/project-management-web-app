@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { auth } from "backend/firebase";
+import { auth } from "api/firebase";
 import { message } from "antd";
 
 function useCreateUser() {

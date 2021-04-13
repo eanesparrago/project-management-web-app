@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import { useAppSelector } from "app/hooks";
 import { selectAccountSetupInfo } from "../../accountSetupPageSlice";
-import { firestore } from "backend/firebase";
+import { firestore } from "api/firebase";
 import useAuth from "utils/useAuth";
 
 import { message } from "antd";

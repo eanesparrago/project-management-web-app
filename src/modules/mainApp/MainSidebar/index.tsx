@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory, useRouteMatch, NavLink } from "react-router-dom";
-import { firestore } from "backend/firebase";
+import { firestore } from "api/firebase";
 import collectIdsAndDocs from "utils/collectIdsAndDocs";
 
 import styled from "styled-components";

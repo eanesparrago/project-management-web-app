@@ -1,4 +1,4 @@
-import { signInWithGoogle } from "backend/firebase";
+import { signInWithGoogle } from "api/firebase";
 import { Link, useHistory } from "react-router-dom";
 
 import { Button, Divider, Typography } from "antd";

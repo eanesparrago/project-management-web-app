@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import firebase from "firebase";
-import { auth } from "backend/firebase";
+import { auth } from "api/firebase";
 
 type AuthState = {
   isSignedIn: boolean;

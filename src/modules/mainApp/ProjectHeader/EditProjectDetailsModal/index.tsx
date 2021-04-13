@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { firestore } from "backend/firebase";
+import { firestore } from "api/firebase";
 import { useAppSelector, useAppDispatch } from "app/hooks";
 import {
   selectIsEditProjectDetailsModalOpen,

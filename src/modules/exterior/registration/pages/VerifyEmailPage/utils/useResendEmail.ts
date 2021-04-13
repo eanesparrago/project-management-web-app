@@ -1,4 +1,4 @@
-import { auth } from "backend/firebase";
+import { auth } from "api/firebase";
 import { useState } from "react";
 import { message } from "antd";
 

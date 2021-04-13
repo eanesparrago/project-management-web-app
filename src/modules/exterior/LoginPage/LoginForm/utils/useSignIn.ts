@@ -1,6 +1,6 @@
 import { useHistory } from "react-router";
 import { useState } from "react";
-import { auth, firestore, createUserProfileDocument } from "backend/firebase";
+import { auth, firestore, createUserProfileDocument } from "api/firebase";
 import { message } from "antd";
 
 function useSignIn() {
