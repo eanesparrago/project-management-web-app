@@ -40,7 +40,7 @@ function CreateAccountPage() {
               { type: "email", message: "Email is not a valid email" },
             ]}
           >
-            <Input />
+            <Input data-testid="emailInput" />
           </Form.Item>
 
           <Form.Item
@@ -51,11 +51,17 @@ function CreateAccountPage() {
               { min: 8, message: "Password must be 8 characters or longer!" },
             ]}
           >
-            <Input.Password />
+            <Input.Password data-testid="passwordInput" />
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block loading={isLoading}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              loading={isLoading}
+              data-testid="submitBtn"
+            >
               Create your account
             </Button>
           </Form.Item>
