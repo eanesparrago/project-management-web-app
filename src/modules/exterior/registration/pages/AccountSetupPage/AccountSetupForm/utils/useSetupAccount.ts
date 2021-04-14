@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { useAppSelector } from "app/hooks";
 import { selectAccountSetupInfo } from "../../accountSetupPageSlice";
 import { firestore } from "api/firebase";
-import useAuth from "utils/useAuth";
+import useAuth from "api/hooks/useAuth";
 
 import { message } from "antd";
 

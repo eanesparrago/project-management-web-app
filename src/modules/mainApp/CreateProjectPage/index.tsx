@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import { FunctionComponent } from "react";
 import { useHistory } from "react-router-dom";
 import { auth, firestore } from "api/firebase";
-import collectIdsAndDocs from "utils/collectIdsAndDocs";
+import collectIdsAndDocs from "api/utils/collectIdsAndDocs";
 
+import styled from "styled-components";
 import { Button, Form, Typography, Input, FormProps } from "antd";
 import { ArrowLeftOutlined, CloseOutlined } from "@ant-design/icons";
-import { FunctionComponent } from "react";
 
 const { Title } = Typography;
 const { TextArea } = Input;

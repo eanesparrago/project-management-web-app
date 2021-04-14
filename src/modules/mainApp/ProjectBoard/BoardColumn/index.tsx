@@ -1,14 +1,21 @@
-import styled from "styled-components";
+import useHover from "./utils/useHover";
+import { useParams } from "react-router-dom";
+import useCreateTask from "api/hooks/useCreateTask";
 
+import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { PlusOutlined, EllipsisOutlined } from "@ant-design/icons";
 import ColumnTitle from "./ColumnTitle";
 import ColumnCard from "./ColumnCard";
 
-import useHover from "./utils/useHover";
-
 function BoardColumn() {
   const { isHovered, onHover, onHoverEnd } = useHover();
+  const { projectId } = useParams<{ projectId: string }>();
+  const { createTask, isCreateTaskLoading } = useCreateTask();
+
+  function onCreateTask() {
+    createTask(projectId, { title: "TASK" });
+  }
 
   return (
     <ScBoardColumn $isHovered={isHovered}>
@@ -17,7 +24,12 @@ function BoardColumn() {
 
         <HeaderButtonsBlock>
           <Tooltip title="Add task">
-            <Button type="text" icon={<PlusOutlined />} />
+            <Button
+              type="text"
+              icon={<PlusOutlined />}
+              onClick={onCreateTask}
+              loading={isCreateTaskLoading}
+            />
           </Tooltip>
 
           <Tooltip title="More actions">

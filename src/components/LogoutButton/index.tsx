@@ -1,4 +1,4 @@
-import useAuth from "utils/useAuth";
+import useAuth from "api/hooks/useAuth";
 import { useHistory } from "react-router";
 
 import { Button } from "antd";

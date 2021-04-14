@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import useAuth from "utils/useAuth";
+import useAuth from "api/hooks/useAuth";
 import useResendEmail from "./utils/useResendEmail";
 
 import { Typography, Spin } from "antd";

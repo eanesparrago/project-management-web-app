@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import BoardColumn from "./BoardColumn";
 
 function ProjectBoard({ ...rest }) {
