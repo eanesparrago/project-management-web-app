@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import { useHistory, useRouteMatch, NavLink } from "react-router-dom";
-import { firestore } from "api/firebase";
-import collectIdsAndDocs from "utils/collectIdsAndDocs";
+import useFetchMyProjects from "api/hooks/useFetchMyProjects";
 
 import styled from "styled-components";
 import { Menu, MenuProps } from "antd";
@@ -10,35 +8,10 @@ import Logo from "components/Logo";
 
 const { SubMenu } = Menu;
 
-type Project = {
-  id: string;
-  title: string;
-  description: string;
-  user: {
-    uid: string;
-    displayName: string;
-  };
-};
-
 function MainSidebar({ ...rest }) {
-  const [projects, setProjects] = useState<Project[]>([]);
   const history = useHistory();
   const { url } = useRouteMatch();
-
-  useEffect(() => {
-    function subscribeToProjects() {
-      return firestore.collection("projects").onSnapshot((snapshot) => {
-        const projects = snapshot.docs.map(collectIdsAndDocs);
-        setProjects(projects);
-      });
-    }
-
-    const unsubscribeFromFirestore = subscribeToProjects();
-
-    return () => {
-      unsubscribeFromFirestore();
-    };
-  }, []);
+  const [projects = []] = useFetchMyProjects();
 
   function onGoToCreateProject() {
     history.push("/create-project");
