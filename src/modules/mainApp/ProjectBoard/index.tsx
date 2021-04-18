@@ -2,6 +2,7 @@ import useGroups from "api/groups/useGroups";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import BoardGroup from "./BoardGroup";
+import AddGroupInput from "./AddGroupInput";
 
 function ProjectBoard({ ...rest }) {
   const { projectId } = useParams<{ projectId: string }>();
@@ -13,6 +14,8 @@ function ProjectBoard({ ...rest }) {
         groups.map((group) => (
           <BoardGroup key={group.id} title={group.title} />
         ))}
+
+      <AddGroupInput />
     </ScProjectBoard>
   );
 }

@@ -13,7 +13,7 @@ type TaskCardProps = {
 function TaskCard({ title, isComplete, ...rest }: TaskCardProps) {
   return (
     <ScTaskCard role="button" {...rest}>
-      <CompleteButton isComplete={isComplete}/>
+      <CompleteButton isComplete={isComplete} />
 
       <Text>{title}</Text>
     </ScTaskCard>
@@ -24,7 +24,7 @@ export const ScTaskCard = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  border-radius: 8px;
+  border-radius: ${(p) => p.theme.borderRadius.s};
   background-color: ${(p) => p.theme.color.white};
   padding: 0.75rem;
   ${(p) => p.theme.boxShadow["1"]}

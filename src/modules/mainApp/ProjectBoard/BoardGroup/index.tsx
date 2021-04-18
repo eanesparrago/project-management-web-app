@@ -20,7 +20,7 @@ function BoardGroup({ title }: BoardGroupProps) {
   const { projectId } = useParams<{ projectId: string }>();
   const { createTask, isCreateTaskLoading } = useCreateTask();
   const [isCreatingNewTask, setIsCreatingNewTask] = useIsCreatingNewTask();
-  const { projectTasks } = useProjectTasks(projectId);
+  // const { projectTasks } = useProjectTasks(projectId);
 
   function onStartCreateTask() {
     setIsCreatingNewTask(true);
@@ -52,14 +52,16 @@ function BoardGroup({ title }: BoardGroupProps) {
           <NewTaskCard handleSetIsCreatingNewTask={setIsCreatingNewTask} />
         )}
 
-        {projectTasks &&
+        {/* {projectTasks &&
           projectTasks.map((task) => (
             <TaskCard
               key={task.id}
               title={task.title}
               isComplete={task.isComplete}
             />
-          ))}
+          ))} */}
+
+        <TaskCard title="TEST" isComplete={true} />
       </TasksBlock>
     </ScBoardGroup>
   );
@@ -69,7 +71,7 @@ const ScBoardGroup = styled.div<{ $isHovered: boolean }>`
   flex-shrink: 0;
   width: 20rem;
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: ${(p) => p.theme.borderRadius.s};
   transition-property: box-shadow;
   transition-duration: 100ms;
 
