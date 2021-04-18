@@ -45,6 +45,7 @@ function MainSidebar({ ...rest }) {
 }
 
 const ScMenu: typeof Menu = styled(Menu)<MenuProps>`
+  flex-shrink: 0;
   width: 16rem;
   height: 100vh;
 ` as any;

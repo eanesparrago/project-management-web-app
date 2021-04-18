@@ -39,6 +39,7 @@ const MainBlock = styled.div`
   flex-grow: 1;
   display: flex;
   flex-flow: column;
+  overflow: hidden;
 `;
 
 const ScProjectBoard = styled(ProjectBoard)`

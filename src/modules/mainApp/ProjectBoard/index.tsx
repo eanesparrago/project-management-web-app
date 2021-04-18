@@ -1,10 +1,18 @@
+import useGroups from "api/groups/useGroups";
+import { useParams } from "react-router";
 import styled from "styled-components";
 import BoardColumn from "./BoardColumn";
 
 function ProjectBoard({ ...rest }) {
+  const { projectId } = useParams<{ projectId: string }>();
+  const { groups } = useGroups(projectId);
+
   return (
     <ScProjectBoard {...rest}>
-      <BoardColumn />
+      {groups &&
+        groups.map((group) => (
+          <BoardColumn key={group.id} title={group.title} />
+        ))}
     </ScProjectBoard>
   );
 }
@@ -12,6 +20,8 @@ function ProjectBoard({ ...rest }) {
 const ScProjectBoard = styled.div`
   padding: 0.5rem 1rem;
   background-color: ${(p) => p.theme.color.grey.light};
+  display: flex;
+  overflow-x: auto;
 `;
 
 export default ProjectBoard;

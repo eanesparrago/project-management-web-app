@@ -11,7 +11,11 @@ import TaskCard from "./TaskCard";
 import NewTaskCard from "./TaskCard/variants/NewTaskCard";
 import useProjectTasks from "api/hooks/useProjectTasks";
 
-function BoardColumn() {
+type BoardColumnProps = {
+  title: string;
+};
+
+function BoardColumn({ title }: BoardColumnProps) {
   const { isHovered, onHover, onHoverEnd } = useHover();
   const { projectId } = useParams<{ projectId: string }>();
   const { createTask, isCreateTaskLoading } = useCreateTask();
@@ -25,7 +29,7 @@ function BoardColumn() {
   return (
     <ScBoardColumn $isHovered={isHovered}>
       <HeaderBlock onMouseLeave={onHoverEnd} onMouseEnter={onHover}>
-        <ScColumnTitle />
+        <ScColumnTitle title={title} />
 
         <HeaderButtonsBlock>
           <Tooltip title="Add task">
@@ -62,6 +66,7 @@ function BoardColumn() {
 }
 
 const ScBoardColumn = styled.div<{ $isHovered: boolean }>`
+  flex-shrink: 0;
   width: 20rem;
   padding: 0.75rem 1rem;
   border-radius: 8px;

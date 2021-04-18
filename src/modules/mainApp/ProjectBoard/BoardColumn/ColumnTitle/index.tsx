@@ -2,10 +2,14 @@ import { Typography } from "antd";
 
 const { Title } = Typography;
 
-function ColumnTitle({ ...rest }) {
+type ColumnTitleProps = {
+  title: string;
+};
+
+function ColumnTitle({ title, ...rest }: ColumnTitleProps) {
   return (
     <Title level={4} editable {...rest}>
-      To Do
+      {title}
     </Title>
   );
 }
