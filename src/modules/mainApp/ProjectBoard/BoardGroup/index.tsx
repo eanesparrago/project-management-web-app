@@ -6,16 +6,16 @@ import useIsCreatingNewTask from "./utils/useIsCreatingNewTask";
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { PlusOutlined, EllipsisOutlined } from "@ant-design/icons";
-import ColumnTitle from "./ColumnTitle";
+import GroupTitle from "./GroupTitle";
 import TaskCard from "./TaskCard";
 import NewTaskCard from "./TaskCard/variants/NewTaskCard";
 import useProjectTasks from "api/hooks/useProjectTasks";
 
-type BoardColumnProps = {
+type BoardGroupProps = {
   title: string;
 };
 
-function BoardColumn({ title }: BoardColumnProps) {
+function BoardGroup({ title }: BoardGroupProps) {
   const { isHovered, onHover, onHoverEnd } = useHover();
   const { projectId } = useParams<{ projectId: string }>();
   const { createTask, isCreateTaskLoading } = useCreateTask();
@@ -27,9 +27,9 @@ function BoardColumn({ title }: BoardColumnProps) {
   }
 
   return (
-    <ScBoardColumn $isHovered={isHovered}>
+    <ScBoardGroup $isHovered={isHovered}>
       <HeaderBlock onMouseLeave={onHoverEnd} onMouseEnter={onHover}>
-        <ScColumnTitle title={title} />
+        <ScGroupTitle title={title} />
 
         <HeaderButtonsBlock>
           <Tooltip title="Add task">
@@ -61,11 +61,11 @@ function BoardColumn({ title }: BoardColumnProps) {
             />
           ))}
       </TasksBlock>
-    </ScBoardColumn>
+    </ScBoardGroup>
   );
 }
 
-const ScBoardColumn = styled.div<{ $isHovered: boolean }>`
+const ScBoardGroup = styled.div<{ $isHovered: boolean }>`
   flex-shrink: 0;
   width: 20rem;
   padding: 0.75rem 1rem;
@@ -94,7 +94,7 @@ const HeaderButtonsBlock = styled.div`
   }
 `;
 
-const ScColumnTitle = styled(ColumnTitle)`
+const ScGroupTitle = styled(GroupTitle)`
   flex-grow: 1;
 `;
 
@@ -104,4 +104,4 @@ const TasksBlock = styled.div`
   }
 `;
 
-export default BoardColumn;
+export default BoardGroup;

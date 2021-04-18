@@ -1,7 +1,7 @@
 import useGroups from "api/groups/useGroups";
 import { useParams } from "react-router";
 import styled from "styled-components";
-import BoardColumn from "./BoardColumn";
+import BoardGroup from "./BoardGroup";
 
 function ProjectBoard({ ...rest }) {
   const { projectId } = useParams<{ projectId: string }>();
@@ -11,7 +11,7 @@ function ProjectBoard({ ...rest }) {
     <ScProjectBoard {...rest}>
       {groups &&
         groups.map((group) => (
-          <BoardColumn key={group.id} title={group.title} />
+          <BoardGroup key={group.id} title={group.title} />
         ))}
     </ScProjectBoard>
   );

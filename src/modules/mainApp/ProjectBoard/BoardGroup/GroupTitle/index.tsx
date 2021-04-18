@@ -2,11 +2,11 @@ import { Typography } from "antd";
 
 const { Title } = Typography;
 
-type ColumnTitleProps = {
+type GroupTitleProps = {
   title: string;
 };
 
-function ColumnTitle({ title, ...rest }: ColumnTitleProps) {
+function GroupTitle({ title, ...rest }: GroupTitleProps) {
   return (
     <Title level={4} editable {...rest}>
       {title}
@@ -14,4 +14,4 @@ function ColumnTitle({ title, ...rest }: ColumnTitleProps) {
   );
 }
 
-export default ColumnTitle;
+export default GroupTitle;
