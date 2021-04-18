@@ -1,20 +1,25 @@
-import useHover from "./utils/useHover";
 import { useParams } from "react-router-dom";
 import useCreateTask from "api/hooks/useCreateTask";
+import useHover from "./utils/useHover";
+import useIsCreatingNewTask from "./utils/useIsCreatingNewTask";
 
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { PlusOutlined, EllipsisOutlined } from "@ant-design/icons";
 import ColumnTitle from "./ColumnTitle";
-import ColumnCard from "./ColumnCard";
+import TaskCard from "./TaskCard";
+import NewTaskCard from "./TaskCard/variants/NewTaskCard";
+import useProjectTasks from "api/hooks/useProjectTasks";
 
 function BoardColumn() {
   const { isHovered, onHover, onHoverEnd } = useHover();
   const { projectId } = useParams<{ projectId: string }>();
   const { createTask, isCreateTaskLoading } = useCreateTask();
+  const [isCreatingNewTask, setIsCreatingNewTask] = useIsCreatingNewTask();
+  const { projectTasks } = useProjectTasks(projectId);
 
-  function onCreateTask() {
-    createTask(projectId, { title: "TASK" });
+  function onStartCreateTask() {
+    setIsCreatingNewTask(true);
   }
 
   return (
@@ -27,7 +32,7 @@ function BoardColumn() {
             <Button
               type="text"
               icon={<PlusOutlined />}
-              onClick={onCreateTask}
+              onClick={onStartCreateTask}
               loading={isCreateTaskLoading}
             />
           </Tooltip>
@@ -38,7 +43,20 @@ function BoardColumn() {
         </HeaderButtonsBlock>
       </HeaderBlock>
 
-      <ColumnCard />
+      <TasksBlock>
+        {isCreatingNewTask && (
+          <NewTaskCard handleSetIsCreatingNewTask={setIsCreatingNewTask} />
+        )}
+
+        {projectTasks &&
+          projectTasks.map((task) => (
+            <TaskCard
+              key={task.id}
+              title={task.title}
+              isComplete={task.isComplete}
+            />
+          ))}
+      </TasksBlock>
     </ScBoardColumn>
   );
 }
@@ -73,6 +91,12 @@ const HeaderButtonsBlock = styled.div`
 
 const ScColumnTitle = styled(ColumnTitle)`
   flex-grow: 1;
+`;
+
+const TasksBlock = styled.div`
+  > *:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
 `;
 
 export default BoardColumn;

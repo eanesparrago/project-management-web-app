@@ -19,6 +19,9 @@ declare module "styled-components" {
         light: string;
         medium: string;
       };
+      green: {
+        primary: string;
+      };
     };
     boxShadow: {
       1: string;

@@ -5,18 +5,24 @@ import CompleteButton from "./CompleteButton";
 
 const { Text } = Typography;
 
-function ColumnCard({ ...rest }) {
-  return (
-    <ScColumnCard role="button" {...rest}>
-      <CompleteButton />
+type TaskCardProps = {
+  title: string;
+  isComplete: boolean;
+};
 
-      <Text>Task 1</Text>
-    </ScColumnCard>
+function TaskCard({ title, isComplete, ...rest }: TaskCardProps) {
+  return (
+    <ScTaskCard role="button" {...rest}>
+      <CompleteButton isComplete={isComplete}/>
+
+      <Text>{title}</Text>
+    </ScTaskCard>
   );
 }
 
-const ScColumnCard = styled.div`
-  display: block;
+export const ScTaskCard = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
   border-radius: 8px;
   background-color: ${(p) => p.theme.color.white};
@@ -30,4 +36,4 @@ const ScColumnCard = styled.div`
   }
 `;
 
-export default ColumnCard;
+export default TaskCard;
