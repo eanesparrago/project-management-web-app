@@ -1,4 +1,4 @@
-import  { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 function useGroupTitle() {
   const [groupTitle, setGroupTitle] = useState("");
@@ -7,7 +7,11 @@ function useGroupTitle() {
     setGroupTitle(e.target.value.trim());
   }
 
-  return {groupTitle, onGroupTitleChange};
+  function clearGroupTitle() {
+    setGroupTitle("");
+  }
+
+  return { groupTitle, onGroupTitleChange, clearGroupTitle };
 }
 
 export default useGroupTitle;

@@ -15,7 +15,7 @@ type AddGroupInputProps = {};
 function AddGroupInput({ ...rest }: AddGroupInputProps) {
   const { projectId } = useParams<{ projectId: string }>();
   const { createGroup } = useCreateGroup();
-  const { groupTitle, onGroupTitleChange } = useGroupTitle();
+  const { groupTitle, onGroupTitleChange, clearGroupTitle } = useGroupTitle();
   const {
     isCreatingNewGroup,
     startCreatingNewGroup,
@@ -26,9 +26,10 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
     if (groupTitle || isUntitled) {
       const title = groupTitle ? groupTitle : "Untitled group";
 
-      createGroup(projectId, { title }); 
+      createGroup(projectId, { title });
     }
 
+    clearGroupTitle();
     endCreatingNewGroup();
   }
 
