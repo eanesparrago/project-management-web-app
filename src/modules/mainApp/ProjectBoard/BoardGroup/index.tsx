@@ -31,7 +31,7 @@ function BoardGroup({ title, groupId }: BoardGroupProps) {
   return (
     <ScBoardGroup $isHovered={isHovered}>
       <HeaderBlock onMouseLeave={onHoverEnd} onMouseEnter={onHover}>
-        <ScGroupTitle title={title} />
+        <ScGroupTitle title={title} groupId={groupId} />
 
         <HeaderButtonsBlock>
           <Tooltip title="Add task">

@@ -18,9 +18,11 @@ function useCreateGroup() {
 
       if (!projectData) throw new Error("No project data");
 
+      const newGroupData = { ...groupData, createdAt: new Date() };
+
       const groupRef = await firestore
         .collection(`projects/${projectId}/groups`)
-        .add(groupData);
+        .add(newGroupData);
 
       const groupOrder = projectData.groupOrder
         ? [...projectData.groupOrder, groupRef.id]

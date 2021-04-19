@@ -14,6 +14,7 @@ function useGroups(projectId: string) {
 
     const unsubscribe = firestore
       .collection(`projects/${projectId}/groups`)
+      .orderBy("createdAt")
       .onSnapshot((groupsSnapshot) => {
         const groups = groupsSnapshot.docs.map(collectIdsAndDocs);
 

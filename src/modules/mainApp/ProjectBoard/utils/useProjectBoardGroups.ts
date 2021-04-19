@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useProject from "api/projects/useProject";
 import useGroups from "api/groups/useGroups";
@@ -7,19 +7,12 @@ function useProjectBoardGroups() {
   const { projectId } = useParams<{ projectId: string }>();
   const { project, isProjectLoading } = useProject(projectId);
   const { groups, isGroupsLoading } = useGroups(projectId);
-  const prevProjectRef = useRef<typeof project>(null);
   const [projectBoardGroups, setProjectBoardGroups] = useState<typeof groups>(
     null
   );
 
   useEffect(() => {
     if (!project || !groups) return;
-
-    // Make sure project is latest before updating
-    // Prevents UI flashing of misordered groups
-    if (prevProjectRef.current === project) return;
-
-    prevProjectRef.current = project;
 
     // Sort groups by project.groupOrder
     const groupOrder = project.groupOrder;
