@@ -15,7 +15,7 @@ function GroupTitle({ title, groupId, ...rest }: GroupTitleProps) {
   const { projectId } = useParams<{ projectId: string }>();
 
   function onChange(value: string) {
-    const newValue = value ? value : "Untitled section";
+    const newValue = value ? value : "Untitled group";
 
     updateGroup(projectId, groupId, { title: newValue });
   }
