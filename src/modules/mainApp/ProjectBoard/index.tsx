@@ -12,7 +12,7 @@ function ProjectBoard({ ...rest }) {
     <ScProjectBoard {...rest}>
       {groups &&
         groups.map((group) => (
-          <BoardGroup key={group.id} title={group.title} />
+          <BoardGroup key={group.id} groupId={group.id} title={group.title} />
         ))}
 
       <AddGroupInput />

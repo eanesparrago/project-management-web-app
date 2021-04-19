@@ -2,20 +2,22 @@ import { useParams } from "react-router-dom";
 import useCreateTask from "api/hooks/useCreateTask";
 import useHover from "./utils/useHover";
 import useIsCreatingNewTask from "./utils/useIsCreatingNewTask";
+import useProjectTasks from "api/hooks/useProjectTasks";
 
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
-import { PlusOutlined, EllipsisOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import GroupTitle from "./GroupTitle";
 import TaskCard from "./TaskCard";
 import NewTaskCard from "./TaskCard/variants/NewTaskCard";
-import useProjectTasks from "api/hooks/useProjectTasks";
+import MoreActionsButton from "./MoreActionsButton";
 
 type BoardGroupProps = {
   title: string;
+  groupId: string;
 };
 
-function BoardGroup({ title }: BoardGroupProps) {
+function BoardGroup({ title, groupId }: BoardGroupProps) {
   const { isHovered, onHover, onHoverEnd } = useHover();
   const { projectId } = useParams<{ projectId: string }>();
   const { createTask, isCreateTaskLoading } = useCreateTask();
@@ -41,9 +43,7 @@ function BoardGroup({ title }: BoardGroupProps) {
             />
           </Tooltip>
 
-          <Tooltip title="More actions">
-            <Button type="text" icon={<EllipsisOutlined />} />
-          </Tooltip>
+          <MoreActionsButton groupId={groupId} />
         </HeaderButtonsBlock>
       </HeaderBlock>
 
