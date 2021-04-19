@@ -22,10 +22,12 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
     endCreatingNewGroup,
   } = useIsCreatingNewGroup();
 
-  function onCreateGroup() {
-    const title = groupTitle ? groupTitle : "Untitled group";
+  function onCreateGroup(isUntitled?: boolean) {
+    if (groupTitle || isUntitled) {
+      const title = groupTitle ? groupTitle : "Untitled group";
 
-    createGroup(projectId, { title });
+      createGroup(projectId, { title }); 
+    }
 
     endCreatingNewGroup();
   }
@@ -36,7 +38,7 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
 
   function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
-      onCreateGroup();
+      onCreateGroup(true);
     }
 
     if (event.key === "Escape") {
