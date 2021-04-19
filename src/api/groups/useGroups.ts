@@ -1,27 +1,29 @@
+import firebase from "firebase";
 import { firestore } from "api/firebase";
 import collectIdsAndDocs from "api/utils/collectIdsAndDocs";
 import { useEffect, useState } from "react";
 
 function useGroups(projectId: string) {
-  const [groups, setGroups] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [state, setState] = useState<{
+    groups: firebase.firestore.DocumentData[] | null;
+    isLoading: boolean;
+  }>({ groups: null, isLoading: false });
 
   useEffect(() => {
-    setIsLoading(true);
+    setState({ groups: null, isLoading: true });
 
     const unsubscribe = firestore
       .collection(`projects/${projectId}/groups`)
-      .onSnapshot((snapshot) => {
-        const groups = snapshot.docs.map(collectIdsAndDocs);
+      .onSnapshot((groupsSnapshot) => {
+        const groups = groupsSnapshot.docs.map(collectIdsAndDocs);
 
-        setGroups(groups);
-        setIsLoading(false);
+        setState({ groups, isLoading: false });
       });
 
     return () => unsubscribe();
   }, [projectId]);
 
-  return { groups, isGroupsLoading: isLoading };
+  return { groups: state.groups, isGroupsLoading: state.isLoading };
 }
 
 export default useGroups;

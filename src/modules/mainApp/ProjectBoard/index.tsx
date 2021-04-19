@@ -1,17 +1,15 @@
-import useGroups from "api/groups/useGroups";
-import { useParams } from "react-router";
 import styled from "styled-components";
 import BoardGroup from "./BoardGroup";
 import AddGroupInput from "./AddGroupInput";
+import useProjectBoardGroups from "./utils/useProjectBoardGroups";
 
 function ProjectBoard({ ...rest }) {
-  const { projectId } = useParams<{ projectId: string }>();
-  const { groups } = useGroups(projectId);
+  const { projectBoardGroups } = useProjectBoardGroups();
 
   return (
     <ScProjectBoard {...rest}>
-      {groups &&
-        groups.map((group) => (
+      {projectBoardGroups &&
+        projectBoardGroups.map((group) => (
           <BoardGroup key={group.id} groupId={group.id} title={group.title} />
         ))}
 
