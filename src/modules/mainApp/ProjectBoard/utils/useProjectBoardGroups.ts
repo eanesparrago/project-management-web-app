@@ -17,9 +17,8 @@ function useProjectBoardGroups() {
 
     // Make sure project is latest before updating
     // Prevents UI flashing of misordered groups
-    if (prevProjectRef.current === project) {
-      return;
-    }
+    if (prevProjectRef.current === project) return;
+
     prevProjectRef.current = project;
 
     // Sort groups by project.groupOrder
@@ -33,8 +32,6 @@ function useProjectBoardGroups() {
     const sortedGroups = groups
       .slice()
       .sort((groupA, groupB) => order[groupA.id] - order[groupB.id]);
-
-    console.log("setProjectBoardGroups");
 
     setProjectBoardGroups(sortedGroups);
   }, [project, groups, setProjectBoardGroups]);

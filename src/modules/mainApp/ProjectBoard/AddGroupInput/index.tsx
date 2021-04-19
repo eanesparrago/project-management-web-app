@@ -22,7 +22,7 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
     endCreatingNewGroup,
   } = useIsCreatingNewGroup();
 
-  function onCreateGroup(isUntitled?: boolean) {
+  function onCreateGroup(isUntitled?: boolean, continueCreating?: boolean) {
     if (groupTitle || isUntitled) {
       const title = groupTitle ? groupTitle : "Untitled group";
 
@@ -30,7 +30,9 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
     }
 
     clearGroupTitle();
-    endCreatingNewGroup();
+
+    if (!continueCreating) {
+      endCreatingNewGroup()};
   }
 
   function onInputBlur() {
@@ -39,7 +41,7 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
 
   function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
-      onCreateGroup(true);
+      onCreateGroup(true, true);
     }
 
     if (event.key === "Escape") {
@@ -68,6 +70,7 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
             autoFocus
             onChange={onGroupTitleChange}
             onKeyDown={onKeyDown}
+            value={groupTitle}
           />
 
           <EmptyTasksBlock />
