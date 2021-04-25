@@ -46,20 +46,22 @@ function BoardGroup({ title, groupId }: BoardGroupProps) {
 
       <TasksBlock>
         {isCreatingNewTask && (
-          <NewTaskCard
+          <ScNewTaskCard
             handleSetIsCreatingNewTask={setIsCreatingNewTask}
             groupId={groupId}
           />
         )}
 
-        {tasks &&
-          tasks.map((task) => (
-            <TaskCard
-              key={task.id}
-              title={task.title}
-              isComplete={task.isComplete}
-            />
-          ))}
+        <InnerTasksBlock>
+          {tasks &&
+            tasks.map((task) => (
+              <TaskCard
+                key={task.id}
+                title={task.title}
+                isComplete={task.isComplete}
+              />
+            ))}
+        </InnerTasksBlock>
       </TasksBlock>
     </ScBoardGroup>
   );
@@ -72,6 +74,8 @@ const ScBoardGroup = styled.div<{ $isHovered: boolean }>`
   border-radius: ${(p) => p.theme.borderRadius.s};
   transition-property: box-shadow;
   transition-duration: 100ms;
+  display: flex;
+  flex-flow: column nowrap;
 
   ${(p) => p.$isHovered && p.theme.boxShadow["1"]}
 `;
@@ -99,7 +103,20 @@ const ScGroupTitle = styled(GroupTitle)`
 `;
 
 const TasksBlock = styled.div`
-  > *:not(:last-child) {
+  overflow-y: auto;
+  padding: 0.5rem;
+  margin: -0.5rem;
+`;
+
+const ScNewTaskCard = styled(NewTaskCard)`
+  margin-bottom: 0.75rem;
+`;
+
+const InnerTasksBlock = styled.div`
+  display: flex;
+  flex-flow: column-reverse nowrap;
+
+  > *:not(:first-child) {
     margin-bottom: 0.75rem;
   }
 `;

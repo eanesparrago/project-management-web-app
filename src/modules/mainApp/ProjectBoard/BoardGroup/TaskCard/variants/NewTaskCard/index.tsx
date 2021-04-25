@@ -1,5 +1,6 @@
 import { KeyboardEvent, ChangeEvent, useEffect, useRef, useState } from "react";
 
+import styled from "styled-components";
 import { Input } from "antd";
 import { ScTaskCard } from "../../index";
 import CompleteButton from "../../CompleteButton";
@@ -7,44 +8,49 @@ import CompleteButton from "../../CompleteButton";
 import useCreateTask from "api/tasks/useCreateTask";
 import { useParams } from "react-router";
 
+const { TextArea } = Input;
+
 type NewTaskCardProps = {
   handleSetIsCreatingNewTask: (isCreatingNewTask: boolean) => void;
   groupId: string;
+  className?: string;
 };
 
 function NewTaskCard({
   handleSetIsCreatingNewTask,
   groupId,
+  className,
 }: NewTaskCardProps) {
-  const inputRef = useRef<any>(null);
+  const textAreaRef = useRef<any>(null);
   const { createTask } = useCreateTask();
-  const [taskTitle, setTaskTitle] = useState("");
+  const [taskTitle, setTaskTitle] = useState<string>("");
   const { projectId } = useParams<{ projectId: string }>();
 
   useEffect(() => {
-    inputRef.current.focus();
+    textAreaRef.current.focus();
   }, []);
 
   function onCreateTask() {
-    createTask(projectId, groupId, { title: taskTitle });
+    if (taskTitle) {
+      createTask(projectId, groupId, { title: taskTitle });
+
+      process.nextTick(() => {
+        setTaskTitle("");
+      });
+    }
   }
 
   function onBlur() {
-    if (taskTitle) {
-      onCreateTask();
-      handleSetIsCreatingNewTask(false);
-    }
-
+    onCreateTask();
     handleSetIsCreatingNewTask(false);
   }
 
-  function onChange(event: ChangeEvent<HTMLInputElement>) {
+  function onChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setTaskTitle(event.target.value);
   }
 
-  function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    if (event.key === "Enter" && taskTitle) {
-      setTaskTitle("");
+  function onKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
+    if (event.key === "Enter") {
       onCreateTask();
     }
 
@@ -54,20 +60,28 @@ function NewTaskCard({
   }
 
   return (
-    <ScTaskCard>
+    <ScNewTaskCard className={className}>
       <CompleteButton isComplete={false} />
 
-      <Input
+      <ScTextArea
         placeholder="Write a task name"
         bordered={false}
-        ref={inputRef}
+        ref={textAreaRef}
         onBlur={onBlur}
         onChange={onChange}
         onKeyDown={onKeyDown}
         value={taskTitle}
       />
-    </ScTaskCard>
+    </ScNewTaskCard>
   );
 }
+
+const ScNewTaskCard = styled(ScTaskCard)`
+  border: 1px solid ${(p) => p.theme.color.grey.dark};
+`;
+
+const ScTextArea = styled(TextArea)`
+  resize: none;
+`;
 
 export default NewTaskCard;

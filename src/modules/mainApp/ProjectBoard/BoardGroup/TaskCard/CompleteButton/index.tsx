@@ -4,13 +4,18 @@ import { CheckCircleOutlined, CheckCircleFilled } from "@ant-design/icons";
 
 type CompleteButtonProps = {
   isComplete: boolean;
+  className?: string;
 };
 
-function CompleteButton({ isComplete }: CompleteButtonProps) {
+function CompleteButton({ isComplete, className }: CompleteButtonProps) {
   const icon = isComplete ? <CompleteIcon /> : <InCompleteIcon />;
 
   return (
-    <Tooltip title="Mark task complete" mouseEnterDelay={1}>
+    <Tooltip
+      className={className}
+      title="Mark task complete"
+      mouseEnterDelay={1}
+    >
       <Button type="text" icon={icon} />
     </Tooltip>
   );

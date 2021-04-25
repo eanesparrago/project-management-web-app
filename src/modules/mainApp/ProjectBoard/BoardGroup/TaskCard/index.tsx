@@ -13,20 +13,20 @@ type TaskCardProps = {
 function TaskCard({ title, isComplete, ...rest }: TaskCardProps) {
   return (
     <ScTaskCard role="button" {...rest}>
-      <CompleteButton isComplete={isComplete} /> 
+      <ScCompleteButton isComplete={isComplete} />
 
-      <Text>{title}</Text>
+      <ScText>{title}</ScText>
     </ScTaskCard>
   );
 }
 
 export const ScTaskCard = styled.div`
   display: flex;
-  align-items: center;
   width: 100%;
   border-radius: ${(p) => p.theme.borderRadius.s};
   background-color: ${(p) => p.theme.color.white};
   padding: 0.75rem;
+  padding-bottom: 1.5rem;
   ${(p) => p.theme.boxShadow["1"]}
   transition-property: box-shadow;
   transition-duration: 100ms;
@@ -34,6 +34,16 @@ export const ScTaskCard = styled.div`
   &:hover {
     ${(p) => p.theme.boxShadow["2"]}
   }
+`;
+
+const ScCompleteButton = styled(CompleteButton)`
+  flex-shrink: 0;
+`;
+
+const ScText = styled(Text)`
+  word-wrap: break-word;
+  width: 85%;
+  margin-top: 0.15rem;
 `;
 
 export default TaskCard;
