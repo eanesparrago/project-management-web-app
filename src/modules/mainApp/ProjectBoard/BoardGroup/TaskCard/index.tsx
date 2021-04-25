@@ -13,7 +13,7 @@ type TaskCardProps = {
 function TaskCard({ title, isComplete, ...rest }: TaskCardProps) {
   return (
     <ScTaskCard role="button" {...rest}>
-      <CompleteButton isComplete={isComplete} />
+      <CompleteButton isComplete={isComplete} /> 
 
       <Text>{title}</Text>
     </ScTaskCard>

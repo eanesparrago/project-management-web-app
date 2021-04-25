@@ -1,9 +1,3 @@
-import { useParams } from "react-router-dom";
-import useCreateTask from "api/hooks/useCreateTask";
-import useHover from "./utils/useHover";
-import useIsCreatingNewTask from "./utils/useIsCreatingNewTask";
-import useProjectTasks from "api/hooks/useProjectTasks";
-
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
@@ -11,6 +5,11 @@ import GroupTitle from "./GroupTitle";
 import TaskCard from "./TaskCard";
 import NewTaskCard from "./TaskCard/variants/NewTaskCard";
 import MoreActionsButton from "./MoreActionsButton";
+
+import { useParams } from "react-router-dom";
+import useHover from "./utils/useHover";
+import useIsCreatingNewTask from "./utils/useIsCreatingNewTask";
+import useTasks from "api/tasks/useTasks";
 
 type BoardGroupProps = {
   title: string;
@@ -20,9 +19,8 @@ type BoardGroupProps = {
 function BoardGroup({ title, groupId }: BoardGroupProps) {
   const { isHovered, onHover, onHoverEnd } = useHover();
   const { projectId } = useParams<{ projectId: string }>();
-  const { createTask, isCreateTaskLoading } = useCreateTask();
   const [isCreatingNewTask, setIsCreatingNewTask] = useIsCreatingNewTask();
-  // const { projectTasks } = useProjectTasks(projectId);
+  const { tasks } = useTasks(projectId, groupId);
 
   function onStartCreateTask() {
     setIsCreatingNewTask(true);
@@ -39,7 +37,6 @@ function BoardGroup({ title, groupId }: BoardGroupProps) {
               type="text"
               icon={<PlusOutlined />}
               onClick={onStartCreateTask}
-              loading={isCreateTaskLoading}
             />
           </Tooltip>
 
@@ -49,19 +46,20 @@ function BoardGroup({ title, groupId }: BoardGroupProps) {
 
       <TasksBlock>
         {isCreatingNewTask && (
-          <NewTaskCard handleSetIsCreatingNewTask={setIsCreatingNewTask} />
+          <NewTaskCard
+            handleSetIsCreatingNewTask={setIsCreatingNewTask}
+            groupId={groupId}
+          />
         )}
 
-        {/* {projectTasks &&
-          projectTasks.map((task) => (
+        {tasks &&
+          tasks.map((task) => (
             <TaskCard
               key={task.id}
               title={task.title}
               isComplete={task.isComplete}
             />
-          ))} */}
-
-        <TaskCard title="TEST" isComplete={true} />
+          ))}
       </TasksBlock>
     </ScBoardGroup>
   );

@@ -7,6 +7,10 @@ service cloud.firestore {
       
       match /groups/{groupId} {
      		allow create, read, update, delete: if request.auth.uid != null;
+
+         match /tasks/{taskId} {
+           allow create, read, update, delete: if request.auth.uid != null;
+         }
       }
     }
     
