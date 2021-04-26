@@ -25,7 +25,7 @@ function MoreActionsButton({ groupId }: MoreActionsButtonProps) {
   );
 
   return (
-    <Popover content={content} trigger="focus" placement="bottom">
+    <Popover content={content} trigger="focus" placement="bottomLeft">
       <Tooltip title="More actions" trigger="hover">
         <Button type="text" icon={<EllipsisOutlined />} />
       </Tooltip>

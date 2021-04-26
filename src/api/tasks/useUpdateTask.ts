@@ -23,11 +23,11 @@ function useUpdateTask() {
       await firestore
         .doc(`projects/${projectId}/groups/${groupId}/tasks/${taskId}`)
         .update(taskData);
-
-      setIsLoading(false);
     } catch (error) {
       console.error(error);
       message.error("Error updating task");
+    } finally {
+      setIsLoading(false);
     }
   }
 
