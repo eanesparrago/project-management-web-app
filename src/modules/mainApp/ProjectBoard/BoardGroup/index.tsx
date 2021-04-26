@@ -57,6 +57,8 @@ function BoardGroup({ title, groupId }: BoardGroupProps) {
             tasks.map((task) => (
               <TaskCard
                 key={task.id}
+                taskId={task.id}
+                groupId={groupId}
                 title={task.title}
                 isComplete={task.isComplete}
               />
@@ -69,7 +71,7 @@ function BoardGroup({ title, groupId }: BoardGroupProps) {
 
 const ScBoardGroup = styled.div<{ $isHovered: boolean }>`
   flex-shrink: 0;
-  width: 20rem;
+  width: 22rem;
   padding: 0.75rem 1rem;
   border-radius: ${(p) => p.theme.borderRadius.s};
   transition-property: box-shadow;

@@ -19,7 +19,7 @@ function ProjectBoard({ ...rest }) {
 }
 
 const ScProjectBoard = styled.div`
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem 0 1rem;
   background-color: ${(p) => p.theme.color.grey.light};
   display: flex;
   overflow-x: auto;
