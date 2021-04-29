@@ -98,6 +98,12 @@ export const ScTaskCard = styled.div<{
     css`
       opacity: 0.7;
     `}
+
+  ${(p) =>
+    p.$isDragging === true &&
+    css`
+      border: 1px solid ${(p) => p.theme.color.primary.base};
+    `}
 `;
 
 const ScCompleteButton = styled(CompleteButton)`
