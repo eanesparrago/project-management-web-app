@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import useHover from "./utils/useHover";
 import useIsCreatingNewTask from "./utils/useIsCreatingNewTask";
 import useTasks from "api/tasks/useTasks";
+import { Droppable } from "react-beautiful-dnd";
 
 type BoardGroupProps = {
   title: string;
@@ -44,27 +45,35 @@ function BoardGroup({ title, groupId }: BoardGroupProps) {
         </HeaderButtonsBlock>
       </HeaderBlock>
 
-      <TasksBlock>
-        {isCreatingNewTask && (
-          <ScNewTaskCard
-            handleSetIsCreatingNewTask={setIsCreatingNewTask}
-            groupId={groupId}
-          />
-        )}
+      <Droppable droppableId={groupId} key={groupId}>
+        {(provided) => {
+          return (
+            <TasksBlock {...provided.droppableProps} ref={provided.innerRef}>
+              {isCreatingNewTask && (
+                <ScNewTaskCard
+                  handleSetIsCreatingNewTask={setIsCreatingNewTask}
+                  groupId={groupId}
+                />
+              )}
+              <InnerTasksBlock>
+                {tasks &&
+                  tasks.map((task, index) => (
+                    <TaskCard
+                      key={task.id}
+                      taskId={task.id}
+                      groupId={groupId}
+                      title={task.title}
+                      isComplete={task.isComplete}
+                      index={index}
+                    />
+                  ))}
+              </InnerTasksBlock>
 
-        <InnerTasksBlock>
-          {tasks &&
-            tasks.map((task) => (
-              <TaskCard
-                key={task.id}
-                taskId={task.id}
-                groupId={groupId}
-                title={task.title}
-                isComplete={task.isComplete}
-              />
-            ))}
-        </InnerTasksBlock>
-      </TasksBlock>
+              {provided.placeholder}
+            </TasksBlock>
+          );
+        }}
+      </Droppable>
     </ScBoardGroup>
   );
 }
@@ -105,6 +114,7 @@ const ScGroupTitle = styled(GroupTitle)`
 `;
 
 const TasksBlock = styled.div`
+  height: 100%;
   overflow-y: auto;
   padding: 0.5rem;
   margin: -0.5rem;
@@ -115,10 +125,7 @@ const ScNewTaskCard = styled(NewTaskCard)`
 `;
 
 const InnerTasksBlock = styled.div`
-  display: flex;
-  flex-flow: column-reverse nowrap;
-
-  > *:not(:first-child) {
+  > * {
     margin-bottom: 0.75rem;
   }
 `;

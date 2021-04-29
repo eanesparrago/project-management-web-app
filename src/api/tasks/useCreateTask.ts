@@ -9,7 +9,7 @@ type CreateTaskData = {
   description?: string;
 };
 
-type Task = {
+export type Task = {
   title: string;
   description?: string;
   createdAt: string;
@@ -33,7 +33,7 @@ function useCreateTask() {
         .orderBy("rank")
         .get();
       const tasks = tasksSnapshot.docs.map(collectIdsAndDocs);
-      const rank = getNextRank(tasks);
+      const rank = getRank(tasks);
 
       const newTaskData = {
         ...taskData,
@@ -58,14 +58,14 @@ function useCreateTask() {
   return { createTask, isCreateTaskLoading: isLoading };
 }
 
-function getNextRank(tasks: Task[]) {
+function getRank(tasks: Task[]) {
   if (!tasks.length) {
     return LexoRank.middle().toString();
   }
 
-  const latestTask = tasks[tasks.length - 1];
+  const latestTask = tasks[0];
   const parsedRank = LexoRank.parse(latestTask.rank);
-  const nextRank = parsedRank.genNext().toString();
+  const nextRank = parsedRank.genPrev().toString();
 
   return nextRank;
 }

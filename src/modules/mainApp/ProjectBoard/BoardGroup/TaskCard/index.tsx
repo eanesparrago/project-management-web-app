@@ -7,6 +7,7 @@ import { useParams } from "react-router";
 import TaskOptions from "./TaskOptions";
 
 import useIsShowingTaskOptions from "./utils/useIsShowingTaskOptions";
+import { Draggable } from "react-beautiful-dnd";
 
 const { Text } = Typography;
 
@@ -15,6 +16,7 @@ type TaskCardProps = {
   isComplete: boolean;
   groupId: string;
   taskId: string;
+  index: number;
 };
 
 function TaskCard({
@@ -22,6 +24,7 @@ function TaskCard({
   isComplete,
   groupId,
   taskId,
+  index,
   ...rest
 }: TaskCardProps) {
   const { updateTask } = useUpdateTask();
@@ -37,25 +40,42 @@ function TaskCard({
   }
 
   return (
-    <ScTaskCard
-      role="button"
-      $isComplete={isComplete}
-      {...rest}
-      onMouseOver={showTaskOptions}
-      onMouseLeave={hideTaskOptions}
-    >
-      <ScCompleteButton isComplete={isComplete} onClick={onToggleComplete} />
+    <Draggable key={taskId} draggableId={taskId} index={index}>
+      {(provided, snapshot) => {
+        return (
+          <ScTaskCard
+            role="button"
+            $isComplete={isComplete}
+            {...rest}
+            onMouseOver={showTaskOptions}
+            onMouseLeave={hideTaskOptions}
+            style={{ ...provided.draggableProps.style }}
+            $isDragging={snapshot.isDragging}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <ScCompleteButton
+              isComplete={isComplete}
+              onClick={onToggleComplete}
+            />
 
-      <ScText>{title}</ScText>
+            <ScText>{title}</ScText>
 
-      {isShowingTaskOptions && (
-        <ScTaskOptions groupId={groupId} taskId={taskId} />
-      )}
-    </ScTaskCard>
+            {isShowingTaskOptions && (
+              <ScTaskOptions groupId={groupId} taskId={taskId} />
+            )}
+          </ScTaskCard>
+        );
+      }}
+    </Draggable>
   );
 }
 
-export const ScTaskCard = styled.div<{ $isComplete?: boolean }>`
+export const ScTaskCard = styled.div<{
+  $isComplete?: boolean;
+  $isDragging?: boolean;
+}>`
   display: flex;
   width: 100%;
   border-radius: ${(p) => p.theme.borderRadius.s};
@@ -67,6 +87,7 @@ export const ScTaskCard = styled.div<{ $isComplete?: boolean }>`
   transition-duration: 100ms;
   cursor: pointer;
   position: relative;
+  user-select: none;
 
   &:hover {
     ${(p) => p.theme.boxShadow["2"]}
