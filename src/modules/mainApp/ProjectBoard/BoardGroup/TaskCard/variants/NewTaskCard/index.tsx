@@ -30,18 +30,10 @@ function NewTaskCard({
     textAreaRef.current.focus();
   }, []);
 
-  function onCreateTask() {
+  async function onBlur() {
     if (taskTitle) {
-      createTask(projectId, groupId, { title: taskTitle });
-
-      process.nextTick(() => {
-        setTaskTitle("");
-      });
+      await createTask(projectId, groupId, { title: taskTitle });
     }
-  }
-
-  function onBlur() {
-    onCreateTask();
     handleSetIsCreatingNewTask(false);
   }
 
@@ -50,8 +42,12 @@ function NewTaskCard({
   }
 
   function onKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
-    if (event.key === "Enter") {
-      onCreateTask();
+    if (event.key === "Enter" && taskTitle) {
+      createTask(projectId, groupId, { title: taskTitle });
+
+      process.nextTick(() => {
+        setTaskTitle("");
+      });
     }
 
     if (event.key === "Escape") {
