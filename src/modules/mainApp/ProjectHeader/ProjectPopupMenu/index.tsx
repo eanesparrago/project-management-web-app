@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import { firestore } from "api/firebase";
 import { useAppDispatch } from "app/hooks";
-import { setIsEditProjectDetailsModalOpen } from "../projectHeaderSlice";
+import { setIsEditProjectInfoModalOpen } from "../projectHeaderSlice";
 
 import { Button, Popover, Modal } from "antd";
 import { CaretDownOutlined } from "@ant-design/icons";
@@ -19,7 +19,7 @@ function ProjectPopupMenu() {
     }
   }
 
-  function onDeleteProjectWarn() {
+  function warnDeleteProject() {
     Modal.confirm({
       title: "Delete this project?",
       cancelText: "Cancel",
@@ -30,17 +30,17 @@ function ProjectPopupMenu() {
     });
   }
 
-  function onOpenEditProjectDetails() {
-    dispatch(setIsEditProjectDetailsModalOpen(true));
+  function openEditProjectDetails() {
+    dispatch(setIsEditProjectInfoModalOpen(true));
   }
 
   const content = (
     <ScContent>
-      <Button type="text" onClick={onOpenEditProjectDetails} block>
+      <Button type="text" onClick={openEditProjectDetails} block>
         Edit project details
       </Button>
 
-      <Button type="text" danger onClick={onDeleteProjectWarn} block>
+      <Button type="text" danger onClick={warnDeleteProject} block>
         Delete project
       </Button>
     </ScContent>

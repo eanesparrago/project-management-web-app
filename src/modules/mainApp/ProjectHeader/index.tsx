@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Typography } from "antd";
 import ProjectPopupMenu from "./ProjectPopupMenu";
-import EditProjectDetailsModal from "./EditProjectDetailsModal";
+import EditProjectInfoModal from "./EditProjectInfoModal";
 import UserMainAvatar from "./UserMainAvatar";
 
 import { useParams } from "react-router";
@@ -22,7 +22,7 @@ function ProjectHeader() {
       {project && (
         <>
           <ProjectPopupMenu />
-          <EditProjectDetailsModal />
+          <EditProjectInfoModal />
         </>
       )}
 
