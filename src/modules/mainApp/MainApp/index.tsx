@@ -22,6 +22,13 @@ function MainApp() {
           <Route path={`${path}/:projectId`}>
             <ScProjectBoard />
           </Route>
+
+          <Route path="*">
+            <div>
+              HEY
+              {/* TODO: Add UI */}
+            </div>
+          </Route>
         </Switch>
       </MainBlock>
 

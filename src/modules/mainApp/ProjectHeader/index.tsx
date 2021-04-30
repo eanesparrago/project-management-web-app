@@ -1,20 +1,30 @@
 import styled from "styled-components";
-
 import { Typography } from "antd";
 import ProjectPopupMenu from "./ProjectPopupMenu";
 import EditProjectDetailsModal from "./EditProjectDetailsModal";
 import UserMainAvatar from "./UserMainAvatar";
 
+import { useParams } from "react-router";
+import useProject from "api/projects/useProject";
+
 const { Title } = Typography;
 
 function ProjectHeader() {
+  const { projectId } = useParams<{ projectId?: string }>();
+  const { project } = useProject(projectId);
+
   return (
     <ScProjectHeader>
-      <ScTitle level={3}>[Project title]</ScTitle>
+      <ScTitle level={3}>
+        {project ? project.title : "Create or select a project ✨"}
+      </ScTitle>
 
-      <ProjectPopupMenu />
-
-      <EditProjectDetailsModal />
+      {project && (
+        <>
+          <ProjectPopupMenu />
+          <EditProjectDetailsModal />
+        </>
+      )}
 
       <ScUserMainAvatar />
     </ScProjectHeader>

@@ -3,7 +3,7 @@ import firebase from "firebase";
 import { firestore } from "api/firebase";
 import collectIdsAndDocs from "api/utils/collectIdsAndDocs";
 
-function useProject(projectId: string) {
+function useProject(projectId?: string) {
   const [state, setState] = useState<{
     project: firebase.firestore.DocumentData | null;
     isLoading: boolean;
@@ -12,8 +12,10 @@ function useProject(projectId: string) {
     project: null,
   });
 
-  useEffect(() => { 
-    setState({ isLoading: true, project: null });
+  useEffect(() => {
+    if (!projectId) return;
+
+    setState((prevState) => ({ ...prevState, isLoading: true }));
 
     const unsubscribe = firestore
       .doc(`projects/${projectId}`)
