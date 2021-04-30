@@ -3,9 +3,11 @@ import { setIsProfileSettingsModalOpen } from "modules/mainApp/mainAppSlice";
 
 import { Avatar, Popover, Button } from "antd";
 import LogoutButton from "components/LogoutButton";
+import useCurrentUser from "api/hooks/useCurrentUser";
 
 function UserMainAvatar({ ...rest }) {
   const dispatch = useAppDispatch();
+  const [currentUser] = useCurrentUser();
 
   function onMyProfileSettingsClick() {
     dispatch(setIsProfileSettingsModalOpen(true));
@@ -23,7 +25,7 @@ function UserMainAvatar({ ...rest }) {
   return (
     <Popover content={content} placement="bottomRight" trigger="focus">
       <button {...rest}>
-        <Avatar />
+        <Avatar src={currentUser?.data()?.photoURL} />
       </button>
     </Popover>
   );
