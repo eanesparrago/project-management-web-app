@@ -1,19 +1,20 @@
 import { useHistory, useRouteMatch, NavLink } from "react-router-dom";
-import useFetchMyProjects from "api/hooks/useFetchMyProjects";
 
 import styled from "styled-components";
 import { Menu, MenuProps } from "antd";
 import { UnorderedListOutlined, PlusOutlined } from "@ant-design/icons";
 import Logo from "components/Logo";
 
+import useProjects from "api/projects/useProjects";
+
 const { SubMenu } = Menu;
 
 function MainSidebar({ ...rest }) {
   const history = useHistory();
   const { url } = useRouteMatch();
-  const [projects = []] = useFetchMyProjects();
+  const { projects } = useProjects();
 
-  function onGoToCreateProject() {
+  function goToCreateProject() {
     history.push("/create-project");
   }
 
@@ -29,12 +30,12 @@ function MainSidebar({ ...rest }) {
         <Logo />
       </HeaderBlock>
 
-      <Menu.Item icon={<PlusOutlined />} onClick={onGoToCreateProject}>
+      <Menu.Item icon={<PlusOutlined />} onClick={goToCreateProject}>
         Create Project
       </Menu.Item>
 
       <SubMenu key="projects" icon={<UnorderedListOutlined />} title="Projects">
-        {projects.map((project) => (
+        {projects?.map((project) => (
           <Menu.Item key={project.id}>
             <NavLink to={`${url}/${project.id}`}>{project.title}</NavLink>
           </Menu.Item>

@@ -16,7 +16,9 @@ type CreateProjectForm = {
 };
 
 async function createProject(projectData: CreateProjectForm) {
-  const docRef = await firestore.collection("projects").add(projectData);
+  const docRef = await firestore
+    .collection("projects")
+    .add({ ...projectData, createdAt: new Date() });
   const doc = await docRef.get();
   const newProject = collectIdsAndDocs(doc);
 
@@ -60,7 +62,13 @@ function CreateProjectPage() {
           layout="vertical"
           onFinish={onFinish}
         >
-          <Form.Item label="Project name" name="title">
+          <Form.Item
+            label="Project name"
+            name="title"
+            rules={[
+              { required: true, message: "Please input the project title!" },
+            ]}
+          >
             <Input />
           </Form.Item>
 
