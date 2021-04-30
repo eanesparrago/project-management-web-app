@@ -1,13 +1,13 @@
+import { Draggable } from "react-beautiful-dnd";
 import styled, { css } from "styled-components";
-
 import { Typography } from "antd";
-import CompleteButton from "./CompleteButton";
-import useUpdateTask from "api/tasks/useUpdateTask";
-import { useParams } from "react-router";
+import CompleteButton from "../../components/CompleteButton";
 import TaskOptions from "./TaskOptions";
 
+import { useHistory, useParams, useRouteMatch } from "react-router";
 import useIsShowingTaskOptions from "./utils/useIsShowingTaskOptions";
-import { Draggable } from "react-beautiful-dnd";
+import useUpdateTask from "api/tasks/useUpdateTask";
+import { MouseEvent } from "react";
 
 const { Text } = Typography;
 
@@ -34,9 +34,16 @@ function TaskCard({
     showTaskOptions,
     hideTaskOptions,
   } = useIsShowingTaskOptions();
+  const history = useHistory();
+  const { url } = useRouteMatch();
 
-  function onToggleComplete() {
+  function toggleComplete(event: MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
     updateTask(projectId, groupId, taskId, { isComplete: !isComplete });
+  }
+
+  function goToTask() {
+    history.push(`${url}/${groupId}/${taskId}`);
   }
 
   return (
@@ -46,18 +53,19 @@ function TaskCard({
           <ScTaskCard
             role="button"
             $isComplete={isComplete}
-            {...rest}
             onMouseOver={showTaskOptions}
             onMouseLeave={hideTaskOptions}
+            onClick={goToTask}
             style={{ ...provided.draggableProps.style }}
             $isDragging={snapshot.isDragging}
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
+            {...rest}
           >
             <ScCompleteButton
               isComplete={isComplete}
-              onClick={onToggleComplete}
+              onClick={toggleComplete}
             />
 
             <ScText>{title}</ScText>

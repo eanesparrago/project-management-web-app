@@ -1,13 +1,17 @@
+import { Route, useRouteMatch } from "react-router-dom";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import styled from "styled-components";
 import BoardGroup from "./BoardGroup";
 import AddGroupInput from "./AddGroupInput";
+import TaskModal from "./TaskModal";
+
 import useProjectBoardGroups from "./utils/useProjectBoardGroups";
 import useMoveTask from "./utils/useMoveTask";
 
 function ProjectBoard({ ...rest }) {
   const { projectBoardGroups } = useProjectBoardGroups();
   const { moveTask } = useMoveTask();
+  const { path } = useRouteMatch();
 
   function handleDragEnd(result: DropResult) {
     moveTask(
@@ -29,6 +33,10 @@ function ProjectBoard({ ...rest }) {
       </DragDropContext>
 
       <AddGroupInput />
+
+      <Route path={`${path}/:groupId/:taskId`}>
+        <TaskModal />
+      </Route>
     </ScProjectBoard>
   );
 }

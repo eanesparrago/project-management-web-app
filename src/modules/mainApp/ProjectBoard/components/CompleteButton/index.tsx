@@ -1,16 +1,21 @@
+import { MouseEvent } from "react";
+import { SizeType } from "antd/lib/config-provider/SizeContext";
+
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import { CheckCircleOutlined, CheckCircleFilled } from "@ant-design/icons";
 
 type CompleteButtonProps = {
   isComplete: boolean;
+  size?: SizeType;
   className?: string;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
 function CompleteButton({
   isComplete,
   className,
+  size,
   onClick,
 }: CompleteButtonProps) {
   const icon = isComplete ? <CompleteIcon /> : <IncompleteIcon />;
@@ -21,7 +26,7 @@ function CompleteButton({
       title="Mark task complete"
       mouseEnterDelay={1}
     >
-      <Button type="text" icon={icon} onClick={onClick} />
+      <Button type="text" icon={icon} size={size} onClick={onClick} />
     </Tooltip>
   );
 }

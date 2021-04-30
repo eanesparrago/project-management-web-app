@@ -2,8 +2,8 @@ import { KeyboardEvent, ChangeEvent, useEffect, useRef, useState } from "react";
 
 import styled from "styled-components";
 import { Input } from "antd";
+import CompleteButton from "../../../../components/CompleteButton";
 import { ScTaskCard } from "../../index";
-import CompleteButton from "../../CompleteButton";
 
 import useCreateTask from "api/tasks/useCreateTask";
 import { useParams } from "react-router";

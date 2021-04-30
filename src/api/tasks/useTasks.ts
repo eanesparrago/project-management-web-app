@@ -10,7 +10,7 @@ function useTasks(projectId: string, groupId: string) {
   }>({ tasks: null, isLoading: false });
 
   useEffect(() => {
-    setState({ tasks: null, isLoading: true });
+    setState((prevState) => ({ ...prevState, isLoading: true }));
 
     const unsubscribe = firestore
       .collection(`projects/${projectId}/groups/${groupId}/tasks`)

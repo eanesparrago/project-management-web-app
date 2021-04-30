@@ -1,3 +1,5 @@
+import { MouseEvent } from "react";
+
 import { Button, Popover } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
 
@@ -14,13 +16,15 @@ function TaskOptions({ className, groupId, taskId }: TaskOptionsProps) {
   const { projectId } = useParams<{ projectId: string }>();
   const { deleteTask } = useDeleteTask();
 
-  function onDeleteTask() {
+  function handleDeleteTask(event: MouseEvent<HTMLElement>) {
+    event.stopPropagation();
+
     deleteTask(projectId, groupId, taskId);
   }
 
   const content = (
     <>
-      <Button block danger onClick={onDeleteTask}>
+      <Button type="text" block danger onClick={handleDeleteTask}>
         Delete task
       </Button>
     </>
@@ -34,7 +38,11 @@ function TaskOptions({ className, groupId, taskId }: TaskOptionsProps) {
       motion={undefined}
       overlayClassName="TaskOptions-overlay"
     >
-      <Button className={className} icon={<EllipsisOutlined />} />
+      <Button
+        className={className}
+        icon={<EllipsisOutlined />}
+        onClick={(e) => e.stopPropagation()}
+      />
     </Popover>
   );
 }
