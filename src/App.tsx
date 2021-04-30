@@ -7,6 +7,7 @@ import "antd/dist/antd.css";
 import theme from "styles/theme";
 import GlobalStyle from "styles/GlobalStyle";
 import { store } from "app/store";
+import LoadingScreen from "components/LoadingScreen";
 
 const CreateAccountPage = lazy(
   () => import("modules/exterior/registration/pages/CreateAccountPage")
@@ -33,7 +34,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle></GlobalStyle>
 
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<LoadingScreen />}>
           <Switch>
             <Route path="/login">
               <LoginPage />
