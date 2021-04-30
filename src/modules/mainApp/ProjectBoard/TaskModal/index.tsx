@@ -4,15 +4,28 @@ import CompleteButton from "../components/CompleteButton";
 import TaskDescription from "./TaskDescription";
 import TaskTitle from "./TaskTitle";
 
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import useTask from "./utils/useTask";
+import useUpdateTask from "api/tasks/useUpdateTask";
 
 function TaskModal() {
   const history = useHistory();
   const { task } = useTask();
+  const { projectId, groupId, taskId } = useParams<{
+    projectId: string;
+    groupId: string;
+    taskId: string;
+  }>();
+  const { updateTask } = useUpdateTask();
 
   function handleCancel() {
     history.goBack();
+  }
+
+  function toggleComplete() {
+    updateTask(projectId, groupId, taskId, {
+      isComplete: !task?.isComplete,
+    });
   }
 
   if (!task) return null;
@@ -25,7 +38,11 @@ function TaskModal() {
       destroyOnClose
       title={
         <TitleBlock>
-          <CompleteButton isComplete={task.isComplete} size="large" />
+          <CompleteButton
+            isComplete={task.isComplete}
+            size="large"
+            onClick={toggleComplete}
+          />
           <TaskTitle title={task.title} />
         </TitleBlock>
       }
