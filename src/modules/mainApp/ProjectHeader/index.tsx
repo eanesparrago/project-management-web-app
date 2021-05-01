@@ -16,7 +16,7 @@ function ProjectHeader() {
   return (
     <ScProjectHeader>
       <ScTitle level={3}>
-        {project ? project.title : "Create or select a project ✨"}
+        {project?.title ? project.title : "Create or select a project ✨"}
       </ScTitle>
 
       {project && (

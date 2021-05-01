@@ -41,7 +41,11 @@ function LoginPage() {
 
         <ScLoginForm />
 
-        <ScForgotPasswordButton type="text" block onClick={onGoToForgotPassword}>
+        <ScForgotPasswordButton
+          type="text"
+          block
+          onClick={onGoToForgotPassword}
+        >
           Forgot your password?
         </ScForgotPasswordButton>
 

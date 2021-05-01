@@ -1,5 +1,6 @@
 import { useAppDispatch } from "app/hooks";
 import { setIsProfileSettingsModalOpen } from "modules/mainApp/mainAppSlice";
+import cheemsDoge from "assets/cheems-doge.png";
 
 import { Avatar, Popover, Button } from "antd";
 import LogoutButton from "components/LogoutButton";
@@ -22,10 +23,12 @@ function UserMainAvatar({ ...rest }) {
     </>
   );
 
+  const src = currentUser?.data()?.photoURL || cheemsDoge;
+
   return (
     <Popover content={content} placement="bottomRight" trigger="focus">
       <button {...rest}>
-        <Avatar src={currentUser?.data()?.photoURL} />
+        <Avatar src={src} />
       </button>
     </Popover>
   );

@@ -39,7 +39,7 @@ function useSignIn() {
 
       if (userProfile.isActivated) {
         setIsLoading(false);
-        history.push("/app");
+        history.push("/");
         return;
       }
 

@@ -28,7 +28,7 @@ function useSetupAccount() {
 
       setIsLoading(false);
 
-      history.push("/app");
+      history.push("/");
     } catch (error) {
       setIsLoading(false);
       console.error(error);

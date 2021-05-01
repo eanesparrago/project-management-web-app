@@ -11,8 +11,8 @@ const { SubMenu } = Menu;
 
 function MainSidebar({ ...rest }) {
   const history = useHistory();
-  const { url } = useRouteMatch();
   const { projects } = useProjects();
+  const { url } = useRouteMatch();
 
   function goToCreateProject() {
     history.push("/create-project");

@@ -30,11 +30,12 @@ function ProfileSettingsModal() {
       return <Spin />;
     }
 
-    const currentUserData = currentUser.data();
+    // TODO: Disabled for now
+    // const currentUserData = currentUser.data();
 
-    const initialValues = {
-      fullName: currentUserData?.profile.fullName,
-    };
+    // const initialValues = {
+    //   fullName: currentUserData?.profile.fullName,
+    // };
 
     return (
       <Form
@@ -42,19 +43,19 @@ function ProfileSettingsModal() {
         layout="vertical"
         id="profileSettings"
         onFinish={updateUser}
-        initialValues={initialValues}
+        // initialValues={initialValues}
       >
         <Form.Item label="Your photo">
           <PhotoUpload />
         </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
           label="Your full name"
           name="fullName"
           rules={[{ required: true, message: "Please input your full name!" }]}
         >
           <Input />
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     );
   }

@@ -1,13 +1,19 @@
 import { lazy, Suspense } from "react";
 import { ThemeProvider } from "styled-components";
-import { Switch, Route } from "react-router-dom";
+
 import { Provider } from "react-redux";
+import { store } from "app/store";
+
 import "destyle.css";
 import "antd/dist/antd.css";
 import theme from "styles/theme";
 import GlobalStyle from "styles/GlobalStyle";
-import { store } from "app/store";
+
+import { Switch, Route } from "react-router-dom";
 import LoadingScreen from "components/LoadingScreen";
+import PrivateRoute from "components/PrivateRoute";
+import PublicRoute from "components/PublicRoute";
+import RootRedirect from "./RootRedirect";
 
 const CreateAccountPage = lazy(
   () => import("modules/exterior/registration/pages/CreateAccountPage")
@@ -36,33 +42,39 @@ function App() {
 
         <Suspense fallback={<LoadingScreen />}>
           <Switch>
-            <Route path="/login">
-              <LoginPage />
+            <Route exact path="/">
+              <RootRedirect />
             </Route>
 
-            <Route path="/account-setup">
-              <AccountSetupPage />
-            </Route>
-
-            <Route path="/create-account">
-              <CreateAccountPage />
-            </Route>
-
-            <Route path="/verify-email">
-              <VerifyEmailPage />
-            </Route>
-
-            <Route path="/create-project">
-              <CreateProjectPage />
-            </Route>
-
-            <Route path="/forgot-password">
-              <ForgotPasswordPage />
-            </Route>
-
-            <Route path="/app">
+            {/* Private routes */}
+            <PrivateRoute path="/app">
               <MainApp />
-            </Route>
+            </PrivateRoute>
+
+            <PrivateRoute path="/create-project">
+              <CreateProjectPage />
+            </PrivateRoute>
+
+            <PrivateRoute path="/account-setup">
+              <AccountSetupPage />
+            </PrivateRoute>
+
+            {/* Public routes */}
+            <PublicRoute path="/login">
+              <LoginPage />
+            </PublicRoute>
+
+            <PublicRoute path="/create-account">
+              <CreateAccountPage />
+            </PublicRoute>
+
+            <PublicRoute path="/verify-email">
+              <VerifyEmailPage />
+            </PublicRoute>
+
+            <PublicRoute path="/forgot-password">
+              <ForgotPasswordPage />
+            </PublicRoute>
           </Switch>
         </Suspense>
       </ThemeProvider>

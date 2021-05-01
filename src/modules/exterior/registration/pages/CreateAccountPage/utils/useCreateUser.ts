@@ -19,12 +19,12 @@ function useCreateUser() {
       if (!user) return;
 
       await user.sendEmailVerification({
-        url: "http://localhost:3000/login",
+        url: "http://localhost:3000/login", // TODO
         handleCodeInApp: true,
       });
 
       setIsLoading(false);
-      history.push("/verify-email");
+      history.push("/app");
     } catch (error) {
       console.error(error);
       setIsLoading(false);
