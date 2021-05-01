@@ -4,7 +4,7 @@ function useGroupTitle() {
   const [groupTitle, setGroupTitle] = useState("");
 
   function onGroupTitleChange(e: ChangeEvent<HTMLInputElement>) {
-    setGroupTitle(e.target.value.trim());
+    setGroupTitle(e.target.value);
   }
 
   function clearGroupTitle() {

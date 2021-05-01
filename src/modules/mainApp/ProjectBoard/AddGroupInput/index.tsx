@@ -24,7 +24,7 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
 
   function onCreateGroup(isUntitled?: boolean, continueCreating?: boolean) {
     if (groupTitle || isUntitled) {
-      const title = groupTitle ? groupTitle : "Untitled group";
+      const title = groupTitle ? groupTitle.trim() : "Untitled group";
 
       createGroup(projectId, { title });
     }
@@ -32,7 +32,8 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
     clearGroupTitle();
 
     if (!continueCreating) {
-      endCreatingNewGroup()};
+      endCreatingNewGroup();
+    }
   }
 
   function onInputBlur() {
