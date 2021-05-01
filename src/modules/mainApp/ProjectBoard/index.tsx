@@ -7,9 +7,12 @@ import TaskModal from "./TaskModal";
 
 import useMoveTask from "./utils/useMoveTask";
 import useGroups from "api/groups/useGroups";
+import useProject from "api/projects/useProject";
+import { Spin } from "antd";
 
 function ProjectBoard({ ...rest }) {
   const { projectId } = useParams<{ projectId: string }>();
+  const { project, isProjectLoading } = useProject(projectId);
   const { groups } = useGroups(projectId);
   const { moveTask } = useMoveTask();
   const { path } = useRouteMatch();
@@ -22,6 +25,18 @@ function ProjectBoard({ ...rest }) {
       result.destination?.index,
       result.destination?.droppableId
     );
+  }
+
+  if (isProjectLoading) {
+    return (
+      <div style={{ padding: "1rem" }}>
+        <Spin />
+      </div>
+    );
+  }
+
+  if (!isProjectLoading && !project) {
+    return <div>Project not found</div>;
   }
 
   return (

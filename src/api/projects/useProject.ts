@@ -17,13 +17,17 @@ function useProject(projectId?: string) {
 
     setState((prevState) => ({ ...prevState, isLoading: true }));
 
-    const unsubscribe = firestore
-      .doc(`projects/${projectId}`)
-      .onSnapshot((projectSnapshot) => {
+    const unsubscribe = firestore.doc(`projects/${projectId}`).onSnapshot(
+      (projectSnapshot) => {
         const projectData = collectIdsAndDocs(projectSnapshot);
 
         setState({ isLoading: false, project: projectData });
-      });
+      },
+      (error) => {
+        console.error(error);
+        setState((prevState) => ({ ...prevState, isLoading: false }));
+      }
+    );
 
     return () => unsubscribe();
   }, [projectId]);
