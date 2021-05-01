@@ -29,7 +29,7 @@ function CreateAccountPage() {
       </HeaderBlock>
 
       <MainBlock>
-        <ScTitle>Create your Asana Clone account</ScTitle>
+        <ScTitle>Create your Asanaol v1 account</ScTitle>
 
         <ScForm size="large" onFinish={onFinish} layout="vertical">
           <Form.Item

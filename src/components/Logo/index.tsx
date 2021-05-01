@@ -5,7 +5,7 @@ type LogoProps = {
 };
 
 function Logo({ ...rest }: LogoProps) {
-  return <ScLogo {...rest}>Asana Clone</ScLogo>;
+  return <ScLogo {...rest}>Asanaol v1</ScLogo>;
 }
 
  
