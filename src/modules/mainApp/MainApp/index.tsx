@@ -5,6 +5,7 @@ import MainSidebar from "../MainSidebar";
 import ProjectHeader from "../ProjectHeader";
 import ProjectBoard from "../ProjectBoard";
 import ProfileSettingsModal from "../ProfileSettingsModal";
+import WelcomeView from "../WelcomeView";
 
 function MainApp() {
   const { path } = useRouteMatch();
@@ -24,10 +25,7 @@ function MainApp() {
           </Route>
 
           <Route path="*">
-            <div>
-              HEY
-              {/* TODO: Add UI */}
-            </div>
+            <WelcomeView />
           </Route>
         </Switch>
       </MainBlock>

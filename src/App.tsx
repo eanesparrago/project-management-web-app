@@ -14,6 +14,7 @@ import LoadingScreen from "components/LoadingScreen";
 import PrivateRoute from "components/PrivateRoute";
 import PublicRoute from "components/PublicRoute";
 import RootRedirect from "./RootRedirect";
+import Page404 from "modules/Page404";
 
 const CreateAccountPage = lazy(
   () => import("modules/exterior/registration/pages/CreateAccountPage")
@@ -75,6 +76,10 @@ function App() {
             <PublicRoute path="/forgot-password">
               <ForgotPasswordPage />
             </PublicRoute>
+
+            <Route path="*">
+              <Page404 />
+            </Route>
           </Switch>
         </Suspense>
       </ThemeProvider>
