@@ -34,7 +34,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && firebase deploy --only hosting,database,storage,firestore"
+    "deploy": "npm run build && firebase deploy --only hosting,database,storage,firestore",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\""
   },
   "eslintConfig": {
     "extends": [

@@ -1,32 +1,32 @@
-import { message } from "antd";
-import { firestore } from "api/firebase";
-import { useState } from "react";
+import { message } from 'antd'
+import { firestore } from 'api/firebase'
+import { useState } from 'react'
 
 function useDeleteTask() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   async function deleteTask(
     projectId: string,
     groupId: string,
-    taskId: string
+    taskId: string,
   ) {
     try {
-      setIsLoading(true);
+      setIsLoading(true)
 
       await firestore
         .doc(`projects/${projectId}/groups/${groupId}/tasks/${taskId}`)
-        .delete();
+        .delete()
 
-      message.info("Task deleted");
+      message.info('Task deleted')
     } catch (error) {
-      console.log(error);
-      message.error("Error deleting task");
+      console.log(error)
+      message.error('Error deleting task')
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }
 
-  return { deleteTask, isDeleteTaskLoading: isLoading };
+  return { deleteTask, isDeleteTaskLoading: isLoading }
 }
 
-export default useDeleteTask;
+export default useDeleteTask

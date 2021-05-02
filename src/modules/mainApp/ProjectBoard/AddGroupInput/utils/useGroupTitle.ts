@@ -1,17 +1,17 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from 'react'
 
 function useGroupTitle() {
-  const [groupTitle, setGroupTitle] = useState("");
+  const [groupTitle, setGroupTitle] = useState('')
 
   function onGroupTitleChange(e: ChangeEvent<HTMLInputElement>) {
-    setGroupTitle(e.target.value);
+    setGroupTitle(e.target.value)
   }
 
   function clearGroupTitle() {
-    setGroupTitle("");
+    setGroupTitle('')
   }
 
-  return { groupTitle, onGroupTitleChange, clearGroupTitle };
+  return { groupTitle, onGroupTitleChange, clearGroupTitle }
 }
 
-export default useGroupTitle;
+export default useGroupTitle

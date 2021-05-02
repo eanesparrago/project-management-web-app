@@ -1,8 +1,8 @@
-import { signInWithGoogle } from "api/firebase";
-import { Link, useHistory } from "react-router-dom";
+import { signInWithGoogle } from 'api/firebase'
+import { Link, useHistory } from 'react-router-dom'
 
-import { Button, Divider, Typography } from "antd";
-import { GoogleOutlined } from "@ant-design/icons";
+import { Button, Divider, Typography } from 'antd'
+import { GoogleOutlined } from '@ant-design/icons'
 import {
   ScForgotPasswordButton,
   PageBlock,
@@ -10,17 +10,17 @@ import {
   ScLoginForm,
   ScLogo,
   SignUpBlock,
-} from "./styles";
+} from './styles'
 
 function LoginPage() {
-  const history = useHistory();
+  const history = useHistory()
 
   function onLoginWithGoogle() {
-    signInWithGoogle();
+    signInWithGoogle()
   }
 
   function onGoToForgotPassword() {
-    history.push("/forgot-password");
+    history.push('/forgot-password')
   }
 
   return (
@@ -29,7 +29,7 @@ function LoginPage() {
         <ScLogo />
 
         <Button
-          size="large"
+          size='large'
           block
           icon={<GoogleOutlined />}
           onClick={onLoginWithGoogle}
@@ -42,7 +42,7 @@ function LoginPage() {
         <ScLoginForm />
 
         <ScForgotPasswordButton
-          type="text"
+          type='text'
           block
           onClick={onGoToForgotPassword}
         >
@@ -51,8 +51,8 @@ function LoginPage() {
 
         <SignUpBlock>
           <Typography.Text>
-            Don't have an account?{" "}
-            <Link to="/create-account" component={Typography.Link}>
+            Don't have an account?{' '}
+            <Link to='/create-account' component={Typography.Link}>
               Sign up
             </Link>
             <Typography.Link></Typography.Link>
@@ -60,7 +60,7 @@ function LoginPage() {
         </SignUpBlock>
       </ScCard>
     </PageBlock>
-  );
+  )
 }
 
-export default LoginPage;
+export default LoginPage

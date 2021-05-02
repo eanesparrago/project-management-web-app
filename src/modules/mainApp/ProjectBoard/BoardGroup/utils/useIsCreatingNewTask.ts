@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 function useIsCreatingNewTask() {
-  return useState(false);
+  return useState(false)
 }
 
-export default useIsCreatingNewTask;
+export default useIsCreatingNewTask

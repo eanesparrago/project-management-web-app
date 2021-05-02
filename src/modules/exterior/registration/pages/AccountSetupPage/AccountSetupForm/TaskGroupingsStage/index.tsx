@@ -1,18 +1,18 @@
-import { useAppDispatch } from "app/hooks";
-import { setStage, setTaskGroupings } from "../../accountSetupPageSlice";
-import useSetupAccount from "../utils/useSetupAccount";
+import { useAppDispatch } from 'app/hooks'
+import { setStage, setTaskGroupings } from '../../accountSetupPageSlice'
+import useSetupAccount from '../utils/useSetupAccount'
 
-import { Typography, Space, Form, Button, Input } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Typography, Space, Form, Button, Input } from 'antd'
+import { ArrowLeftOutlined } from '@ant-design/icons'
 
-const { Title } = Typography;
+const { Title } = Typography
 
 function TaskGroupingsStage() {
-  const dispatch = useAppDispatch();
-  const { setupAccount, isSetupAccountLoading } = useSetupAccount();
+  const dispatch = useAppDispatch()
+  const { setupAccount, isSetupAccountLoading } = useSetupAccount()
 
   function onBack() {
-    dispatch(setStage("projectTasks"));
+    dispatch(setStage('projectTasks'))
   }
 
   function onFinish({
@@ -20,20 +20,20 @@ function TaskGroupingsStage() {
     grouping2,
     grouping3,
   }: {
-    grouping1: string;
-    grouping2: string;
-    grouping3: string;
+    grouping1: string
+    grouping2: string
+    grouping3: string
   }) {
-    dispatch(setTaskGroupings([grouping1, grouping2, grouping3]));
+    dispatch(setTaskGroupings([grouping1, grouping2, grouping3]))
 
-    setupAccount();
+    setupAccount()
   }
 
   return (
-    <Space direction="vertical" size="large">
-      <Space align="start">
+    <Space direction='vertical' size='large'>
+      <Space align='start'>
         <Button
-          type="text"
+          type='text'
           icon={<ArrowLeftOutlined />}
           onClick={onBack}
         ></Button>
@@ -44,31 +44,31 @@ function TaskGroupingsStage() {
       </Space>
 
       <Form
-        layout="vertical"
+        layout='vertical'
         initialValues={{
-          grouping1: "To do",
-          grouping2: "Doing",
-          grouping3: "Done",
+          grouping1: 'To do',
+          grouping2: 'Doing',
+          grouping3: 'Done',
         }}
         onFinish={onFinish}
       >
-        <Form.Item name="grouping1">
-          <Input type="text" size="large"></Input>
+        <Form.Item name='grouping1'>
+          <Input type='text' size='large'></Input>
         </Form.Item>
 
-        <Form.Item name="grouping2">
-          <Input type="text" size="large"></Input>
+        <Form.Item name='grouping2'>
+          <Input type='text' size='large'></Input>
         </Form.Item>
 
-        <Form.Item name="grouping3">
-          <Input type="text" size="large"></Input>
+        <Form.Item name='grouping3'>
+          <Input type='text' size='large'></Input>
         </Form.Item>
 
         <Form.Item>
           <Button
-            size="large"
-            type="primary"
-            htmlType="submit"
+            size='large'
+            type='primary'
+            htmlType='submit'
             loading={isSetupAccountLoading}
           >
             Continue
@@ -76,7 +76,7 @@ function TaskGroupingsStage() {
         </Form.Item>
       </Form>
     </Space>
-  );
+  )
 }
 
-export default TaskGroupingsStage;
+export default TaskGroupingsStage

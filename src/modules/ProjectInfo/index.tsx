@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import githubLogo from "assets/github-logo.png";
+import styled from 'styled-components'
+import githubLogo from 'assets/github-logo.png'
 
 function ProjectInfo() {
   return (
     <ScProjectInfo>
       <a
-        href="https://github.com/eanesparrago/asanaol"
-        rel="noopener noreferrer"
-        target="_blank"
+        href='https://github.com/eanesparrago/asanaol'
+        rel='noopener noreferrer'
+        target='_blank'
       >
         <div>Asanaol v1</div>
-        <img src={githubLogo} alt="GitHub repo" />
+        <img src={githubLogo} alt='GitHub repo' />
       </a>
     </ScProjectInfo>
-  );
+  )
 }
 
 const ScProjectInfo = styled.div`
@@ -29,6 +29,6 @@ const ScProjectInfo = styled.div`
       margin-right: 0.5rem;
     }
   }
-`;
+`
 
-export default ProjectInfo;
+export default ProjectInfo

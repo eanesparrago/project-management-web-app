@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 function useIsShowingTaskOptions() {
-  const [state, setState] = useState(false);
+  const [state, setState] = useState(false)
 
   function showTaskOptions() {
-    setState(true);
+    setState(true)
   }
 
   function hideTaskOptions() {
-    setState(false);
+    setState(false)
   }
 
-  return { isShowingTaskOptions: state, showTaskOptions, hideTaskOptions };
+  return { isShowingTaskOptions: state, showTaskOptions, hideTaskOptions }
 }
 
-export default useIsShowingTaskOptions;
+export default useIsShowingTaskOptions

@@ -1,27 +1,27 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "app/store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from 'app/store'
 
 interface ProjectHeaderState {
-  isEditProjectInfoModalOpen: boolean;
+  isEditProjectInfoModalOpen: boolean
 }
 
 const initialState: ProjectHeaderState = {
   isEditProjectInfoModalOpen: false,
-};
+}
 
 const projectHeaderSlice = createSlice({
-  name: "projectHeader",
+  name: 'projectHeader',
   initialState,
   reducers: {
     setIsEditProjectInfoModalOpen(state, action: PayloadAction<boolean>) {
-      state.isEditProjectInfoModalOpen = action.payload;
+      state.isEditProjectInfoModalOpen = action.payload
     },
   },
-});
+})
 
-export const { setIsEditProjectInfoModalOpen } = projectHeaderSlice.actions;
+export const { setIsEditProjectInfoModalOpen } = projectHeaderSlice.actions
 
 export const selectIsEditProjectInfoModalOpen = (state: RootState) =>
-  state.projectHeader.isEditProjectInfoModalOpen;
+  state.projectHeader.isEditProjectInfoModalOpen
 
-export default projectHeaderSlice.reducer;
+export default projectHeaderSlice.reducer

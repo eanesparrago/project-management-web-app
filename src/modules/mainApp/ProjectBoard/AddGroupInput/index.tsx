@@ -1,52 +1,52 @@
-import { KeyboardEvent } from "react";
-import { useParams } from "react-router";
-import useCreateGroup from "api/groups/useCreateGroup";
-import useIsCreatingNewGroup from "./utils/useIsCreatingNewGroup";
-import useGroupTitle from "./utils/useGroupTitle";
+import { KeyboardEvent } from 'react'
+import { useParams } from 'react-router'
+import useCreateGroup from 'api/groups/useCreateGroup'
+import useIsCreatingNewGroup from './utils/useIsCreatingNewGroup'
+import useGroupTitle from './utils/useGroupTitle'
 
-import styled from "styled-components";
-import { Typography, Input } from "antd";
-import EmptyTasksBlock from "../components/EmptyTasksBlock";
+import styled from 'styled-components'
+import { Typography, Input } from 'antd'
+import EmptyTasksBlock from '../components/EmptyTasksBlock'
 
-const { Title } = Typography;
+const { Title } = Typography
 
-type AddGroupInputProps = {};
+type AddGroupInputProps = {}
 
 function AddGroupInput({ ...rest }: AddGroupInputProps) {
-  const { projectId } = useParams<{ projectId: string }>();
-  const { createGroup } = useCreateGroup();
-  const { groupTitle, onGroupTitleChange, clearGroupTitle } = useGroupTitle();
+  const { projectId } = useParams<{ projectId: string }>()
+  const { createGroup } = useCreateGroup()
+  const { groupTitle, onGroupTitleChange, clearGroupTitle } = useGroupTitle()
   const {
     isCreatingNewGroup,
     startCreatingNewGroup,
     endCreatingNewGroup,
-  } = useIsCreatingNewGroup();
+  } = useIsCreatingNewGroup()
 
   function onCreateGroup(isUntitled?: boolean, continueCreating?: boolean) {
     if (groupTitle || isUntitled) {
-      const title = groupTitle ? groupTitle.trim() : "Untitled group";
+      const title = groupTitle ? groupTitle.trim() : 'Untitled group'
 
-      createGroup(projectId, { title });
+      createGroup(projectId, { title })
     }
 
-    clearGroupTitle();
+    clearGroupTitle()
 
     if (!continueCreating) {
-      endCreatingNewGroup();
+      endCreatingNewGroup()
     }
   }
 
   function onInputBlur() {
-    onCreateGroup();
+    onCreateGroup()
   }
 
   function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    if (event.key === "Enter") {
-      onCreateGroup(true, true);
+    if (event.key === 'Enter') {
+      onCreateGroup(true, true)
     }
 
-    if (event.key === "Escape") {
-      endCreatingNewGroup();
+    if (event.key === 'Escape') {
+      endCreatingNewGroup()
     }
   }
 
@@ -55,7 +55,7 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
       {!isCreatingNewGroup && (
         <ScTitle
           level={4}
-          type="secondary"
+          type='secondary'
           {...rest}
           onClick={startCreatingNewGroup}
         >
@@ -66,7 +66,7 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
       {isCreatingNewGroup && (
         <>
           <ScInput
-            placeholder="New group"
+            placeholder='New group'
             onBlur={onInputBlur}
             autoFocus
             onChange={onGroupTitleChange}
@@ -78,7 +78,7 @@ function AddGroupInput({ ...rest }: AddGroupInputProps) {
         </>
       )}
     </ScAddGroupInput>
-  );
+  )
 }
 
 const ScAddGroupInput = styled.div`
@@ -87,19 +87,19 @@ const ScAddGroupInput = styled.div`
   width: 20rem;
   display: flex;
   flex-flow: column;
-`;
+`
 
 const ScTitle = styled(Title)`
   cursor: pointer;
   white-space: nowrap;
 
   &:hover {
-    color: ${(p) => p.theme.color.primary.base};
+    color: ${p => p.theme.color.primary.base};
   }
-`;
+`
 
 const ScInput = styled(Input)`
   margin-bottom: 1rem;
-`;
+`
 
-export default AddGroupInput;
+export default AddGroupInput

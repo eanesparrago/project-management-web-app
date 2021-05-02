@@ -1,35 +1,35 @@
-import "styled-components";
+import 'styled-components'
 
-declare module "styled-components" {
+declare module 'styled-components' {
   export interface DefaultTheme {
     breakpoint: {
-      phone: string;
-      tabletPortrait: string;
-      tabletLandscape: string;
-      desktopM: string;
-      desktopL: string;
-      desktopXL: string;
-    };
+      phone: string
+      tabletPortrait: string
+      tabletLandscape: string
+      desktopM: string
+      desktopL: string
+      desktopXL: string
+    }
     color: {
       primary: {
-        base: string;
-      };
-      white: string;
+        base: string
+      }
+      white: string
       grey: {
-        light: string;
-        medium: string;
-        dark: string;
-      };
+        light: string
+        medium: string
+        dark: string
+      }
       green: {
-        primary: string;
-      };
-    };
+        primary: string
+      }
+    }
     boxShadow: {
-      1: string;
-      2: string;
-    };
+      1: string
+      2: string
+    }
     borderRadius: {
-      s: string;
-    };
+      s: string
+    }
   }
 }

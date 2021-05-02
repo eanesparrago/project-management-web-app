@@ -1,12 +1,12 @@
-import { Spin } from "antd";
-import styled from "styled-components";
+import { Spin } from 'antd'
+import styled from 'styled-components'
 
 function LoadingScreen() {
   return (
     <ScLoadingScreen>
       <Spin />
     </ScLoadingScreen>
-  );
+  )
 }
 
 const ScLoadingScreen = styled.div`
@@ -15,6 +15,6 @@ const ScLoadingScreen = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
-export default LoadingScreen;
+export default LoadingScreen

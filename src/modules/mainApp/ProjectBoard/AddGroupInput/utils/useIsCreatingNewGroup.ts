@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 function useIsCreatingNewGroup() {
-  const [isCreatingNewGroup, setIsCreatingNewGroup] = useState(false);
+  const [isCreatingNewGroup, setIsCreatingNewGroup] = useState(false)
 
   function startCreatingNewGroup() {
-    setIsCreatingNewGroup(true);
+    setIsCreatingNewGroup(true)
   }
 
   function endCreatingNewGroup() {
-    setIsCreatingNewGroup(false);
+    setIsCreatingNewGroup(false)
   }
 
-  return { isCreatingNewGroup, startCreatingNewGroup, endCreatingNewGroup };
+  return { isCreatingNewGroup, startCreatingNewGroup, endCreatingNewGroup }
 }
 
-export default useIsCreatingNewGroup;
+export default useIsCreatingNewGroup

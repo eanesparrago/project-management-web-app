@@ -1,33 +1,33 @@
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from 'app/hooks'
 import {
   selectIsProfileSettingsModalOpen,
   setIsProfileSettingsModalOpen,
-} from "../mainAppSlice";
-import useCurrentUser from "api/hooks/useCurrentUser";
-import useUpdateUser from "./utils/useUpdateUser";
+} from '../mainAppSlice'
+import useCurrentUser from 'api/hooks/useCurrentUser'
+import useUpdateUser from './utils/useUpdateUser'
 
-import { Modal, Form, Input, Spin } from "antd";
-import PhotoUpload from "./PhotoUpload";
+import { Modal, Form, Input, Spin } from 'antd'
+import PhotoUpload from './PhotoUpload'
 
 export type ProfileSettingsFormData = {
-  fullName: string;
-};
+  fullName: string
+}
 
 function ProfileSettingsModal() {
-  const dispatch = useAppDispatch();
-  const [currentUser, isCurrentUserLoading] = useCurrentUser();
+  const dispatch = useAppDispatch()
+  const [currentUser, isCurrentUserLoading] = useCurrentUser()
   const isProfileSettingsModalOpen = useAppSelector(
-    selectIsProfileSettingsModalOpen
-  );
-  const { updateUser, isUpdateUserLoading } = useUpdateUser();
+    selectIsProfileSettingsModalOpen,
+  )
+  const { updateUser, isUpdateUserLoading } = useUpdateUser()
 
   function onClose() {
-    dispatch(setIsProfileSettingsModalOpen(false));
+    dispatch(setIsProfileSettingsModalOpen(false))
   }
 
   function renderForm() {
     if (!currentUser || isCurrentUserLoading) {
-      return <Spin />;
+      return <Spin />
     }
 
     // TODO: Disabled for now
@@ -39,13 +39,13 @@ function ProfileSettingsModal() {
 
     return (
       <Form
-        size="large"
-        layout="vertical"
-        id="profileSettings"
+        size='large'
+        layout='vertical'
+        id='profileSettings'
         onFinish={updateUser}
         // initialValues={initialValues}
       >
-        <Form.Item label="Your photo">
+        <Form.Item label='Your photo'>
           <PhotoUpload />
         </Form.Item>
 
@@ -57,26 +57,26 @@ function ProfileSettingsModal() {
           <Input />
         </Form.Item> */}
       </Form>
-    );
+    )
   }
 
   return (
     <Modal
       visible={isProfileSettingsModalOpen}
-      title="My Profile Settings"
-      okText="Save"
-      cancelText="Close"
+      title='My Profile Settings'
+      okText='Save'
+      cancelText='Close'
       onCancel={onClose}
       okButtonProps={{
-        htmlType: "submit",
-        form: "profileSettings",
+        htmlType: 'submit',
+        form: 'profileSettings',
         loading: isUpdateUserLoading,
       }}
       destroyOnClose
     >
       {renderForm()}
     </Modal>
-  );
+  )
 }
 
-export default ProfileSettingsModal;
+export default ProfileSettingsModal

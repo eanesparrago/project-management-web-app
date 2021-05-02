@@ -1,21 +1,21 @@
-import { ReactNode } from "react";
-import { Redirect, Route, RouteProps } from "react-router";
-import useAuth from "api/hooks/useAuth";
+import { ReactNode } from 'react'
+import { Redirect, Route, RouteProps } from 'react-router'
+import useAuth from 'api/hooks/useAuth'
 
 type PrivateRouteProps = {
-  children: ReactNode;
-} & RouteProps;
+  children: ReactNode
+} & RouteProps
 
 function PrivateRoute({ children, ...rest }: PrivateRouteProps) {
-  const { isAuthLoading, isSignedIn } = useAuth();
+  const { isAuthLoading, isSignedIn } = useAuth()
 
-  if (isAuthLoading) return null;
+  if (isAuthLoading) return null
 
   if (isSignedIn) {
-    return <Route {...rest}>{children}</Route>;
+    return <Route {...rest}>{children}</Route>
   }
 
-  return <Redirect to="/login" />;
+  return <Redirect to='/login' />
 }
 
-export default PrivateRoute;
+export default PrivateRoute

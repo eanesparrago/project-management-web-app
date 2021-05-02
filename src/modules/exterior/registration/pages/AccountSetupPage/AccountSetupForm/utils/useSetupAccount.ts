@@ -1,42 +1,42 @@
-import { useState } from "react";
-import { useHistory } from "react-router";
-import { useAppSelector } from "app/hooks";
-import { selectAccountSetupInfo } from "../../accountSetupPageSlice";
-import { firestore } from "api/firebase";
-import useAuth from "api/hooks/useAuth";
+import { useState } from 'react'
+import { useHistory } from 'react-router'
+import { useAppSelector } from 'app/hooks'
+import { selectAccountSetupInfo } from '../../accountSetupPageSlice'
+import { firestore } from 'api/firebase'
+import useAuth from 'api/hooks/useAuth'
 
-import { message } from "antd";
+import { message } from 'antd'
 
 function useSetupAccount() {
-  const accountSetupInfo = useAppSelector(selectAccountSetupInfo);
-  const { user } = useAuth();
-  const history = useHistory();
-  const [isLoading, setIsLoading] = useState(false);
+  const accountSetupInfo = useAppSelector(selectAccountSetupInfo)
+  const { user } = useAuth()
+  const history = useHistory()
+  const [isLoading, setIsLoading] = useState(false)
 
   async function setupAccount() {
-    if (!user) return;
+    if (!user) return
 
-    const userRef = firestore.doc(`users/${user.uid}`);
+    const userRef = firestore.doc(`users/${user.uid}`)
 
     try {
-      setIsLoading(true);
+      setIsLoading(true)
 
       await userRef.update({
         isActivated: true,
         profile: accountSetupInfo.profileInfo,
-      });
+      })
 
-      setIsLoading(false);
+      setIsLoading(false)
 
-      history.push("/");
+      history.push('/')
     } catch (error) {
-      setIsLoading(false);
-      console.error(error);
-      message.error("Error updating user");
+      setIsLoading(false)
+      console.error(error)
+      message.error('Error updating user')
     }
   }
 
-  return { setupAccount, isSetupAccountLoading: isLoading };
+  return { setupAccount, isSetupAccountLoading: isLoading }
 }
 
-export default useSetupAccount;
+export default useSetupAccount

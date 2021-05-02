@@ -1,32 +1,32 @@
-import { useHistory, useRouteMatch, NavLink } from "react-router-dom";
+import { useHistory, useRouteMatch, NavLink } from 'react-router-dom'
 
-import styled from "styled-components";
-import { Menu, MenuProps } from "antd";
-import { UnorderedListOutlined, PlusOutlined } from "@ant-design/icons";
-import Logo from "components/Logo";
+import styled from 'styled-components'
+import { Menu, MenuProps } from 'antd'
+import { UnorderedListOutlined, PlusOutlined } from '@ant-design/icons'
+import Logo from 'components/Logo'
 
-import useProjects from "api/projects/useProjects";
+import useProjects from 'api/projects/useProjects'
 
-const { SubMenu } = Menu;
+const { SubMenu } = Menu
 
 function MainSidebar({ ...rest }) {
-  const history = useHistory();
-  const { projects } = useProjects();
-  const { url } = useRouteMatch();
+  const history = useHistory()
+  const { projects } = useProjects()
+  const { url } = useRouteMatch()
 
   function goToCreateProject() {
-    history.push("/create-project");
+    history.push('/create-project')
   }
 
   return (
     <ScMenu
-      defaultOpenKeys={["projects"]}
-      mode="inline"
-      theme="dark"
+      defaultOpenKeys={['projects']}
+      mode='inline'
+      theme='dark'
       inlineCollapsed={false}
       {...rest}
     >
-      <HeaderBlock className="MainSidebar__header-block">
+      <HeaderBlock className='MainSidebar__header-block'>
         <Logo />
       </HeaderBlock>
 
@@ -34,22 +34,22 @@ function MainSidebar({ ...rest }) {
         Create Project
       </Menu.Item>
 
-      <SubMenu key="projects" icon={<UnorderedListOutlined />} title="Projects">
-        {projects?.map((project) => (
+      <SubMenu key='projects' icon={<UnorderedListOutlined />} title='Projects'>
+        {projects?.map(project => (
           <Menu.Item key={project.id}>
             <NavLink to={`${url}/${project.id}`}>{project.title}</NavLink>
           </Menu.Item>
         ))}
       </SubMenu>
     </ScMenu>
-  );
+  )
 }
 
 const ScMenu: typeof Menu = styled(Menu)<MenuProps>`
   flex-shrink: 0;
   width: 16rem;
   height: 100vh;
-` as any;
+` as any
 
 const HeaderBlock = styled.div`
   padding-top: 1.5rem;
@@ -59,6 +59,6 @@ const HeaderBlock = styled.div`
   > * {
     line-height: normal;
   }
-`;
+`
 
-export default MainSidebar;
+export default MainSidebar

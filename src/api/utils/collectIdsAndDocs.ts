@@ -1,3 +1,3 @@
-const collectIdsAndDocs = (doc: any) => ({ id: doc.id, ...doc.data() });
+const collectIdsAndDocs = (doc: any) => ({ id: doc.id, ...doc.data() })
 
-export default collectIdsAndDocs;
+export default collectIdsAndDocs

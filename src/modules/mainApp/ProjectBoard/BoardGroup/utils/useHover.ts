@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 function useHover() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false)
 
   function onHover() {
-    setIsHovered(true);
+    setIsHovered(true)
   }
 
   function onHoverEnd() {
-    setIsHovered(false);
+    setIsHovered(false)
   }
 
-  return { isHovered, onHover, onHoverEnd };
+  return { isHovered, onHover, onHoverEnd }
 }
 
-export default useHover;
+export default useHover

@@ -1,14 +1,14 @@
-import styled from "styled-components";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import styled from 'styled-components'
+import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
-import MainSidebar from "../MainSidebar";
-import ProjectHeader from "../ProjectHeader";
-import ProjectBoard from "../ProjectBoard";
-import ProfileSettingsModal from "../ProfileSettingsModal";
-import WelcomeView from "../WelcomeView";
+import MainSidebar from '../MainSidebar'
+import ProjectHeader from '../ProjectHeader'
+import ProjectBoard from '../ProjectBoard'
+import ProfileSettingsModal from '../ProfileSettingsModal'
+import WelcomeView from '../WelcomeView'
 
 function MainApp() {
-  const { path } = useRouteMatch();
+  const { path } = useRouteMatch()
 
   return (
     <PageBlock>
@@ -24,7 +24,7 @@ function MainApp() {
             <ScProjectBoard />
           </Route>
 
-          <Route path="*">
+          <Route path='*'>
             <WelcomeView />
           </Route>
         </Switch>
@@ -32,12 +32,12 @@ function MainApp() {
 
       <ProfileSettingsModal />
     </PageBlock>
-  );
+  )
 }
 
 const PageBlock = styled.div`
   display: flex;
-`;
+`
 
 const MainBlock = styled.div`
   height: 100vh;
@@ -45,10 +45,10 @@ const MainBlock = styled.div`
   display: flex;
   flex-flow: column;
   overflow: hidden;
-`;
+`
 
 const ScProjectBoard = styled(ProjectBoard)`
   flex-grow: 1;
-`;
+`
 
-export default MainApp;
+export default MainApp

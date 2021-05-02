@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = null;
+const initialState = null
 
 const appSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {},
-});
+})
 
-export default appSlice.reducer;
+export default appSlice.reducer

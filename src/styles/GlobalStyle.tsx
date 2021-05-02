@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -12,6 +12,6 @@ const GlobalStyle = createGlobalStyle`
   .TaskOptions-overlay {
     animation-duration: 0s !important;
   }
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle

@@ -1,27 +1,27 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "app/store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from 'app/store'
 
 type MainAppState = {
-  isProfileSettingsModalOpen: boolean;
-};
+  isProfileSettingsModalOpen: boolean
+}
 
 const initialState: MainAppState = {
   isProfileSettingsModalOpen: false,
-};
+}
 
 const mainAppSlice = createSlice({
-  name: "mainApp",
+  name: 'mainApp',
   initialState,
   reducers: {
     setIsProfileSettingsModalOpen(state, action: PayloadAction<boolean>) {
-      state.isProfileSettingsModalOpen = action.payload;
+      state.isProfileSettingsModalOpen = action.payload
     },
   },
-});
+})
 
-export const { setIsProfileSettingsModalOpen } = mainAppSlice.actions;
+export const { setIsProfileSettingsModalOpen } = mainAppSlice.actions
 
 export const selectIsProfileSettingsModalOpen = (state: RootState) =>
-  state.mainApp.isProfileSettingsModalOpen;
+  state.mainApp.isProfileSettingsModalOpen
 
-export default mainAppSlice.reducer;
+export default mainAppSlice.reducer

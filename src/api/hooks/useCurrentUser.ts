@@ -1,11 +1,11 @@
-import { firestore, auth } from "api/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useDocument } from "react-firebase-hooks/firestore";
+import { firestore, auth } from 'api/firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useDocument } from 'react-firebase-hooks/firestore'
 
 function useCurrentUser() {
-  const [user] = useAuthState(auth);
+  const [user] = useAuthState(auth)
 
-  return useDocument(user && firestore.doc(`users/${user.uid}`));
+  return useDocument(user && firestore.doc(`users/${user.uid}`))
 }
 
-export default useCurrentUser;
+export default useCurrentUser

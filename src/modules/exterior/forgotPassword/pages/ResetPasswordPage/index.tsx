@@ -1,70 +1,70 @@
 // TODO: Use this UI for resetting the password instead of Firebase default
 
-import styled from "styled-components";
-import useUpdatePassword from "./utils/useUpdatePassword";
+import styled from 'styled-components'
+import useUpdatePassword from './utils/useUpdatePassword'
 
-import { Input, Form, Button } from "antd";
-import Logo from "components/Logo";
-import { MainBlock } from "../../../styles";
+import { Input, Form, Button } from 'antd'
+import Logo from 'components/Logo'
+import { MainBlock } from '../../../styles'
 
 type ResetPasswordFormData = {
-  password: string;
-  confirmPassword: string;
-};
+  password: string
+  confirmPassword: string
+}
 
 function ResetPasswordPage() {
-  const { updatePassword, isUpdatePasswordLoading } = useUpdatePassword();
+  const { updatePassword, isUpdatePasswordLoading } = useUpdatePassword()
 
   async function onFinish({ password }: ResetPasswordFormData) {
-    await updatePassword(password);
+    await updatePassword(password)
   }
 
   return (
     <S.ResetPasswordPage>
-      <header className="ResetPasswordPage__header-block">
+      <header className='ResetPasswordPage__header-block'>
         <Logo />
       </header>
 
       <MainBlock>
         <Form
-          className="ResetPasswordPage__Form"
-          size="large"
+          className='ResetPasswordPage__Form'
+          size='large'
           onFinish={onFinish}
-          layout="vertical"
+          layout='vertical'
         >
           <Form.Item
-            label="Password"
-            name="password"
+            label='Password'
+            name='password'
             hasFeedback
             rules={[
-              { required: true, message: "Please input your new password!" },
-              { min: 8, message: "Password must be 8 characters or longer!" },
+              { required: true, message: 'Please input your new password!' },
+              { min: 8, message: 'Password must be 8 characters or longer!' },
             ]}
           >
             <Input.Password />
           </Form.Item>
 
           <Form.Item
-            label="Confirm Password"
-            name="confirmPassword"
-            dependencies={["password"]}
+            label='Confirm Password'
+            name='confirmPassword'
+            dependencies={['password']}
             hasFeedback
             rules={[
               {
                 required: true,
-                message: "Please confirm your password!",
+                message: 'Please confirm your password!',
               },
-              { min: 8, message: "Password must be 8 characters or longer!" },
+              { min: 8, message: 'Password must be 8 characters or longer!' },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve()
                   }
                   return Promise.reject(
                     new Error(
-                      "The two passwords that you entered do not match!"
-                    )
-                  );
+                      'The two passwords that you entered do not match!',
+                    ),
+                  )
                 },
               }),
             ]}
@@ -74,8 +74,8 @@ function ResetPasswordPage() {
 
           <Form.Item>
             <Button
-              type="primary"
-              htmlType="submit"
+              type='primary'
+              htmlType='submit'
               block
               loading={isUpdatePasswordLoading}
             >
@@ -85,10 +85,10 @@ function ResetPasswordPage() {
         </Form>
       </MainBlock>
     </S.ResetPasswordPage>
-  );
+  )
 }
 
-const S = {} as any;
+const S = {} as any
 
 S.ResetPasswordPage = styled.div`
   .ResetPasswordPage__header-block {
@@ -99,7 +99,7 @@ S.ResetPasswordPage = styled.div`
   .ResetPasswordPage__main-block {
     padding-left: 6rem;
 
-    @media (max-width: ${(p) => p.theme.breakpoint.tabletPortrait}) {
+    @media (max-width: ${p => p.theme.breakpoint.tabletPortrait}) {
       padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
@@ -112,10 +112,10 @@ S.ResetPasswordPage = styled.div`
   .ResetPasswordPage__Form {
     width: 32rem;
 
-    @media (max-width: ${(p) => p.theme.breakpoint.tabletPortrait}) {
+    @media (max-width: ${p => p.theme.breakpoint.tabletPortrait}) {
       width: 100%;
     }
   }
-`;
+`
 
-export default ResetPasswordPage;
+export default ResetPasswordPage

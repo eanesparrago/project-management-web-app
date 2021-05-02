@@ -1,44 +1,44 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from 'react'
 
-import { Input } from "antd";
+import { Input } from 'antd'
 
-import { useParams } from "react-router";
-import { firestore } from "api/firebase";
+import { useParams } from 'react-router'
+import { firestore } from 'api/firebase'
 
-const { TextArea } = Input;
+const { TextArea } = Input
 
 type TaskDescriptionProps = {
-  description?: string;
-};
+  description?: string
+}
 
 function TaskDescription({ description }: TaskDescriptionProps) {
-  const [localDescription, setLocalDescription] = useState(description);
+  const [localDescription, setLocalDescription] = useState(description)
   const { projectId, groupId, taskId } = useParams<{
-    projectId: string;
-    groupId: string;
-    taskId: string;
-  }>();
+    projectId: string
+    groupId: string
+    taskId: string
+  }>()
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    setLocalDescription(event.target.value);
+    setLocalDescription(event.target.value)
   }
 
   function updateDescription() {
     firestore
       .doc(`projects/${projectId}/groups/${groupId}/tasks/${taskId}`)
-      .update({ description: localDescription });
+      .update({ description: localDescription })
   }
 
   return (
     <TextArea
-      placeholder="Add more detail to this task..."
+      placeholder='Add more detail to this task...'
       bordered={false}
       rows={4}
       value={localDescription}
       onChange={handleChange}
       onBlur={updateDescription}
     />
-  );
+  )
 }
 
-export default TaskDescription;
+export default TaskDescription

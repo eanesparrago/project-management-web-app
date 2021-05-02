@@ -1,20 +1,20 @@
-import useSendPasswordResetEmail from "./utils/useSendPasswordResetEmail";
+import useSendPasswordResetEmail from './utils/useSendPasswordResetEmail'
 
-import { Typography, Input, Form, Button } from "antd";
-import Logo from "components/Logo";
+import { Typography, Input, Form, Button } from 'antd'
+import Logo from 'components/Logo'
 import {
   PageBlock,
   HeaderBlock,
   MainBlock,
   ScForm,
   ScTitle,
-} from "../../../styles";
+} from '../../../styles'
 
-const { Text } = Typography;
+const { Text } = Typography
 
 type ForgotPasswordFormData = {
-  emailAddress: string;
-};
+  emailAddress: string
+}
 
 function ForgotPasswordPage() {
   const {
@@ -22,10 +22,10 @@ function ForgotPasswordPage() {
     isSendPasswordResetEmailLoading,
     isSendPasswordResetEmailSuccess,
     recipientEmailAddress,
-  } = useSendPasswordResetEmail();
+  } = useSendPasswordResetEmail()
 
   async function onFinish({ emailAddress }: ForgotPasswordFormData) {
-    await sendPasswordResetEmail(emailAddress);
+    await sendPasswordResetEmail(emailAddress)
   }
 
   function renderForm() {
@@ -35,24 +35,24 @@ function ForgotPasswordPage() {
           <ScTitle>Instructions sent!</ScTitle>
 
           <Text>
-            Instructions for resetting your password have been sent to{" "}
+            Instructions for resetting your password have been sent to{' '}
             <Text strong>{recipientEmailAddress}</Text>.
           </Text>
         </>
-      );
+      )
     }
 
     return (
       <>
         <ScTitle>Forgot password?</ScTitle>
 
-        <ScForm size="large" onFinish={onFinish} layout="vertical">
+        <ScForm size='large' onFinish={onFinish} layout='vertical'>
           <Form.Item
-            label="Email address"
-            name="emailAddress"
+            label='Email address'
+            name='emailAddress'
             rules={[
-              { required: true, message: "Please input your email address!" },
-              { type: "email", message: "Email is not a valid email" },
+              { required: true, message: 'Please input your email address!' },
+              { type: 'email', message: 'Email is not a valid email' },
             ]}
           >
             <Input />
@@ -60,8 +60,8 @@ function ForgotPasswordPage() {
 
           <Form.Item>
             <Button
-              type="primary"
-              htmlType="submit"
+              type='primary'
+              htmlType='submit'
               block
               loading={isSendPasswordResetEmailLoading}
             >
@@ -70,7 +70,7 @@ function ForgotPasswordPage() {
           </Form.Item>
         </ScForm>
       </>
-    );
+    )
   }
 
   return (
@@ -81,7 +81,7 @@ function ForgotPasswordPage() {
 
       <MainBlock>{renderForm()}</MainBlock>
     </PageBlock>
-  );
+  )
 }
 
-export default ForgotPasswordPage;
+export default ForgotPasswordPage

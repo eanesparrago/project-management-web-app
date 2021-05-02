@@ -1,38 +1,38 @@
-import styled from "styled-components";
-import useAuth from "api/hooks/useAuth";
-import useResendEmail from "./utils/useResendEmail";
+import styled from 'styled-components'
+import useAuth from 'api/hooks/useAuth'
+import useResendEmail from './utils/useResendEmail'
 
-import { Typography, Spin } from "antd";
-import { CheckCircleFilled } from "@ant-design/icons";
-import Logo from "components/Logo";
-import LogoutButton from "components/LogoutButton";
-import { PageBlock, HeaderBlock, ScTitle, MainBlock } from "../../../styles";
+import { Typography, Spin } from 'antd'
+import { CheckCircleFilled } from '@ant-design/icons'
+import Logo from 'components/Logo'
+import LogoutButton from 'components/LogoutButton'
+import { PageBlock, HeaderBlock, ScTitle, MainBlock } from '../../../styles'
 
-const { Text, Link } = Typography;
+const { Text, Link } = Typography
 
 function VerifyEmailPage() {
-  const { user, isAuthLoading } = useAuth();
+  const { user, isAuthLoading } = useAuth()
   const {
     resendEmail,
     isResendEmailLoading,
     isResendEmailSuccess,
-  } = useResendEmail();
+  } = useResendEmail()
 
   function renderEmail() {
-    return isAuthLoading ? <Spin /> : user?.email;
+    return isAuthLoading ? <Spin /> : user?.email
   }
 
   function renderResendEmail() {
-    if (isResendEmailLoading) return <Spin />;
+    if (isResendEmailLoading) return <Spin />
 
     if (isResendEmailSuccess)
       return (
-        <Typography.Text type="success">
+        <Typography.Text type='success'>
           Email sent <CheckCircleFilled />
         </Typography.Text>
-      );
+      )
 
-    return <Link onClick={resendEmail}>Resend email</Link>;
+    return <Link onClick={resendEmail}>Resend email</Link>
   }
 
   return (
@@ -52,11 +52,11 @@ function VerifyEmailPage() {
         </Text>
       </MainBlock>
     </PageBlock>
-  );
+  )
 }
 
 const ScLogoutButton = styled(LogoutButton)`
   margin-left: auto;
-`;
+`
 
-export default VerifyEmailPage;
+export default VerifyEmailPage
