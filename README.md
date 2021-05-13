@@ -1,6 +1,6 @@
 # Asanaol
 
-A basic clone of Asana
+A basic clone of Asana (project management app)
 
 ## Demo
 
